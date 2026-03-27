@@ -25,7 +25,7 @@ export default function FAQ() {
 
     return (
         <section
-            className="relative w-full"
+            className="relative w-full "
             style={{ background: '#08120C' }}
         >
             {/* Sticky zero-height anchor — video stays pinned while section is in view.
@@ -46,7 +46,7 @@ export default function FAQ() {
                         position: 'absolute',
                         top: 0,
                         left: 0,
-                        width: '100vw',
+                        width: '100%',
                         height: '100vh',
                         marginLeft: 'calc(-50vw + 50%)',
                         transform: 'translateZ(0)',
@@ -66,7 +66,7 @@ export default function FAQ() {
                             display: 'block',
                         }}
                     >
-                        <source src="/faq-bg-2.mp4" type="video/mp4" />
+                        <source src="faq-bg-2.mp4" type="video/mp4" />
                     </video>
 
                     <div

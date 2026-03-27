@@ -111,7 +111,7 @@ export default function Promotion() {
         <div className="relative w-full bg-white" style={{ zIndex: 2 }}>
 
             {/* Desktop: 4-column grid */}
-            <div className="hidden md:block max-w-6xl mx-auto px-4 py-12">
+            <div className="hidden md:block max-w-375 mx-auto px-4 py-12">
                 <div className="grid grid-cols-4 gap-5">
                     {CARDS.map(({ key, badgeBg, badgeText, cardBg }) => (
                         <PromoCard key={key} keyName={key} badgeBg={badgeBg} badgeText={badgeText} cardBg={cardBg} />

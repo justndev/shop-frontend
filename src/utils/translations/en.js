@@ -44,6 +44,24 @@ export const en = {
         paragraph: "By choosing The CBD Wholesaler, you benefit from... <b>CBD wholesale orders</b> are carefully prepared and <b>shipped within 24 hours</b>, with <b>fast, free delivery for orders over €99</b>."
     },
 
+    adva: {
+        paragraph1: "Buying CBD wholesale has <b>many advantages</b> for professionals and distributors:",
+        bullet1: "<b>Low prices</b> thanks to bulk purchasing.",
+        bullet2: "<b>Premium quality</b> guaranteed on all our CBD flowers, resins and oils.",
+        bullet3: "<b>Wide choice</b> of products tailored to your B2B needs.",
+        bullet4: "<b>Fast delivery</b> in France and Europe.",
+        bullet5: "<b>Legal compliance</b> with THC levels below 0.3%."
+    },
+
+    expertise: {
+        paragraph1: "We put our expertise as a CBD wholesaler at the service of professionals and distributors wishing to buy CBD in bulk legally in France and Europe. Our products, from organically grown hemp, are carefully selected to guarantee premium quality.",
+        paragraph2: "Thanks to our comprehensive CBD catalog, you benefit from CBD resins, hemp flowers and CBD oils that comply with current legislation, with fast, secure delivery tailored to your B2B needs."
+    },
+
+    read_more: {
+        title: "<b>Read More</b>",
+    },
+
     why_us: {
         image_alt: "Premium loose leaf tea",
         title: "<b>Tearoma</b> — Your N°1 Source for Premium Tea",
@@ -57,11 +75,11 @@ export const en = {
     categories: {
         title: "Explore our tea collections",
         items: {
-            puer: "Puer Tea →",
-            oolong: "Oolong Tea →",
-            green: "Green Tea →",
-            white: "White Tea →",
-            ceremony: "Tea Ceremony →",
+            puer: "Puer Tea",
+            oolong: "Oolong Tea",
+            green: "Green Tea",
+            white: "White Tea",
+            ceremony: "Tea Ceremony",
         },
     },
     header: {
