@@ -2,38 +2,8 @@ import apiClient from '../lib/apiClient'
 
 // ── TYPES ─────────────────────────────────────────────────────────────────────
 
-export type StockStatus = 'IN_STOCK' | 'OUT_OF_STOCK' | 'ON_BACKORDER'
 
-export interface Category {
-    id: string
-    name: string
-    slug: string
-    createdAt: string
-    updatedAt: string
-}
 
-export interface Product {
-    id: string
-    name: string
-    slug: string
-    description: string | null
-    shortDescription: string | null
-    price: number
-    salePrice: number | null
-    sku: string | null
-    stock: number
-    stockStatus: StockStatus
-    images: string[]
-    tags: string[]
-    isActive: boolean
-    purchaseNote: string | null
-    menuOrder: number
-    reviewsEnabled: boolean
-    categoryId: string
-    category: Category
-    createdAt: string
-    updatedAt: string
-}
 
 export interface CreateProductPayload {
     name: string

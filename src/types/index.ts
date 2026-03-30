@@ -10,6 +10,29 @@ export interface User {
   createdAt: string
 }
 
+type StockStatus = 'IN_STOCK' | 'OUT_OF_STOCK';
+
+export interface Category {
+  name: string;
+  slug: string;
+}
+
+export interface Product {
+  id: string;
+  brand: string;
+  name: string;
+  slug: string;
+  shortDescription: string;
+  description: string;
+  price: number;
+  salePrice: number | null;
+  stockStatus: StockStatus;
+  images: string[];
+  thumbnails: string[];
+  category: Category;
+  tags: string[];
+}
+
 // < -- HELPERS -- >
 
 export type Tab = 'profile' | 'dashboard' | 'orders ' | 'logout';
@@ -84,24 +107,3 @@ export interface MediaItem {
   description: string;
 }
 
-
-export interface Category {
-  id: string
-  name: string
-  slug: string
-  createdAt: string
-}
-
-export interface Product {
-  id: string
-  name: string
-  slug: string
-  description?: string
-  price: number
-  stock: number
-  isActive: boolean
-  images: string[]
-  categoryId: string
-  category?: Category
-  createdAt: string
-}

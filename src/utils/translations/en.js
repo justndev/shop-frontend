@@ -1,4 +1,8 @@
 export const en = {
+    general: {
+        home: 'Home'
+    },
+
     faq: {
         title: "Why choose TheWholesalerCBD.com?",
         items: {
