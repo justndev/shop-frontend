@@ -161,8 +161,7 @@ export default function ProductPage() {
                     {/* LEFT — sticky image panel */}
                     <div className="image-col">
                         {/* Main image */}
-                        <div className="relative w-full flex-1 flex items-center justify-center"
-                             style={{maxHeight: 'calc(100vh - 180px)'}}>
+                        <div className="relative w-full flex-1 flex items-center justify-center" style={{maxHeight: 'calc(100vh - 180px)'}}>
                             <img
                                 src={product.images[selectedImage]}
                                 alt={product.name}

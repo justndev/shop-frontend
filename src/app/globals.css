@@ -79,6 +79,8 @@
     --sidebar-ring: oklch(0.709 0.01 56.259);
     --mint: #f0f7f2;
     --bordfer: #e0ddd5;
+    --sage-light: #5a7d56;
+    --sage-pale: #e8efe7;
 }
 
 .dark {
