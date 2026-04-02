@@ -1,4 +1,232 @@
 export const en = {
+    legal: {
+        'privacy-policy': {
+            'page-header': {
+                overline: 'Legal',
+                h1: 'Privacy Policy',
+                'last-updated': 'Last updated: {{date}}',
+            },
+            intro: {
+                p1: '{{company}} is committed to protecting your personal data. This policy explains what we collect, why, and what rights you have — in plain language, as required by the EU General Data Protection Regulation (GDPR).',
+            },
+            'section-1': {
+                h2: '1. Who we are',
+                p1: '{{company}} (registry code {{reg}}), located at {{address}}, is the controller of your personal data. You can contact us at {{email}} for any privacy-related questions.',
+            },
+            'section-2': {
+                h2: '2. What data we collect',
+                p1: 'We collect data you provide directly when placing an order or creating an account: your name, email address, delivery address, and phone number.',
+                p2: 'We also collect technical data automatically: IP address, browser type, pages visited, and session duration via cookies. We do not collect sensitive personal data.',
+            },
+            'section-3': {
+                h2: '3. Why we collect it (legal basis)',
+                p1: 'We process your data for the following purposes:',
+                'li-1': 'Order fulfilment — processing and delivering your orders (legal basis: contract performance, Art. 6(1)(b) GDPR)',
+                'li-2': 'Customer account — maintaining your account and order history (legal basis: contract performance)',
+                'li-3': 'Legal obligations — issuing invoices and accounting records (legal basis: legal obligation, Art. 6(1)(c) GDPR)',
+                'li-4': 'Marketing emails — only if you have explicitly opted in (legal basis: consent, Art. 6(1)(a) GDPR)',
+                'li-5': 'Website analytics — improving our service (legal basis: legitimate interest, Art. 6(1)(f) GDPR)',
+            },
+            'section-4': {
+                h2: '4. How long we keep your data',
+                p1: 'Order and invoice data is kept for 7 years as required by the Estonian Accounting Act. Account data is kept until you delete your account. Marketing consent is kept until you withdraw it. Analytics data is kept for 26 months.',
+            },
+            'section-5': {
+                h2: '5. Who we share data with',
+                p1: 'We share your data only with service providers necessary to operate our store:',
+                'li-1': 'Shipping partners — for delivery of your order',
+                'li-2': 'Payment processors — for secure payment handling',
+                'li-3': 'Email service providers — for order confirmations and support',
+                p2: 'All processors are bound by data processing agreements. We do not sell your data to third parties. We do not transfer data outside the EU/EEA.',
+            },
+            'section-6': {
+                h2: '6. Your rights',
+                p1: 'Under GDPR you have the right to:',
+                'li-1': 'Access your personal data we hold',
+                'li-2': 'Correct inaccurate data',
+                'li-3': 'Request deletion ("right to be forgotten")',
+                'li-4': 'Restrict or object to processing',
+                'li-5': 'Data portability',
+                'li-6': 'Withdraw consent at any time (without affecting prior processing)',
+                p2: 'To exercise any right, contact us at {{email}}. You also have the right to lodge a complaint with the Estonian Data Protection Inspectorate (Andmekaitse Inspektsioon) at www.aki.ee.',
+            },
+            'section-7': {
+                h2: '7. Cookies',
+                p1: 'We use cookies as described in our Cookie Policy. You can manage cookie preferences at any time via the cookie banner or your browser settings.',
+            },
+            'section-8': {
+                h2: '8. Changes to this policy',
+                p1: 'We may update this policy from time to time. The current version is always available on this page. Significant changes will be communicated by email if you have an account.',
+            },
+            'footer-note': {
+                p1: 'Questions about your data? Contact us at {{email}}. We respond within 30 days as required by GDPR.',
+            },
+        },
+
+        terms: {
+            'page-header': {
+                overline: 'Legal',
+                h1: 'Terms & Conditions',
+                'last-updated': 'Last updated: {{date}}',
+            },
+            intro: {
+                p1: 'These Terms & Conditions govern all purchases made through {{shop}} operated by {{company}} (registry code {{reg}}), {{address}}. By placing an order you confirm that you agree to these Terms.',
+            },
+            'section-1': {
+                h2: '1. Products',
+                p1: 'All products are food products (tea) intended for personal consumption. We take care to ensure product descriptions and images are accurate, but minor variations in appearance may occur.',
+                p2: 'We reserve the right to withdraw any product from sale at any time. Availability is not guaranteed until your order is confirmed.',
+            },
+            'section-2': {
+                h2: '2. Ordering',
+                p1: 'An order is placed when you complete checkout and receive an order confirmation email. This confirmation constitutes our acceptance and forms a binding contract.',
+                p2: 'We reserve the right to cancel orders in cases of pricing errors, suspected fraud, or inability to fulfil. You will be notified promptly and any payment refunded in full.',
+            },
+            'section-3': {
+                h2: '3. Prices and payment',
+                p1: 'All prices are in euros (€) and include Estonian VAT (22%). Shipping costs are shown separately at checkout.',
+                p2: 'Payment is due at the time of ordering. We accept credit/debit card and other methods listed at checkout. We do not store your card details.',
+            },
+            'section-4': {
+                h2: '4. Delivery',
+                p1: 'We deliver to addresses within Estonia. Estimated delivery times shown at checkout are indicative, not guaranteed. A tracking number will be sent by email upon dispatch.',
+                p2: 'Risk passes to you upon delivery. If a package arrives visibly damaged, photograph it before opening and contact us within 48 hours.',
+            },
+            'section-5': {
+                h2: '5. Liability',
+                p1: 'Our liability is limited to the value of the products purchased. We are not liable for indirect or consequential losses.',
+                p2: 'Nothing in these Terms excludes or limits liability for death or personal injury caused by negligence, or any other liability that cannot be excluded under Estonian or EU law.',
+            },
+            'section-6': {
+                h2: '6. Governing law',
+                p1: 'These Terms are governed by the laws of the Republic of Estonia. Any disputes shall be resolved in Harju County Court, unless you are a consumer entitled to bring proceedings in your country of residence.',
+                p2: "The European Commission's Online Dispute Resolution platform is available at ec.europa.eu/consumers/odr.",
+            },
+            'section-7': {
+                h2: '7. Contact',
+                p1: 'For any questions regarding these Terms, contact us at {{email}}.',
+            },
+            'footer-note': {
+                p1: 'These Terms were last updated on {{date}} and supersede all previous versions.',
+            },
+        },
+
+        returns: {
+            'page-header': {
+                overline: 'Legal',
+                h1: 'Return Policy',
+                'last-updated': 'Last updated: {{date}}',
+            },
+            intro: {
+                p1: 'Your satisfaction is important to us. As a consumer purchasing from an Estonian online store you have statutory withdrawal rights under EU law. This page explains those rights and our process.',
+            },
+            'section-1': {
+                h2: '1. Right of withdrawal',
+                p1: 'You have the right to withdraw from your purchase within 14 calendar days of the day you (or a person you nominate) physically receives the goods — without giving any reason.',
+                p2: 'To exercise this right, notify us before the 14-day period expires by emailing {{email}} with your order number and a clear statement that you wish to withdraw.',
+            },
+            'section-2': {
+                h2: '2. Exceptions',
+                p1: 'The right of withdrawal does not apply to:',
+                'li-1': 'Sealed goods that have been opened after delivery and are unsuitable for return due to health protection or hygiene reasons',
+                'li-2': 'Goods that have been clearly personalised',
+                'li-3': 'Perishable goods that have expired',
+                p2: 'Unsealed tea products that have been opened cannot be returned for hygiene reasons.',
+            },
+            'section-3': {
+                h2: '3. How to return',
+                p1: 'Once you have notified us of your withdrawal:',
+                'li-1': 'Repack the items securely in their original packaging where possible',
+                'li-2': 'Send the goods back to us within 14 days of notifying us',
+                'li-3': 'You are responsible for the cost of return shipping unless the item is faulty',
+                p2: 'Please email {{email}} before sending to receive the return address and a return reference number.',
+            },
+            'section-4': {
+                h2: '4. Refunds',
+                p1: 'We will process your refund within 14 days of receiving the returned goods (or proof of return, whichever is earlier).',
+                p2: 'The refund will be made to your original payment method and will include the standard delivery cost you paid. We may deduct an amount if the goods have been handled beyond what is necessary to inspect them.',
+            },
+            'section-5': {
+                h2: '5. Faulty or incorrect items',
+                p1: 'If you received a faulty, damaged, or incorrect item, contact us within 48 hours of delivery at {{email}} with your order number and a photo.',
+                p2: 'We will arrange a replacement or full refund at no cost to you, including return shipping.',
+            },
+            'footer-note': {
+                p1: 'Questions about a return? Contact us at {{email}} — we aim to respond within 1 business day.',
+            },
+        },
+
+        cookies: {
+            'page-header': {
+                overline: 'Legal',
+                h1: 'Cookie Policy',
+                'last-updated': 'Last updated: {{date}}',
+            },
+            intro: {
+                p1: 'This policy explains what cookies are, which ones we use on {{shop}}, and how you can control them.',
+            },
+            'section-1': {
+                h2: '1. What are cookies',
+                p1: 'Cookies are small text files placed on your device when you visit a website. They allow the site to remember your actions and preferences over a period of time.',
+                p2: 'Cookies cannot run programs or deliver viruses. They are uniquely assigned to you and can only be read by the web server that issued them.',
+            },
+            'section-2': {
+                h2: '2. Cookies we use',
+                p1: 'We use the following categories of cookies:',
+            },
+            'cookie-table': {
+                'col-name': 'Cookie',
+                'col-purpose': 'Purpose',
+                'col-duration': 'Duration',
+                'col-type': 'Type',
+                'row-1-name': 'session_id',
+                'row-1-purpose': 'Keeps you logged in and maintains your cart',
+                'row-1-duration': 'Session',
+                'row-1-type': 'Essential',
+                'row-2-name': 'csrf_token',
+                'row-2-purpose': 'Prevents cross-site request forgery attacks',
+                'row-2-duration': 'Session',
+                'row-2-type': 'Essential',
+                'row-3-name': 'cookie_consent',
+                'row-3-purpose': 'Remembers your cookie preferences',
+                'row-3-duration': '1 year',
+                'row-3-type': 'Essential',
+                'row-4-name': '_ga',
+                'row-4-purpose': 'Google Analytics — tracks visits and behaviour anonymously',
+                'row-4-duration': '2 years',
+                'row-4-type': 'Analytics',
+                'row-5-name': '_ga_*',
+                'row-5-purpose': 'Google Analytics — session tracking',
+                'row-5-duration': '2 years',
+                'row-5-type': 'Analytics',
+            },
+            'section-3': {
+                h2: '3. Essential cookies',
+                p1: 'Essential cookies are strictly necessary for the website to function. They enable core features such as login, cart, and security. These cannot be disabled.',
+            },
+            'section-4': {
+                h2: '4. Analytics cookies',
+                p1: 'Analytics cookies help us understand how visitors use our site so we can improve it. The data is aggregated and anonymous.',
+                p2: 'We use Google Analytics. You can opt out at any time via our cookie banner or by installing the Google Analytics Opt-out Browser Add-on at tools.google.com/dlpage/gaoptout.',
+            },
+            'section-5': {
+                h2: '5. How to manage cookies',
+                p1: 'You can control cookies through:',
+                'li-1': 'Our cookie banner — shown on your first visit, accessible again via the cookie icon in the footer',
+                'li-2': 'Your browser settings — most browsers allow you to view, block, or delete cookies',
+                'li-3': 'Third-party opt-out tools — such as the Google Analytics opt-out add-on',
+                p2: 'Blocking essential cookies will affect the functioning of the website, including your ability to add items to cart or log in.',
+            },
+            'section-6': {
+                h2: '6. Changes to this policy',
+                p1: 'We may update this Cookie Policy when we add or change cookies on the site. The current version is always available on this page.',
+            },
+            'footer-note': {
+                p1: 'Questions about cookies? Contact us at {{email}}.',
+            },
+        },
+    },
+
     general: {
         home: 'Home'
     },
@@ -52,13 +280,13 @@ export const en = {
         paragraph1: "Buying CBD wholesale has <b>many advantages</b> for professionals and distributors:",
         bullet1: "<b>Low prices</b> thanks to bulk purchasing.",
         bullet2: "<b>Premium quality</b> guaranteed on all our CBD flowers, resins and oils.",
-        bullet3: "<b>Wide choice</b> of products tailored to your B2B needs.",
+        bullet3: "<b>Wide choice</b> of product tailored to your B2B needs.",
         bullet4: "<b>Fast delivery</b> in France and Europe.",
         bullet5: "<b>Legal compliance</b> with THC levels below 0.3%."
     },
 
     expertise: {
-        paragraph1: "We put our expertise as a CBD wholesaler at the service of professionals and distributors wishing to buy CBD in bulk legally in France and Europe. Our products, from organically grown hemp, are carefully selected to guarantee premium quality.",
+        paragraph1: "We put our expertise as a CBD wholesaler at the service of professionals and distributors wishing to buy CBD in bulk legally in France and Europe. Our product, from organically grown hemp, are carefully selected to guarantee premium quality.",
         paragraph2: "Thanks to our comprehensive CBD catalog, you benefit from CBD resins, hemp flowers and CBD oils that comply with current legislation, with fast, secure delivery tailored to your B2B needs."
     },
 
@@ -291,7 +519,7 @@ export const en = {
         product_update_failed: "Product update failed.",
         product_deletion_failed: "Product deletion failed.",
         product_fetch_failed: "Failed to fetch product.",
-        products_fetch_failed: "Failed to fetch products.",
+        products_fetch_failed: "Failed to fetch product.",
         categories_fetch_failed: "Failed to fetch categories.",
         category_creation_failed: "Category creation failed.",
         user_fetch_failed: "Failed to fetch user.",

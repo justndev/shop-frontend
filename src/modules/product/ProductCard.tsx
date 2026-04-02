@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { Button, Typography } from '@mui/material';
+import {useState} from 'react';
+import {Button, Typography} from '@mui/material';
 import Link from 'next/link';
+import {ArrowUpRight, User} from "lucide-react";
 
 interface ProductCardProps {
     id: string | number;
@@ -13,7 +14,7 @@ interface ProductCardProps {
     slug?: string;
 }
 
-export default function ProductCard({ id, name, price, image, hoverImage, slug }: ProductCardProps) {
+export default function ProductCard({id, name, price, image, hoverImage, slug}: ProductCardProps) {
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -23,96 +24,119 @@ export default function ProductCard({ id, name, price, image, hoverImage, slug }
             style={{
                 display: 'flex',
                 flexDirection: 'column',
-                background: '#faf9f7',
-                border: '1px solid #c8c8bc',
+                background: 'var(--color-background-primary, #fff)',
+                borderRadius: '12px',
                 overflow: 'hidden',
                 cursor: 'pointer',
-                transition: 'box-shadow 0.3s ease',
-                boxShadow: hovered ? '0 8px 32px rgba(0, 0, 0, 0.12)' : 'none',
+                transition: 'box-shadow 0.25s ease',
             }}
         >
-            {/* Image wrapper */}
-            <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
-                {/* Primary image */}
+            {/* Square image area */}
+            <div
+                style={{
+                    position: 'relative',
+                    width: '100%',
+                    aspectRatio: '1 / 1',
+                    background: '#ffffff',
+                    overflow: 'hidden',
+                }}
+            >
+                {/* MASK WRAPPER */}
                 <div
                     style={{
                         position: 'absolute',
                         inset: 0,
-                        backgroundImage: `url(${image})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        opacity: hovered ? 0 : 1,
-                        transform: hovered ? 'scale(1.08)' : 'scale(1)',
-                        transition: 'opacity 0.5s ease, transform 0.6s ease',
+
+                        WebkitMaskImage: 'url(/puerh-mask.png)',
+                        WebkitMaskRepeat: 'no-repeat',
+                        WebkitMaskSize: 'contain',
+                        WebkitMaskPosition: 'center',
+
+                        maskImage: 'url(/puerh-mask.png)',
+                        maskRepeat: 'no-repeat',
+                        maskSize: 'contain',
+                        maskPosition: 'center',
                     }}
-                />
-                {/* Hover image */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        inset: 0,
-                        backgroundImage: `url(${hoverImage})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        opacity: hovered ? 1 : 0,
-                        transform: hovered ? 'scale(1.08)' : 'scale(1)',
-                        transition: 'opacity 0.5s ease, transform 0.6s ease',
-                        zIndex: 1,
-                    }}
-                />
+                >
+                    {/* Base image */}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            backgroundImage: `url(/puerh-product.webp)`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            opacity: hovered ? 0 : 1,
+                            transition: 'opacity 0.5s ease',
+                        }}
+                    />
+
+                    {/* Hover image */}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            backgroundImage: `url(/puerh-zoomed.png)`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            opacity: hovered ? 1 : 0,
+                            transform: hovered ? 'scale(1.2)' : 'scale(1)',
+                            transition: 'opacity 0.5s ease, transform 0.6s ease',
+                        }}
+                    />
+                </div>
             </div>
 
             {/* Card body */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16 }}>
-                {/* Name + price row */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
-                    <Typography
-                        variant="subtitle1"
-                        style={{
-                            fontFamily: "'DM Sans', sans-serif",
-                            fontWeight: 500,
-                            fontSize: '0.95rem',
-                            letterSpacing: '0.01em',
-                            color: '#1a3c2e',
-                            lineHeight: 1.3,
-                        }}
-                    >
-                        {name}
-                    </Typography>
+            <div style={{display: 'flex', flexDirection: 'column', gap: 4, padding: '14px 16px 16px'}}>
+                {/* Name */}
+                <Typography
+                    variant="body2"
+                    style={{
+                        fontWeight: 600,
+                        letterSpacing: '0.02em',
+                        lineHeight: 1.4,
+                    }}
+                >
+                    {name}
+                </Typography>
 
-                    <Typography
-                        variant="body2"
-                        style={{
-                            fontFamily: "'DM Sans', sans-serif",
-                            fontSize: '0.95rem',
-                            color: '#4a6b5a',
-                            letterSpacing: '0.01em',
-                            whiteSpace: 'nowrap',
-                        }}
-                    >
-                        ${price.toFixed(2)}
-                    </Typography>
-                </div>
+                {/* Price — larger and bold, below name */}
+                <Typography
+                    variant="h6"
+                    style={{
+                        fontWeight: 700,
+                        fontSize: '1.35rem',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.2,
+                        fontStyle: 'italic'
+                    }}
+                >
+                    €{price.toFixed(2)}
+                </Typography>
 
-                {/* Button — matches product page .buy-btn exactly */}
-                <Link href={`/catalog/${slug ?? id}`} style={{ width: '100%' }}>
+                {/* CTA button */}
+                <Link href={`/product/${slug ?? id}`} style={{width: '100%', marginTop: 10}}>
                     <Button
                         fullWidth
                         variant="contained"
+                        endIcon={
+                            <ArrowUpRight/>
+                        }
                         sx={{
-                            backgroundColor: 'var(--sage)',
+                            backgroundColor: '#1a3c2e',
                             color: '#fff',
                             borderRadius: '6px',
-                            textTransform: 'none',
-                            fontSize: '0.95rem',
+                            textTransform: 'uppercase',
+                            fontSize: '0.75rem',
                             fontWeight: 500,
-                            py: 1.5,
+                            letterSpacing: '0.06em',
+                            py: 1.25,
                             fontFamily: "'DM Sans', sans-serif",
-                            letterSpacing: '0.01em',
                             boxShadow: 'none',
                             transition: 'background 0.2s ease',
                             '&:hover': {
-                                backgroundColor: 'var(--sage-light)',
+                                backgroundColor: '#2d5c46',
                                 boxShadow: 'none',
                             },
                         }}

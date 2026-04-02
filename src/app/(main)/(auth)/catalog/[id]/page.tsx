@@ -51,7 +51,7 @@ export default function CatalogPage() {
                 }
 
                 .catalog-page {
-                    background: #f5f4f0;
+                    background: white;
                 }
 
                 .catalog-main {
@@ -59,6 +59,7 @@ export default function CatalogPage() {
                     gap: 32px;
                     max-width: 1400px;
                     margin: 0 auto;
+                    margin-top: 20px;
                     padding: 40px 24px;
                 }
 

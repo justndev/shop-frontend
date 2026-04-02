@@ -33,7 +33,7 @@ const LOW_STOCK = [
 ];
 
 const QUICK = [
-    { title: "Top Categories", emoji: "📦", items: ["Engine — 412 products", "Suspension — 354", "Brakes — 289", "Electric — 231"] },
+    { title: "Top Categories", emoji: "📦", items: ["Engine — 412 product", "Suspension — 354", "Brakes — 289", "Electric — 231"] },
     { title: "Deliveries",     emoji: "🚚", items: ["Omniva Parcel — 621", "DPD Express — 438", "Courier — 225", "Pickup — 0 pending"] },
     { title: "Quick Actions",  emoji: "⚡", items: ["Add new product", "Process pending orders", "Export sales report", "Manage coupons"] },
 ];
