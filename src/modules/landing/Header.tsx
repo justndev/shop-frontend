@@ -22,7 +22,7 @@ const NAV_LINKS = [
     {label: 'header.nav.contact', href: '/contact'},
 ];
 
-export default function Header() {
+export default function Header({toggleCart}: {toggleCart: () => void}) {
     const {t} = useTranslation();
 
     const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ export default function Header() {
                             <IconButton size="small" sx={{color: 'white'}}>
                                 <User size={20} strokeWidth={1.5}/>
                             </IconButton>
-                            <IconButton size="small" sx={{color: 'white'}}>
+                            <IconButton size="small" sx={{color: 'white'}} onClick={toggleCart}>
                                 <Badge badgeContent={0}>
                                     <ShoppingCart size={20} strokeWidth={1.5}/>
                                 </Badge>

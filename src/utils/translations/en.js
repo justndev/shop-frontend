@@ -1,4 +1,70 @@
 export const en = {
+    checkout: {
+        pay_now: 'Pay now',
+
+        contact: {
+            title: 'Contact',
+            sign_in: 'Sign in',
+            email: 'Email',
+            newsletter: 'Email me with news and offers',
+        },
+
+        delivery: {
+            title: 'Delivery',
+            country: 'Country / Region',
+            first_name: 'First name',
+            last_name: 'Last name',
+            address: 'Address',
+            apartment: 'Apartment, suite, etc. (optional)',
+            postal_code: 'Postal code',
+            city: 'City',
+            phone: 'Phone',
+            save_info: 'Save this information for next time',
+        },
+
+        shipping: {
+            title: 'Shipping method',
+        },
+
+        payment: {
+            title: 'Payment',
+            subtitle: 'All transactions are secure and encrypted.',
+            credit_card: 'Credit card',
+            card_number: 'Card number',
+            expiry: 'Expiration date (MM / YY)',
+            cvv: 'Security code',
+            name_on_card: 'Name on card',
+            billing_same: 'Use shipping address as billing address',
+        },
+
+        summary: {
+            discount_placeholder: 'Discount code or gift card',
+            apply: 'Apply',
+            subtotal: 'Subtotal',
+            shipping: 'Shipping',
+            total: 'Total',
+            tax_note: 'Including €{{amount}} in taxes',
+            secure: 'All transactions are secure and encrypted.',
+        },
+
+        footer: {
+            'refund-policy': 'Refund policy',
+            'terms-of-service': 'Terms of service',
+            'privacy-policy': 'Privacy policy',
+            'cookie-policy': 'Cookie policy',
+        },
+    },
+    cart: {
+        title: 'Your shopping cart',
+        item: 'item',
+        items: 'items',
+        'col-product': 'Product',
+        'col-total': 'Total',
+        empty: 'Your cart is empty.',
+        'estimated-total': 'Estimated total',
+        'tax-note': 'Tax included. Shipping calculated at checkout.',
+        'proceed-to-payment': 'Proceed to payment',
+    },
     legal: {
         'privacy-policy': {
             'page-header': {
