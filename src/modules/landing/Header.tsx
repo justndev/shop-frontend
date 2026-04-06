@@ -15,6 +15,9 @@ import {Collapse, Paper, List, ListItemButton, ListItemText} from '@mui/material
 import SmallHeader from "@/src/modules/landing/SmallHeader";
 import Logo from "@/src/modules/landing/Logo";
 import {Menu, ShoppingCart, User, X} from "lucide-react";
+import useCartHook from "@/src/hooks/useCartHook";
+import {useDispatch} from "react-redux";
+import {toggleCart} from "@/src/store/slices/cartSlice";
 
 const NAV_LINKS = [
     {label: 'header.nav.blog', href: '/blog'},
@@ -22,8 +25,13 @@ const NAV_LINKS = [
     {label: 'header.nav.contact', href: '/contact'},
 ];
 
-export default function Header({toggleCart}: {toggleCart: () => void}) {
-    const {t} = useTranslation();
+export default function Header() {
+    const { t } = useTranslation();
+    const dispatch = useDispatch();
+
+    function handleToggleCart() {
+        dispatch(toggleCart());
+    }
 
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<HTMLButtonElement>(null);
@@ -62,7 +70,7 @@ export default function Header({toggleCart}: {toggleCart: () => void}) {
                             <IconButton size="small" sx={{color: 'white'}}>
                                 <User size={20} strokeWidth={1.5}/>
                             </IconButton>
-                            <IconButton size="small" sx={{color: 'white'}} onClick={toggleCart}>
+                            <IconButton size="small" sx={{color: 'white'}} onClick={handleToggleCart}>
                                 <Badge badgeContent={0}>
                                     <ShoppingCart size={20} strokeWidth={1.5}/>
                                 </Badge>

@@ -160,7 +160,7 @@ export default function Header() {
                 )}
               </div>
             ) : (
-              <Link href="/auth/login" className="flex flex-col items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-[#222527] transition-colors text-xs gap-0.5">
+              <Link href="/src/app/(main)/(auth)/auth/login" className="flex flex-col items-center p-2 text-gray-300 hover:text-white rounded-lg hover:bg-[#222527] transition-colors text-xs gap-0.5">
                 <User className="w-5 h-5" />
                 <span className="hidden md:block">Войти</span>
               </Link>

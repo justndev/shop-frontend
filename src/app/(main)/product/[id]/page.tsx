@@ -12,9 +12,15 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import BoltIcon from '@mui/icons-material/Bolt';
 import {MOCKED_PRODUCT} from "@/src/utils/mocks";
 import BreadcrumbNav from "@/src/modules/product/BreadcrumbNav";
+import { addProduct } from '@/src/store/slices/productsSlice';
+import useCartHook from '@/src/hooks/useCartHook';
+import {addItem} from "@/src/store/slices/cartSlice";
+import {useDispatch} from "react-redux";
 
 
 export default function ProductPage() {
+    const dispatch = useDispatch();
+
     const product = MOCKED_PRODUCT;
 
     const [selectedImage, setSelectedImage] = useState(0);
@@ -23,6 +29,10 @@ export default function ProductPage() {
     const totalPrice = product.price * quantity;
 
     const descRef = useRef<HTMLDivElement>(null);
+
+    function addProductToCart() {
+        dispatch(addItem({...product, quantity}));
+    }
 
     return (
         <>
@@ -259,23 +269,25 @@ export default function ProductPage() {
                         {/* CTA Buttons */}
                         <div className="flex flex-col gap-3 mb-6">
                             <Button
+                                onClick={addProductToCart}
                                 fullWidth
                                 variant="outlined"
-                                className="add-cart-btn"
+                                // className="add-cart-btn"
+                                    className="buy-btn"
                                 startIcon={<ShoppingCartOutlinedIcon/>}
                                 disabled={product.stockStatus !== 'IN_STOCK'}
                             >
                                 Add to cart
                             </Button>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                className="buy-btn"
-                                startIcon={<BoltIcon/>}
-                                disabled={product.stockStatus !== 'IN_STOCK'}
-                            >
-                                Buy now
-                            </Button>
+                            {/*<Button*/}
+                            {/*    fullWidth*/}
+                            {/*    variant="contained"*/}
+                            {/*    className="buy-btn"*/}
+                            {/*    startIcon={<BoltIcon/>}*/}
+                            {/*    disabled={product.stockStatus !== 'IN_STOCK'}*/}
+                            {/*>*/}
+                            {/*    Buy now*/}
+                            {/*</Button>*/}
                         </div>
 
 

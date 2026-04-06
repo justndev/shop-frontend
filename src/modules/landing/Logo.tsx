@@ -5,7 +5,7 @@ export default function Logo() {
     return (
         <Link href="/">
             <Typography
-                sx={{fontWeight: 'bold', color: 'white'}}
+                sx={{fontWeight: 'bold', color: '#FFFFFF'}}
             >
                 PUERH EXPERT
             </Typography>

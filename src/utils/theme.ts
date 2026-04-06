@@ -28,6 +28,9 @@ export const theme = createTheme({
         secondary: {
             main: '#cfdad6',
         },
+        white: {
+            main: '#ffffff',
+        },
     },
     components: {
         MuiTypography: {

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { EmblaCarouselType } from 'embla-carousel';
-import { CarouselSlide } from './EmblaCarousel';
+import { CarouselSlide } from './BannerCarousel';
 
 type Props = {
     emblaApi: EmblaCarouselType | undefined;

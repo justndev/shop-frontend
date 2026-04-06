@@ -7,7 +7,7 @@ import {useShopHook} from '@/src/hooks/useShopHook'
 import {useEffect} from "react";
 import {useSelector} from "react-redux";
 import {RootState} from "@/src/store";
-import EmblaCarousel, {CarouselSlide} from "@/src/modules/landing/carousel/EmblaCarousel";
+import BannerCarousel, {CarouselSlide} from "@/src/modules/landing/carousel/BannerCarousel";
 import PromotionText from "@/src/modules/landing/PromotionText";
 import WhyUs from "@/src/modules/landing/WhyUs";
 import Categories from "@/src/modules/landing/Categories";
@@ -20,13 +20,10 @@ import AdvantagesText from "@/src/modules/landing/AdvantagesText";
 
 
 export default function HomePage() {
-    const {user} = useSelector((state: RootState) => state.user)
-
-
     return (
-        <div className={'z-1'}>
+        <>
             {/* Hero */}
-            <EmblaCarousel/>
+            <BannerCarousel/>
             <PromotionText/>
             <WhyUs/>
             <Categories/>
@@ -37,7 +34,6 @@ export default function HomePage() {
             <HowToBuy/>
             <ReadMore/>
             <AdvantagesText/>
-
-        </div>
+        </>
     )
 }

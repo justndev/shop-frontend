@@ -25,7 +25,7 @@ export default function PromotionText() {
     }, [emblaApi]);
 
     return (
-        <div className="w-full bg-white text-center z-10">
+        <div className="w-full bg-white text-center">
             <div className="max-w-375 mx-auto py-16 px-4">
                 <Typography variant="h2" sx={{ fontWeight: 600, marginBottom: 4 }} className={'lg:font-3xl md:text-2xl'}>
                     {t('promo.title')}
@@ -36,7 +36,7 @@ export default function PromotionText() {
             </div>
 
             {/* Desktop: 3 columns */}
-            <div className="hidden md:flex bg-[#f0f7f2] py-12 px-6 grid-cols-3 gap-10 justify-center">
+            <div className="hidden md:flex bg-(--mint) py-12 px-6 grid-cols-3 gap-10 justify-center">
                 <div className='grid grid-cols-3 max-w-375 w-full'>
                     {ACHIEVEMENTS.map(({ Icon, key }) => (
                         <div key={key} className="flex flex-col items-center gap-4">

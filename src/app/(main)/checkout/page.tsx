@@ -75,7 +75,7 @@ export default function CheckoutPage() {
                 <section className="checkout-section">
                     <div className="checkout-section__header">
                         <h2 className="checkout-section__title">{t('checkout.contact.title')}</h2>
-                        <Link href="/auth/login" className="checkout-section__link">
+                        <Link href="/src/app/(main)/(auth)/auth/login" className="checkout-section__link">
                             {t('checkout.contact.sign_in')}
                         </Link>
                     </div>
@@ -298,10 +298,10 @@ export default function CheckoutPage() {
 
                 {/* Footer links */}
                 <div className="checkout-footer-links">
-                    <Link href="/legal/returns"   className="checkout-footer-link">{t('checkout.footer.refund_policy')}</Link>
-                    <Link href="/legal/terms"     className="checkout-footer-link">{t('checkout.footer.terms_of_service')}</Link>
-                    <Link href="/legal/privacy"   className="checkout-footer-link">{t('checkout.footer.privacy_policy')}</Link>
-                    <Link href="/legal/cookies"   className="checkout-footer-link">{t('checkout.footer.cookie_policy')}</Link>
+                    <Link href="/src/app/(main)/(docs)/legal/returns" className="checkout-footer-link">{t('checkout.footer.refund_policy')}</Link>
+                    <Link href="/src/app/(main)/(docs)/legal/terms" className="checkout-footer-link">{t('checkout.footer.terms_of_service')}</Link>
+                    <Link href="/src/app/(main)/(docs)/legal/privacy" className="checkout-footer-link">{t('checkout.footer.privacy_policy')}</Link>
+                    <Link href="/src/app/(main)/(docs)/legal/cookies" className="checkout-footer-link">{t('checkout.footer.cookie_policy')}</Link>
                 </div>
             </div>
 

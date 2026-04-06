@@ -3,71 +3,48 @@
 import { useTranslation } from 'react-i18next';
 import { Drawer, IconButton, Divider, Button } from '@mui/material';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
-import { useState } from 'react';
 import Image from 'next/image';
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-  variant?: string;
-}
-
-const MOCKED_ITEMS: CartItem[] = [
-  {
-    id: 1,
-    name: 'Aged Puerh Cake',
-    price: 48.00,
-    quantity: 1,
-    image: '/puerh-product.webp',
-  },
-  {
-    id: 2,
-    name: 'White Peony Loose Leaf',
-    price: 32.00,
-    quantity: 2,
-    image: '/puerh-product.webp',
-    variant: '50g',
-  },
-  {
-    id: 3,
-    name: 'Celadon Gaiwan Set',
-    price: 120.00,
-    quantity: 1,
-    image: '/puerh-product.webp',
-  },
-];
+import useCartHook from '@/src/hooks/useCartHook';
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "@/src/store";
+import {removeItem, toggleCart, updateQuantity} from "@/src/store/slices/cartSlice";
+import {useEffect} from "react"; // adjust path as needed
 
 interface CartSidebarProps {
   open: boolean;
   onClose: () => void;
 }
 
-export default function CartSidebar({ open, onClose }: CartSidebarProps) {
+export default function CartSidebar() {
   const { t } = useTranslation();
-  const [items, setItems] = useState<CartItem[]>(MOCKED_ITEMS);
+  const dispatch = useDispatch();
+  const { items, isOpen } = useSelector((state: RootState) => state.cart);
 
-  const updateQty = (id: number, delta: number) => {
-    setItems(prev =>
-        prev
-            .map(item => item.id === id ? { ...item, quantity: item.quantity + delta } : item)
-            .filter(item => item.quantity > 0)
-    );
-  };
+  useEffect(() => {
+    console.log(items)
+  })
 
-  const removeItem = (id: number) => {
-    setItems(prev => prev.filter(item => item.id !== id));
-  };
+  function handleToggleCart() {
+    dispatch(toggleCart());
+  }
+
+  function handleUpdateQuantity(id: string, quantity: number) {
+    console.log(`quantity: ${quantity}`);
+    dispatch(updateQuantity({id, quantity}));
+  }
+
+  function handleRemoveItem(id: string) {
+    dispatch(removeItem(id));
+  }
+  // const { items, removeItem, updateQuantity, showCart, toggleShowCart } = useCartHook();
 
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
       <Drawer
           anchor="right"
-          open={open}
-          onClose={onClose}
+          open={isOpen}
+          onClose={handleToggleCart}
           PaperProps={{
             sx: {
               width: { xs: '100vw', sm: 420 },
@@ -110,7 +87,7 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
             </p>
           </div>
           <IconButton
-              onClick={onClose}
+              onClick={handleToggleCart}
               size="small"
               sx={{
                 color: '#4a4a42',
@@ -128,16 +105,6 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
           padding: '10px 24px',
           borderBottom: '0.5px solid #e0ddd6',
         }}>
-                <span style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '0.7rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: '#888880',
-                }}>
-                    {t('cart.col_product', 'Product')}
-                </span>
           <span style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: '0.7rem',
@@ -146,8 +113,18 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
             textTransform: 'uppercase',
             color: '#888880',
           }}>
-                    {t('cart.col_total', 'Total')}
-                </span>
+            {t('cart.col_product', 'Product')}
+          </span>
+          <span style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '0.7rem',
+            fontWeight: 600,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: '#888880',
+          }}>
+            {t('cart.col_total', 'Total')}
+          </span>
         </div>
 
         {/* Items */}
@@ -194,7 +171,7 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                         position: 'relative',
                       }}>
                         <img
-                            src={item.image}
+                            src={item.thumbnails[0]}
                             alt={item.name}
                             style={{
                               width: '100%',
@@ -234,7 +211,7 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                           color: '#6b6b5e',
                           margin: 0,
                         }}>
-                          {item.price.toFixed(2)}€
+                          {item.price}€
                         </p>
 
                         {/* Qty stepper */}
@@ -248,7 +225,7 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                           background: '#fff',
                         }}>
                           <button
-                              onClick={() => updateQty(item.id, -1)}
+                              onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
                               style={{
                                 width: 32,
                                 height: 32,
@@ -278,11 +255,11 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                             borderRight: '0.5px solid #e0ddd6',
                             lineHeight: '32px',
                           }}>
-                                            {item.quantity}
-                                        </span>
+                            {item.quantity}
+                          </span>
 
                           <button
-                              onClick={() => updateQty(item.id, 1)}
+                              onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
                               style={{
                                 width: 32,
                                 height: 32,
@@ -322,7 +299,7 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                         </p>
 
                         <IconButton
-                            onClick={() => removeItem(item.id)}
+                            onClick={() => handleRemoveItem(item.id)}
                             size="small"
                             sx={{
                               color: '#b0a898',
@@ -353,7 +330,6 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
               flexDirection: 'column',
               gap: 16,
             }}>
-              {/* Estimated total */}
               <div>
                 <div style={{
                   display: 'flex',
@@ -361,14 +337,14 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                   alignItems: 'baseline',
                   marginBottom: 4,
                 }}>
-                            <span style={{
-                              fontFamily: "'DM Sans', sans-serif",
-                              fontWeight: 500,
-                              fontSize: '0.95rem',
-                              color: '#1a1a14',
-                            }}>
-                                {t('cart.estimated_total', 'Estimated total')}
-                            </span>
+                  <span style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontWeight: 500,
+                    fontSize: '0.95rem',
+                    color: '#1a1a14',
+                  }}>
+                    {t('cart.estimated_total', 'Estimated total')}
+                  </span>
                   <span style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontWeight: 700,
@@ -376,8 +352,8 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                     color: '#1a3c2e',
                     letterSpacing: '-0.01em',
                   }}>
-                                €{total.toFixed(2)}
-                            </span>
+                    €{total.toFixed(2)}
+                  </span>
                 </div>
                 <p style={{
                   fontFamily: "'DM Sans', sans-serif",
@@ -390,7 +366,6 @@ export default function CartSidebar({ open, onClose }: CartSidebarProps) {
                 </p>
               </div>
 
-              {/* Checkout button */}
               <Button
                   fullWidth
                   variant="contained"

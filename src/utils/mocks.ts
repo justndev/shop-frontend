@@ -3,7 +3,7 @@ import {Product} from "@/src/types";
 export const MOCKED_PRODUCT: Product = {
     id: '1',
     brand: 'MAMA KANA',
-    name: 'Vape Pen CBD Amnesia',
+    name: 'Golden Riger Pu-Erh',
     slug: 'vape-pen-cbd-amnesia',
     shortDescription: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood.',
     description: `
@@ -22,18 +22,19 @@ export const MOCKED_PRODUCT: Product = {
     <h3>Delivery &amp; returns 📦</h3>
     <p>All packages are neutral for fast, discreet CBD delivery. Minimum order 20 €. Free delivery from 49 € of purchase. You have 15 days to change your mind — unopened packages only.</p>
   `,
-    price: 30.38,
+    price: 30,
     salePrice: null as number | null,
+    stock: 10,
     stockStatus: 'IN_STOCK' as 'IN_STOCK' | 'OUT_OF_STOCK',
     images: [
-        'https://images.unsplash.com/photo-1621527284559-bb1e1f22e83f?w=800&q=80',
-        'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&q=80',
-        'https://images.unsplash.com/photo-1574856344991-aaa31b6f4b9e?w=800&q=80',
+        '/product/golden-tiger1.jpg',
+        '/product/golden-tiger2.jpg',
+        '/product/golden-tiger3.jpg',
     ],
     thumbnails: [
-        'https://images.unsplash.com/photo-1621527284559-bb1e1f22e83f?w=120&q=60',
-        'https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=120&q=60',
-        'https://images.unsplash.com/photo-1574856344991-aaa31b6f4b9e?w=120&q=60',
+        '/product/golden-tiger1.jpg',
+        '/product/golden-tiger2.jpg',
+        '/product/golden-tiger3.jpg',
     ],
     category: { name: 'Vape Pens', slug: 'vape-pens' },
     tags: ['CBD', 'Amnesia', 'Vape', 'Broad-spectrum'],
