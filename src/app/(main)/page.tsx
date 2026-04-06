@@ -17,6 +17,7 @@ import ExpertiseText from "@/src/modules/landing/ExpertiseText";
 import HowToBuy from "@/src/modules/landing/HowToBuy";
 import ReadMore from "@/src/modules/landing/ReadMore";
 import AdvantagesText from "@/src/modules/landing/AdvantagesText";
+import OurProducts from "@/src/modules/landing/OurProducts";
 
 
 export default function HomePage() {
@@ -31,6 +32,8 @@ export default function HomePage() {
             <FAQ/>
 
             <ExpertiseText/>
+
+            <OurProducts/>
             <HowToBuy/>
             <ReadMore/>
             <AdvantagesText/>

@@ -66,7 +66,7 @@ export default function FAQ() {
                             display: 'block',
                         }}
                     >
-                        <source src="faq-bg-2.mp4" type="video/mp4" />
+                        <source src="/faq-bg-2.mp4" type="video/mp4" />
                     </video>
 
                     <div
