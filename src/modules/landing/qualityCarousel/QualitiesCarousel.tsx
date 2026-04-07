@@ -5,14 +5,21 @@ import {
     NextButton,
     PrevButton,
     usePrevNextButtons
-} from './AchievementsEmblaCarouselArrowButtons'
-import {useDotButton} from './AchievementsEmblaCarouselDotButton'
-import './achievements-embla.css'
+} from './QualitiesEmblaCarouselArrowButtons'
+import {DotButton, useDotButton} from './QualitiesEmblaCarouselDotButton'
+import './qualities-embla.css'
 import {Typography} from "@mui/material";
 import {Award, Briefcase, Globe} from "lucide-react";
 import {useTranslation} from "react-i18next";
+import {QUALITIES, QualityCard} from "@/src/modules/landing/Qualities";
+
+type PropType = {
+    slides: number[]
+    options?: EmblaOptionsType
+}
 
 const OPTIONS: EmblaOptionsType = {align: 'start', loop: false}
+const SLIDE_COUNT = 6
 
 const ACHIEVEMENTS = [
     { icon: <Globe size={48} strokeWidth={1} />, key: 'made_in_europe' },
@@ -32,7 +39,7 @@ function AchievementCard({icon, text}) {
     )
 }
 
-const AchievementsEmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
+const QualitiesEmblaCarousel = ({slides = QUALITIES, options = OPTIONS}) => {
     const {t} = useTranslation();
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
@@ -48,22 +55,25 @@ const AchievementsEmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
     } = usePrevNextButtons(emblaApi)
 
     return (
-        <div className="achievements_embla">
-            <div className="achievements_embla__viewport" ref={emblaRef}>
-                <div className="achievements_embla__container">
-                    {slides.map((achievement, index) => (
-                        <div className="achievements_embla__slide" key={index}>
-                            <div key={index}>
-                                <AchievementCard icon={achievement.icon} text={t(`promo.achievements.${achievement.key}`)}/>
+        <div className="qualities_embla">
+            <div className="qualities_embla__viewport" ref={emblaRef}>
+                <div className="qualities_embla__container">
+                    {QUALITIES.map(({ key, badgeBg, badgeColor, cardBg }, index) => (
+                        <div className="qualities_embla__slide" key={index}>
+                                <QualityCard
+                                    title={t(`quality.cards.${key}.title`)}
+                                    bodyText={t(`quality.cards.${key}.body`)}
+                                    badgeText={t(`quality.cards.${key}.badge`)}
 
-                            </div>
+                                    badgeBg={badgeBg} badgeColor={badgeColor} cardBg={cardBg} />
+
                         </div>
                     ))}
                 </div>
             </div>
 
-            <div className="achievements_embla__controls">
-                <div className="achievements_embla__buttons">
+            <div className="qualities_embla__controls">
+                <div className="qualities_embla__buttons">
                     <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}/>
                     <div className="w-full flex justify-center">
                         <Typography variant="body2" sx={{ color: '#666', alignSelf: 'center', alignItems: 'center' }}>
@@ -72,9 +82,21 @@ const AchievementsEmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
                     </div>
                     <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled}/>
                 </div>
+
+                {/*<div className="qualities_embla__dots">*/}
+                {/*    {scrollSnaps.map((_, index) => (*/}
+                {/*        <DotButton*/}
+                {/*            key={index}*/}
+                {/*            onClick={() => onDotButtonClick(index)}*/}
+                {/*            className={'qualities_embla__dot'.concat(*/}
+                {/*                index === selectedIndex ? ' qualities_embla__dot--selected' : ''*/}
+                {/*            )}*/}
+                {/*        />*/}
+                {/*    ))}*/}
+                {/*</div>*/}
             </div>
         </div>
     )
 }
 
-export default AchievementsEmblaCarousel
+export default QualitiesEmblaCarousel

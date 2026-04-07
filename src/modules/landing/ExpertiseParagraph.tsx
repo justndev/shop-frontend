@@ -1,7 +1,7 @@
 import {Typography} from "@mui/material";
 import {Trans} from "react-i18next";
 
-export default function ExpertiseText() {
+export default function ExpertiseParagraph() {
     return (
         <div className="relative w-full bg-white py-10" style={{ zIndex: 2 }}>
             {/* Centred paragraph with bold highlights */}

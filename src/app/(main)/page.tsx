@@ -1,39 +1,44 @@
 'use client'
 
-import Link from 'next/link'
-import {useRouter} from 'next/navigation'
-import {useAppSelector} from '@/src/hooks/redux'
-import {useShopHook} from '@/src/hooks/useShopHook'
-import {useEffect} from "react";
-import {useSelector} from "react-redux";
-import {RootState} from "@/src/store";
-import BannerCarousel, {CarouselSlide} from "@/src/modules/landing/carousel/BannerCarousel";
-import PromotionText from "@/src/modules/landing/PromotionText";
+import BannerCarousel from "@/src/modules/landing/carousel/BannerCarousel";
+import PromotionTitleAndParagraph from "@/src/modules/landing/PromotionTitleAndParagraph";
 import WhyUs from "@/src/modules/landing/WhyUs";
 import Categories from "@/src/modules/landing/Categories";
-import Quality from "@/src/modules/landing/Quality";
+import Qualities from "@/src/modules/landing/Qualities";
 import FAQ from "@/src/modules/landing/FAQ";
-import ExpertiseText from "@/src/modules/landing/ExpertiseText";
+import ExpertiseParagraph from "@/src/modules/landing/ExpertiseParagraph";
 import HowToBuy from "@/src/modules/landing/HowToBuy";
 import ReadMore from "@/src/modules/landing/ReadMore";
 import AdvantagesText from "@/src/modules/landing/AdvantagesText";
 import OurProducts from "@/src/modules/landing/OurProducts";
+import QualityParagraph from "@/src/modules/landing/QualityParagraph";
+import Achievements from "@/src/modules/landing/Achievements";
 
 
 export default function HomePage() {
     return (
         <>
-            {/* Hero */}
+            {/* Sliding Banner */}
             <BannerCarousel/>
-            <PromotionText/>
+
+            {/* h1. Prem Tea p. The fines-origin... */}
+            <PromotionTitleAndParagraph/>
+
+            {/* [() Shipped Across EU] [! 100% Auth] [& Order to u]*/}
+            <Achievements/>
+
             <WhyUs/>
             <Categories/>
-            <Quality/>
+            <QualityParagraph/>
+                <OurProducts/>
+
+
             <FAQ/>
 
-            <ExpertiseText/>
+            <ExpertiseParagraph/>
 
-            <OurProducts/>
+            <Qualities/>
+
             <HowToBuy/>
             <ReadMore/>
             <AdvantagesText/>

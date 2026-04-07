@@ -4,21 +4,14 @@ import {useState} from 'react';
 import {Button, Typography} from '@mui/material';
 import Link from 'next/link';
 import {ArrowUpRight, User} from "lucide-react";
+import {Product} from "@/src/types";
 
-interface ProductCardProps {
-    id: string | number;
-    name: string;
-    price: number;
-    image: string;
-    hoverImage: string;
-    slug?: string;
-}
 
-export default function ProductCard({id, name, price, image, hoverImage, slug}: ProductCardProps) {
+export default function ProductCard({product}: {product: Product}) {
     const [hovered, setHovered] = useState(false);
 
     return (
-        <Link href={`/product/${slug ?? id}`} style={{width: '100%', marginTop: 10}}>
+        <Link href={`/product/${product.slug}`} style={{width: '100%', marginTop: 10}}>
 
             <div
                 onClick={() => setHovered(!hovered)}
@@ -105,7 +98,7 @@ export default function ProductCard({id, name, price, image, hoverImage, slug}: 
                                 lineHeight: 1.4,
                             }}
                         >
-                            {name}
+                            {product.name}
                         </Typography>
                     </div>
 
@@ -121,7 +114,7 @@ export default function ProductCard({id, name, price, image, hoverImage, slug}: 
                             fontStyle: 'italic'
                         }}
                     >
-                        €{price.toFixed(2)}
+                        €{product.price}
                     </Typography>
 
                     {/* CTA button */}

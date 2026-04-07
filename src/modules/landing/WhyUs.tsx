@@ -11,7 +11,7 @@ export default function WhyUs() {
             <div className="max-w-400 mx-auto flex items-stretch justify-center gap-0 md:flex-row flex-col">
 
                 {/* Image — slightly raised */}
-                <div className="hidden md:block w-[400px] -mt-8 -ml-4 mb-8 min-w-[400px]">
+                <div className="hidden md:block w-[500px] -mt-8 -ml-4 mb-8 min-w-[400px]">
                     <img
                         src="/slide1.jpg"
                         alt={t('why_us.image_alt')}
