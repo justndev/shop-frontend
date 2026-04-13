@@ -22,7 +22,7 @@ export default function ReadMore() {
     };
 
     return (
-        <section className="relative w-full bg-white py-16 px-4 z-10 flex flex-col items-center gap-4">
+        <section className="relative w-full bg-white py-16 px-4 z-11 flex flex-col items-center gap-4">
             <div className="max-w-375 w-full flex flex-col justify-start">
                 <Typography variant="h2" className="text-[#193028] mb-15 leading-snug" sx={{fontWeight: 400}}>
                     <Trans i18nKey="read_more.title" components={{ b: <strong /> }} />

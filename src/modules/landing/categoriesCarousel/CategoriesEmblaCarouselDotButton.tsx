@@ -40,7 +40,7 @@ export const useDotButton = (
         onInit(emblaApi)
         onSelect(emblaApi)
 
-        emblaApi.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
+        emblaApi.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect).on('resize', onInit)
     }, [emblaApi, onInit, onSelect])
 
     return {

@@ -27,21 +27,26 @@ export default function HomePage() {
             {/* [() Shipped Across EU] [! 100% Auth] [& Order to u]*/}
             <Achievements/>
 
+            {/* Picture and card with texts */}
             <WhyUs/>
+
             <Categories/>
             <QualityParagraph/>
-                <OurProducts/>
+            <OurProducts/>
+            <Qualities/>
+            <ExpertiseParagraph/>
 
 
             <FAQ/>
 
+
             <ExpertiseParagraph/>
 
-            <Qualities/>
-
             <HowToBuy/>
-            <ReadMore/>
             <AdvantagesText/>
+            <FAQ/>
+
+            <ReadMore/>
         </>
     )
 }

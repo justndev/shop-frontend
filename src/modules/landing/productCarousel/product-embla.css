@@ -1,15 +1,15 @@
 .products_embla {
-    border: solid 1px gray;
     width: 100%;
     margin: auto;
 
-    --slide-height: 19rem;
-    --slide-spacing: 1rem;
-    --slide-size: 100%;
+    --slide-size: calc(100% / 2.5);  /* mobile: 2.5 slides */
+    --slide-spacing: 0.6rem;
+
+    --slide-size-sm: calc(100% / 3);    /* tablet: 3 slides */
     --slide-spacing-sm: 1.6rem;
-    --slide-size-sm: 50%;
+
+    --slide-size-lg: calc(100% / 5);    /* desktop: 4 slides */
     --slide-spacing-lg: 2rem;
-    --slide-size-lg: calc(100% / 5);
 
     --text-body: rgb(54, 49, 61);
     --detail-high-contrast: rgb(192, 192, 192);
@@ -64,16 +64,17 @@
 
 
 .products_embla__controls {
-    display: grid;
+    display: flex;
     grid-template-columns: auto 1fr;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     gap: 1.2rem;
     margin-top: 1.8rem;
 }
 
 .products_embla__buttons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.6rem;
     align-items: center;
 }
@@ -91,8 +92,8 @@
     padding: 0;
     margin: 0;
     border: 0.2rem solid var(--detail-medium-contrast);
-    width: 3.6rem;
-    height: 3.6rem;
+    width: 3rem;
+    height: 3rem;
 
     z-index: 1;
     border-radius: 50%;

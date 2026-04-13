@@ -11,17 +11,17 @@ export default function OurProducts() {
         <section className='w-full flex justify-center'>
 
             {/* Wrapper/Limiter */}
-            <div className="relative w-full max-w-375 flex flex-col items-center gap-4">
+            <div className="relative w-full max-w-375 flex flex-col items-center gap-4 py-8">
 
                 {/* Title */}
-                <div className="w-full">
+                <div className="w-full px-8">
                     <Typography variant="h2" className="text-[#193028] mb-15 leading-snug" sx={{fontWeight: 400}}>
                         <Trans i18nKey="our_products.title" components={{ b: <strong /> }} />
                     </Typography>
                 </div>
 
                 {/* Centred paragraph with bold highlights */}
-                <div className="">
+                <div className="px-8">
                     <Typography variant="body1" sx={{ color: '#444', lineHeight: 1.8 }}>
                         <Trans
                             i18nKey="expertise.paragraph1"

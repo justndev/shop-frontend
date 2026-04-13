@@ -26,7 +26,7 @@ export default function Achievements() {
     return (
         <div className="w-full bg-(--mint) text-center">
             {/* DESKTOP */}
-            <div className="hidden md:flex py-12 px-6 grid-cols-3 gap-10 justify-center">
+            <div className="hidden md:flex py-8 px-6 grid-cols-3 gap-10 justify-center">
                 <div className='grid grid-cols-3 max-w-375 w-full'>
                     {ACHIEVEMENTS.map(({Icon, key}) => (
                         <div key={key} className="flex flex-col items-center gap-4">

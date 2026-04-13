@@ -2,8 +2,9 @@
 
 import CartSidebar from '@/src/modules/cart/CartSidebar'
 import {ToastContainer} from '@/src/modules/ui/Toast'
-import Header from "@/src/modules/landing/Header";
+import Header from "@/src/modules/layout/Header";
 import useCartHook from "@/src/hooks/useCartHook";
+import Footer from "@/src/modules/layout/Footer";
 
 
 export default function MainLayout({children}: { children: React.ReactNode }) {
@@ -15,6 +16,7 @@ export default function MainLayout({children}: { children: React.ReactNode }) {
             <main className="min-h-screen pt-15">{children}</main>
             <CartSidebar open={showCart} onClose={toggleShowCart} />
             <ToastContainer/>
+            <Footer/>
         </>
     )
 }

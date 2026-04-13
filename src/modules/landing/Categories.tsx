@@ -40,12 +40,12 @@ export default function Categories() {
     return (
         <section className="w-full bg-[#f0f7f2] py-8 z-10">
             <div className="max-w-375 mx-auto">
-                <Typography variant="h2" sx={{ fontWeight: 500, marginBottom: 4 }} className="px-16 lg:font-3xl md:text-2xl lg:px-8">
+                <Typography variant="h2" sx={{ fontWeight: 500, marginBottom: 4 }} className="px-8 lg:font-3xl md:text-2xl lg:px-8">
                     {t('categories.title')}
                 </Typography>
 
                 {/* Desktop: grid */}
-                <div className="hidden lg:grid grid-cols-5 gap-4 px-8">
+                <div className="hidden lg:grid grid-cols-5 gap-4 mx-8">
                     {CATEGORIES.map(({ key, image, href }) => (
                         <CategoryCard key={key} text={t(`categories.items.${key}`)} image={image} href={href} />
                     ))}

@@ -35,7 +35,7 @@ const CATEGORIES = [
 const SLIDES = CATEGORIES;
 
 const CategoryCard = ({ image, href, text }: { image: string; href: string; text: string }) => (
-    <Link href={href} className="group flex flex-col gap-6 max-h-[300px]">
+    <Link href={href} className="group flex flex-col gap-6 md:max-h-[300px] max-h-[400px]">
         <div className="overflow-hidden rounded-lg aspect-[4/3] bg-[#08120C]">
             <img
                 src={image}
@@ -74,7 +74,7 @@ const CategoriesCarousel = ({slides = SLIDES, options = OPTIONS}) => {
                 <div className="categories_embla__container">
                     {slides.map((category, index) => (
                         <div className="categories_embla__slide" key={index}>
-                            <div key={index}>
+                            <div key={index} className='mx-4'>
                                 <CategoryCard image={category.image} href={category.href} text={t(`categories.items.${category.key}`)}/>
 
                             </div>
