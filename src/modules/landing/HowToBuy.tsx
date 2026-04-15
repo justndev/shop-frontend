@@ -3,52 +3,71 @@
 import { useTranslation, Trans } from 'react-i18next';
 import { Typography } from '@mui/material';
 
-export default function HowToBuy() {
+export default function WhyUs() {
     const { t } = useTranslation();
 
     return (
-        <section className="relative w-full bg-white py-16 px-4 z-10">
-            <div className="max-w-375 mx-auto flex items-stretch justify-center gap-0 md:flex-row flex-col">
+        <section className="relative w-full bg-[#ffffff] py-8">
 
+            {/* Desktop layout */}
+            <div className="hidden md:grid md:grid-cols-[3fr_2fr] max-w-400 mx-auto px-8 items-start">
 
-                {/* Text card */}
-                <div className="bg-[#f0f7f2] rounded-2xl p-8 md:p-12 flex-1 md:-ml-8 z-10 flex flex-col justify-center gap-4 max-w-[1000px]">
-                    <Typography variant="h2" className="text-[#193028] mb-5 leading-snug" sx={{fontWeight: 400}}>
+                {/* Card */}
+                <div className="relative z-20 -mr-6 mt-8 self-stretch bg-[#f0f7f2]
+                    rounded-2xl p-10 flex flex-col gap-4
+                    shadow-[0_8px_40px_rgba(0,0,0,0.2)]">
+                    <Typography sx={{ fontWeight: 500, fontSize: 38, lineHeight: 1.3, color: '#193028' }}>
                         <Trans i18nKey="why_us.title" components={{ b: <strong /> }} />
                     </Typography>
-
-                    <Typography variant="body2" className="text-[#193028] mb-3 leading-relaxed">
-                        <Trans i18nKey="why_us.paragraph_1" components={{ b: <strong className="text-[#193028]" /> }} />
+                    <Typography variant="body2" sx={{ color: '#193028', lineHeight: 1.7 }}>
+                        <Trans i18nKey="why_us.paragraph_1" components={{ b: <strong /> }} />
                     </Typography>
-
-                    <Typography variant="body2" className="text-[#193028]  mb-4 leading-relaxed">
-                        <Trans i18nKey="why_us.paragraph_2" components={{ b: <strong className="text-[#193028]" /> }} />
+                    <Typography variant="body2" sx={{ color: '#193028', lineHeight: 1.7 }}>
+                        <Trans i18nKey="why_us.paragraph_2" components={{ b: <strong /> }} />
                     </Typography>
-
-                    <Typography variant="body2" className="font-bold text-[#193028]  uppercase tracking-wide text-xs"
-                                style={{fontWeight: 600}}
-                    >
+                    <Typography variant="body2" sx={{ fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(25,48,40,0.65)' }}>
                         {t('why_us.tagline')}
                     </Typography>
                 </div>
-
-                {/* Image — slightly raised */}
-                <div className="hidden md:block w-[400px] flex-shrink-0 -mt-8 mb-8 -ml-12">
+                {/* Image */}
+                <div className="h-[480px] rounded-2xl overflow-hidden relative z-10">
                     <img
                         src="/slide1.jpg"
                         alt={t('why_us.image_alt')}
-                        className="w-full h-full object-cover rounded-lg"
-                    />
-                </div>
-                {/* Image — slightly raised */}
-                <div className="block md:hidden w-full px-7 -mb-8 -mt-8">
-                    <img
-                        src="/slide1.jpg"
-                        alt={t('why_us.image_alt')}
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full h-full"
                     />
                 </div>
             </div>
+
+            {/* Mobile layout */}
+            <div className="flex md:hidden flex-col px-5">
+
+                {/* Image */}
+                <div className=" h-[200px] rounded-xl overflow-hidden relative mb-[-2rem] ml-4 mr-4">
+                    <img
+                        src="/slide1.jpg"
+                        alt={t('why_us.image_alt')}
+                        className="w-full h-fullr"
+                    />
+                </div>
+
+                {/* Card */}
+                <div className="relative z-20 bg-[#f0f7f2] rounded-2xl pt-12 px-6 pb-8 flex flex-col gap-4 shadow-[0_8px_40px_rgba(0,0,0,0.25)]">
+                    <Typography sx={{ fontWeight: 500, fontSize: 28, lineHeight: 1.3, color: '#193028' }}>
+                        <Trans i18nKey="why_us.title" components={{ b: <strong /> }} />
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: '#193028', lineHeight: 1.7 }}>
+                        <Trans i18nKey="why_us.paragraph_1" components={{ b: <strong /> }} />
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: '#193028', lineHeight: 1.7 }}>
+                        <Trans i18nKey="why_us.paragraph_2" components={{ b: <strong /> }} />
+                    </Typography>
+                    <Typography variant="body2" sx={{ fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(25,48,40,0.65)' }}>
+                        {t('why_us.tagline')}
+                    </Typography>
+                </div>
+            </div>
+
         </section>
     );
 }

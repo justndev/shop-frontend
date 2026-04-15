@@ -37,10 +37,11 @@ const EmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
     return (
         <div className="products_embla">
             <div className="products_embla__viewport" ref={emblaRef}>
-                <div className="products_embla__container">
+                <div className="products_embla__container ">
                     {slides.map((product, index) => (
                         <div className="products_embla__slide" key={index}>
-                            <div key={index} className="sm:pl-8">
+                            <div key={index} style={{paddingLeft: 8, paddingRight: 8}}
+                            >
                                 <ProductCard product={product} />
 
                             </div>

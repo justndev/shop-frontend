@@ -300,10 +300,22 @@ export const en = {
     faq: {
         title: "Why choose TheWholesalerCBD.com?",
         items: {
-            organic_farming:    { question: "Organic farming and hemp grown in Europe", answer: "..." },
-            certified_quality:  { question: "Cheap CBD and certified premium quality",  answer: "..." },
-            expertise_catalog:  { question: "Recognized expertise and comprehensive catalog", answer: "..." },
-            packaging_delivery: { question: "Packaging and fast delivery of CBD wholesale and retail", answer: "..." }
+            organic_farming: {
+                question: "Organic farming and hemp grown in Europe",
+                answer: "We prioritize sustainably grown European hemp, cultivated under strict organic farming practices to ensure purity, consistency, and environmental responsibility across all products."
+            },
+            certified_quality: {
+                question: "Cheap CBD and certified premium quality",
+                answer: "Affordable, lab-tested CBD you can trust."
+            },
+            expertise_catalog: {
+                question: "Recognized expertise and comprehensive catalog",
+                answer: "With years of industry experience, we offer a carefully curated catalog that spans a wide range of CBD products, meeting diverse customer needs while maintaining high standards of quality and compliance."
+            },
+            packaging_delivery: {
+                question: "Packaging and fast delivery of CBD wholesale and retail",
+                answer: "Fast delivery with secure packaging for all orders."
+            }
         }
     },
     promo: {
@@ -352,12 +364,16 @@ export const en = {
     },
 
     expertise: {
-        paragraph1: "We put our expertise as a CBD wholesaler at the service of professionals and distributors wishing to buy CBD in bulk legally in France and Europe. Our product, from organically grown hemp, are carefully selected to guarantee premium quality.",
-        paragraph2: "Thanks to our comprehensive CBD catalog, you benefit from CBD resins, hemp flowers and CBD oils that comply with current legislation, with fast, secure delivery tailored to your B2B needs."
+        paragraph1: "We put our <b>expertise as a CBD wholesaler</b> at the service of professionals and distributors wishing to <b>buy CBD in bulk legally in France and Europe</b>. Our products, from <b>organically grown hemp</b>, are carefully selected to guarantee <b>premium quality</b>.",
+        paragraph2: "Thanks to our <b>comprehensive CBD catalog</b>, you benefit from <b>CBD resins, hemp flowers and CBD oils</b> that comply with <b>current legislation</b>, with <b>fast, secure delivery</b> tailored to your <b>B2B needs</b>."
     },
 
     read_more: {
         title: "<b>Read More</b>",
+    },
+
+    our_products: {
+      title: "Out Products",
     },
 
     why_us: {

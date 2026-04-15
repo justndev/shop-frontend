@@ -8,10 +8,10 @@ export default function OurProducts() {
     const { t } = useTranslation();
 
     return (
-        <section className='w-full flex justify-center'>
+        <section className='w-full flex flex-col overflow-hidden'> {/* overflow-hidden clips the carousel sides */}
 
             {/* Wrapper/Limiter */}
-            <div className="relative w-full max-w-375 flex flex-col items-center gap-4 py-8">
+            <div className="relative w-full max-w-375 flex flex-col items-center gap-4 py-8 self-center">
 
                 {/* Title */}
                 <div className="w-full px-8">
@@ -20,32 +20,23 @@ export default function OurProducts() {
                     </Typography>
                 </div>
 
-                {/* Centred paragraph with bold highlights */}
+                {/* Paragraphs */}
                 <div className="px-8">
                     <Typography variant="body1" sx={{ color: '#444', lineHeight: 1.8 }}>
-                        <Trans
-                            i18nKey="expertise.paragraph1"
-                            components={{ b: <strong style={{ color: '#08120C' }} /> }}
-                        />
+                        <Trans i18nKey="expertise.paragraph1" components={{ b: <strong style={{ color: '#08120C' }} /> }} />
                     </Typography>
                     <br/>
                     <Typography variant="body1" sx={{ color: '#444', lineHeight: 1.8 }}>
-                        <Trans
-                            i18nKey="expertise.paragraph2"
-                            components={{ b: <strong style={{ color: '#08120C' }} /> }}
-                        />
+                        <Trans i18nKey="expertise.paragraph2" components={{ b: <strong style={{ color: '#08120C' }} /> }} />
                     </Typography>
                 </div>
-                {/* Carousel — full width within the section */}
+
+                {/* Carousel — anchored to max-w limiter but bleeds right */}
                 <div className="w-full">
                     <ProductCarousel />
                 </div>
-
-
-                <div className="max-w-375 mx-auto flex items-stretch justify-center gap-0 md:flex-row flex-col">
-                </div>
             </div>
-        </section>
 
+        </section>
     )
 }

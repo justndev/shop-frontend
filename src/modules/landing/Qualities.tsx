@@ -103,10 +103,10 @@ export default function Promotion() {
     const { t } = useTranslation();
 
     return (
-        <div className="relative w-full bg-white" style={{ zIndex: 2 }}>
+        <div className="relative w-full bg-white2">
 
             {/* Desktop: 4-column grid */}
-            <div className="hidden md:block max-w-375 mx-auto px-4 py-12">
+            <div className="hidden md:block max-w-375 mx-auto px-4 py-8">
                 <div className="grid grid-cols-4 gap-5">
                     {QUALITIES.map(({ key, badgeBg, badgeColor, cardBg }) => (
                         <QualityCard
@@ -121,7 +121,7 @@ export default function Promotion() {
             </div>
 
             {/* Mobile: Embla carousel */}
-            <div className="md:hidden py-10 px-4">
+            <div className="md:hidden py-10">
                <QualitiesEmblaCarousel/>
             </div>
         </div>

@@ -1,6 +1,7 @@
 .qualities_embla {
     width: 100%;
     margin: auto;
+    overflow: hidden;
 
     --slide-height: 19rem;
     --slide-spacing: 1rem;
@@ -21,7 +22,9 @@
 }
 
 .qualities_embla__viewport {
-    overflow: hidden;
+    overflow: visible;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .qualities_embla__container {

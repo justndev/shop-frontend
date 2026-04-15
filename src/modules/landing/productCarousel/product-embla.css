@@ -1,28 +1,26 @@
 .products_embla {
     width: 100%;
     margin: auto;
+    overflow: visible; /* let slides show outside */
 
-    --slide-size: calc(100% / 2.5);  /* mobile: 2.5 slides */
+    --slide-size: calc(100% / 2.5);
     --slide-spacing: 0.6rem;
-
-    --slide-size-sm: calc(100% / 3);    /* tablet: 3 slides */
+    --slide-size-sm: calc(100% / 3);
     --slide-spacing-sm: 1.6rem;
-
-    --slide-size-lg: calc(100% / 5);    /* desktop: 4 slides */
+    --slide-size-lg: calc(100% / 5);
     --slide-spacing-lg: 2rem;
 
     --text-body: rgb(54, 49, 61);
     --detail-high-contrast: rgb(192, 192, 192);
     --detail-medium-contrast: rgb(234, 234, 234);
     --detail-low-contrast: rgb(240, 240, 242);
-
     --text-high-contrast-rgb-value: 49, 49, 49;
     --text-medium-contrast-rgb-value: 99, 94, 105;
     --text-low-contrast-rgb-value: 116, 109, 118;
 }
 
 .products_embla__viewport {
-    overflow: hidden;
+    overflow: visible;
 }
 
 .products_embla__container {

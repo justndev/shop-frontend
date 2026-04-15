@@ -4,7 +4,7 @@ import BannerCarousel from "@/src/modules/landing/carousel/BannerCarousel";
 import PromotionTitleAndParagraph from "@/src/modules/landing/PromotionTitleAndParagraph";
 import WhyUs from "@/src/modules/landing/WhyUs";
 import Categories from "@/src/modules/landing/Categories";
-import Qualities from "@/src/modules/landing/Qualities";
+import QualityCards from "@/src/modules/landing/Qualities";
 import FAQ from "@/src/modules/landing/FAQ";
 import ExpertiseParagraph from "@/src/modules/landing/ExpertiseParagraph";
 import HowToBuy from "@/src/modules/landing/HowToBuy";
@@ -31,10 +31,10 @@ export default function HomePage() {
             <WhyUs/>
 
             <Categories/>
-            <QualityParagraph/>
             <OurProducts/>
-            <Qualities/>
-            <ExpertiseParagraph/>
+            <QualityCards/>
+                <QualityParagraph/>
+
 
 
             <FAQ/>

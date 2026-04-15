@@ -34,7 +34,7 @@ export default function WhyUs() {
                     <Typography variant="body2" sx={{ color: '#193028', lineHeight: 1.7 }}>
                         <Trans i18nKey="why_us.paragraph_2" components={{ b: <strong /> }} />
                     </Typography>
-                    <Typography variant="caption" sx={{ fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(25,48,40,0.65)' }}>
+                    <Typography variant="body2" sx={{ fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(25,48,40,0.65)' }}>
                         {t('why_us.tagline')}
                     </Typography>
                 </div>
@@ -63,7 +63,7 @@ export default function WhyUs() {
                     <Typography variant="body2" sx={{ color: '#193028', lineHeight: 1.7 }}>
                         <Trans i18nKey="why_us.paragraph_2" components={{ b: <strong /> }} />
                     </Typography>
-                    <Typography variant="caption" sx={{ fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(25,48,40,0.65)' }}>
+                    <Typography variant="body2" sx={{ fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(25,48,40,0.65)' }}>
                         {t('why_us.tagline')}
                     </Typography>
                 </div>
