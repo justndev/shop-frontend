@@ -1,5 +1,5 @@
 import {useState} from "react";
-import C from "@/src/modules/admin/colors";
+import C_old from "@/src/modules/admin/colors";
 import NavItem from "@/src/modules/admin/Navitem";
 import {useRouter} from "next/navigation";
 
@@ -7,7 +7,12 @@ import {useRouter} from "next/navigation";
 const NAV = [
     {label: "Dashboard", icon: "dash"},
     {label: "Shop", icon: "shop", children: ["Orders", "Coupons", "Reports"]},
-    {label: "Products", icon: "product", children: ["All Products", "Add Product", "Categories", "Tags", "Reviews"]},
+    {label: "Products", icon: "product", children: [
+            {label: "All Products", slug: 'products'},
+            {label: "Add Product", slug: 'products/add'},
+            {label: "Categories", slug: 'categories'},
+            {label:  "Tags", slug: 'tags'},
+        ]},
     {label: "Orders", icon: "order"},
     {label: "Media", icon: "media"},
     {label: "Customers", icon: "people"},
@@ -38,19 +43,19 @@ export default function Sidebar({mobileOpen, onClose}) {
 
     const content = (
         <div style={{
-            width: 220, height: "100%", background: C.sidebar,
+            width: 220, height: "100%", background: C_old.sidebar,
             display: "flex", flexDirection: "column", paddingTop: 48,
-            borderRight: `1px solid ${C.border}`,
+            borderRight: `1px solid ${C_old.border}`,
         }}>
             <div style={{padding: "10px 14px 8px", borderBottom: `1px solid #222527`}}>
         <span
-            style={{fontSize: 9, color: C.faint, textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700}}>
+            style={{fontSize: 9, color: C_old.faint, textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700}}>
           Navigation
         </span>
             </div>
             <div style={{flex: 1, overflowY: "auto"}}>
-                {NAV.map(item => (
-                    <NavItem key={item.label} item={item} selected={selected} onSelect={handleSelect}/>
+                {NAV.map((item, index) => (
+                    <NavItem key={index} item={item} selected={selected} onSelect={handleSelect}/>
                 ))}
             </div>
             <div style={{

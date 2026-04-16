@@ -13,6 +13,7 @@ import AdvantagesText from "@/src/modules/landing/AdvantagesText";
 import OurProducts from "@/src/modules/landing/OurProducts";
 import QualityParagraph from "@/src/modules/landing/QualityParagraph";
 import Achievements from "@/src/modules/landing/Achievements";
+import {useEffect} from "react";
 
 
 export default function HomePage() {

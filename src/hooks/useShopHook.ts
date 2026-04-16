@@ -6,7 +6,7 @@ import { setProducts, addProduct, removeProduct, setCategories, addCategory, set
 import { setOrders, addOrder } from '@/src/store/slices/ordersSlice'
 import { addItem, clearCart, openCart } from '@/src/store/slices/cartSlice'
 import productsApi from '@/src/api/productsApi'
-import categoriesApi from '@/src/api/categoriesApi'
+import categoryApi from '@/src/api/categoryApi'
 import ordersApi from '@/src/api/ordersApi'
 import cartApi from '@/src/api/cartApi'
 import paymentApi from '@/src/api/paymentApi'
@@ -52,7 +52,7 @@ export function useShopHook() {
 
   async function fetchCategories() {
     try {
-      const res = await categoriesApi.getAll()
+      const res = await categoryApi.getAll()
       dispatch(setCategories(res.data))
     } catch {
       // categories are non-critical, fail silently

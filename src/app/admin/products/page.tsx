@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
-import productApi, { Product, ProductListParams, categoryApi, Category } from "@/src/api/productApi";
+import productApi, { Product, ProductListParams } from "@/src/api/productApi";
+import categoryApi from "@/src/api/categoryApi";
+import {Category} from "@/src/types";
 
 // ── COLORS ────────────────────────────────────────────────────────────────────
 
@@ -126,7 +128,11 @@ function useProductList() {
 
     // Fetch categories once
     useEffect(() => {
-        categoryApi.list().then(setCategories).catch(console.error);
+        async function fetchCategories() {
+            const responseData = await categoryApi.getAll();
+            setCategories(responseData.data);
+        }
+        fetchCategories();
     }, []);
 
     const fetchProducts = useCallback(async (p: typeof params) => {
@@ -312,8 +318,14 @@ function ProductRow({ product, selected, onToggle, onDelete, router }: {
     onDelete: () => void;
     router: ReturnType<typeof useRouter>;
 }) {
+
+    useEffect(() => {
+        console.log(product)
+    }, []);
     const [hovered, setHovered] = useState(false);
     const thumb = product.images[0];
+
+
 
     return (
         <tr
@@ -352,7 +364,7 @@ function ProductRow({ product, selected, onToggle, onDelete, router }: {
                         onClick={() => router.push(`/admin/products/${product.id}/edit`)}
                         style={{ background: "none", border: "none", padding: 0, color: product.isActive ? C.accent : C.textMuted, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", textAlign: "left" as const }}
                     >
-                        {product.name || <span style={{ color: C.textFaint }}>(no title)</span>}
+                        {product.name['en'] || <span style={{ color: C.textFaint }}>(no title)</span>}
                     </button>
                     <StatusBadge isActive={product.isActive} />
                     {/* Row actions on hover */}
@@ -391,7 +403,7 @@ function ProductRow({ product, selected, onToggle, onDelete, router }: {
 
             {/* Categories */}
             <td style={{ padding: "10px 12px", fontSize: 12, color: C.accent }}>
-                {product.category?.name ?? <span style={{ color: C.textFaint }}>–</span>}
+                {product.category?.name['en'] ?? <span style={{ color: C.textFaint }}>–</span>}
             </td>
 
             {/* Tags */}
@@ -473,7 +485,7 @@ export default function ProductsListPage() {
                         <button style={btnStyle("secondary")}>Import</button>
                         <button style={btnStyle("secondary")}>Export</button>
                         <button
-                            onClick={() => router.push("/admin/products/new")}
+                            onClick={() => router.push("/admin/products/add")}
                             style={btnStyle("primary")}
                         >
                             + Add new product
@@ -534,7 +546,7 @@ export default function ProductsListPage() {
                 <select style={selectStyle} onChange={e => list.setCategory(e.target.value)}>
                     <option value="">Select a category</option>
                     {list.categories.map(c => (
-                        <option key={c.id} value={c.id}>{c.name}</option>
+                        <option key={c.id} value={c.id}>{c.name['en']}</option>
                     ))}
                 </select>
 
@@ -625,7 +637,7 @@ export default function ProductsListPage() {
                                     </svg>
                                     No products found.{" "}
                                     <button
-                                        onClick={() => router.push("/admin/products/new")}
+                                        onClick={() => router.push("/admin/products/add")}
                                         style={{ background: "none", border: "none", color: C.accent, cursor: "pointer", fontFamily: "inherit", fontSize: 14 }}
                                     >
                                         Add your first product

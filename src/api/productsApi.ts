@@ -7,6 +7,7 @@ const productsApi = {
     limit?: number
     minPrice?: number
     maxPrice?: number
+    slug?: string
   }): Promise<{ details: string; data: Product[] }> {
     const res = await apiClient.get('/products', { params })
     return res.data

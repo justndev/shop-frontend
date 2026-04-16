@@ -5,6 +5,8 @@ import { Typography } from '@mui/material';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import CategoriesCarousel from "@/src/modules/landing/categoriesCarousel/CategoriesCarousel";
+import {useEffect, useState} from "react";
+import categoryApi from "@/src/api/categoryApi";
 
 export const CATEGORIES = [
     { key: 'puer',     image: '/categories/categories-puerh.jpg',     href: '/catalog/puer' },
@@ -36,6 +38,18 @@ export function CategoryCard ({ image, href, text }: { image: string; href: stri
 
 export default function Categories() {
     const { t } = useTranslation();
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        console.log('Categories Page rendered')
+
+        async function fetchCategories() {
+            const responseData = await categoryApi.getAll();
+            setCategories(responseData.data)
+        }
+
+        fetchCategories();
+    }, [])
 
     return (
         <section className="w-full bg-[#f0f7f2] py-8 z-10">
@@ -46,8 +60,8 @@ export default function Categories() {
 
                 {/* Desktop: grid */}
                 <div className="hidden lg:grid grid-cols-5 gap-4 mx-8">
-                    {CATEGORIES.map(({ key, image, href }) => (
-                        <CategoryCard key={key} text={t(`categories.items.${key}`)} image={image} href={href} />
+                    {categories.map((category, index) => (
+                        <CategoryCard key={index} text={t(`categories.items.${category.slug}`)} image={category.image} href={`catalog/${category.slug}`} />
                     ))}
                 </div>
 

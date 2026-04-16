@@ -6,22 +6,16 @@ import {
     PrevButton,
     usePrevNextButtons
 } from './ProductEmblaCarouselArrowButtons'
-import { DotButton, useDotButton } from './ProductEmblaCarouselDotButton'
+import { useDotButton } from './ProductEmblaCarouselDotButton'
 import './product-embla.css'
 import {MOCKED_PRODUCTS} from "@/src/utils/mocks";
 import ProductCard from "@/src/modules/product/ProductCard";
 import {Typography} from "@mui/material";
 
-type PropType = {
-    slides: number[]
-    options?: EmblaOptionsType
-}
 
 const OPTIONS: EmblaOptionsType = { align: 'start' }
-const SLIDE_COUNT = 6
-const SLIDES = MOCKED_PRODUCTS;
 
-const EmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
+const EmblaCarousel = ({products = MOCKED_PRODUCTS, options = OPTIONS}) => {
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
     const { selectedIndex, scrollSnaps, onDotButtonClick } =
@@ -38,7 +32,7 @@ const EmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
         <div className="products_embla">
             <div className="products_embla__viewport" ref={emblaRef}>
                 <div className="products_embla__container ">
-                    {slides.map((product, index) => (
+                    {products.map((product, index) => (
                         <div className="products_embla__slide" key={index}>
                             <div key={index} style={{paddingLeft: 8, paddingRight: 8}}
                             >

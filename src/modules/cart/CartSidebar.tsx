@@ -16,7 +16,7 @@ interface CartSidebarProps {
 }
 
 export default function CartSidebar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const { items, isOpen } = useSelector((state: RootState) => state.cart);
 
@@ -171,7 +171,7 @@ export default function CartSidebar() {
                         position: 'relative',
                       }}>
                         <img
-                            src={item.thumbnails[0]}
+                            src={getThumbnailUrl(item.images[0])}
                             alt={item.name}
                             style={{
                               width: '100%',
@@ -191,7 +191,7 @@ export default function CartSidebar() {
                           margin: 0,
                           lineHeight: 1.3,
                         }}>
-                          {item.name}
+                          {item.name[i18n.language]}
                         </p>
 
                         {item.variant && (
@@ -392,4 +392,8 @@ export default function CartSidebar() {
         )}
       </Drawer>
   );
+}
+
+function getThumbnailUrl(url: string) {
+  return url.replace('/uploads/', '/thumbs/');
 }

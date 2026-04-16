@@ -2,7 +2,7 @@
 // ── STAT CARD ─────────────────────────────────────────────────────────────────
 import CustomIcon from "@/src/modules/admin/CustomIcon";
 import icons from "@/src/modules/admin/icons";
-import C from "@/src/modules/admin/colors";
+import C_old from "@/src/modules/admin/colors";
 import {cardStyles} from "@/src/modules/admin/styles";
 
 export default function StatCard({ s }) {
@@ -10,7 +10,7 @@ export default function StatCard({ s }) {
         <div style={{ ...cardStyles, padding: 16 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <div>
-                    <div style={{ fontSize: 10, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 4 }}>
+                    <div style={{ fontSize: 10, color: C_old.faint, textTransform: "uppercase", letterSpacing: "1px", marginBottom: 4 }}>
                         {s.label}
                     </div>
                     <div style={{ fontSize: 28, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{s.value}</div>
@@ -24,9 +24,9 @@ export default function StatCard({ s }) {
                 </div>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 4, marginTop: 12 }}>
-                <CustomIcon d={s.up ? icons.up : icons.down} size={12} color={s.up ? "#4caf50" : C.red} />
-                <span style={{ fontSize: 11, color: s.up ? "#4caf50" : C.red, fontWeight: 700 }}>{s.change}</span>
-                <span style={{ fontSize: 11, color: C.faint }}>vs last month</span>
+                <CustomIcon d={s.up ? icons.up : icons.down} size={12} color={s.up ? "#4caf50" : C_old.red} />
+                <span style={{ fontSize: 11, color: s.up ? "#4caf50" : C_old.red, fontWeight: 700 }}>{s.change}</span>
+                <span style={{ fontSize: 11, color: C_old.faint }}>vs last month</span>
             </div>
         </div>
     );

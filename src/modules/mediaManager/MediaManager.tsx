@@ -4,7 +4,7 @@ import MediaManagerSidebar from "@/src/modules/mediaManager/components/MediaMana
 import AddMediaContent from "@/src/modules/mediaManager/contents/AddMediaContent";
 
 export default function MediaManager() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState("Add media");
 
     function handleSelect(val: string) {

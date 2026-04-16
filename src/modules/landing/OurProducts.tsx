@@ -1,11 +1,25 @@
 import {Typography} from "@mui/material";
 import {Trans, useTranslation} from "react-i18next";
 import ProductCarousel from "@/src/modules/landing/productCarousel/ProductCarousel";
+import {useEffect, useState} from "react";
+import productsApi from "@/src/api/productsApi";
 
 
 
 export default function OurProducts() {
     const { t } = useTranslation();
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        console.log('OurProducts Page rendered')
+
+        async function fetchProducts() {
+            const responseData = await productsApi.getAll();
+            setProducts(responseData.data);
+        }
+
+        fetchProducts();
+    }, [])
 
     return (
         <section className='w-full flex flex-col overflow-hidden'> {/* overflow-hidden clips the carousel sides */}
@@ -33,7 +47,7 @@ export default function OurProducts() {
 
                 {/* Carousel — anchored to max-w limiter but bleeds right */}
                 <div className="w-full">
-                    <ProductCarousel />
+                    <ProductCarousel products={products}/>
                 </div>
             </div>
 

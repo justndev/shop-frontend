@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { categoryApi, Category } from "@/src/api/productApi";
 import {ProductFormState} from "@/src/modules/product/useAddProduct";
+import categoryApi from "@/src/api/categoryApi";
+import {Category} from "@/src/types";
 
 const C = {
     surface: "#22262a",
@@ -45,7 +46,7 @@ interface CategoriesProps {
     error?: string;
 }
 
-export function ProductCategoriesPanel({ categoryId, setField, error }: CategoriesProps) {
+export default function ProductCategoriesPanel({ categoryId, setField, error }: CategoriesProps) {
     const [categories, setCategories] = useState<Category[]>([]);
     const [isAdding, setIsAdding] = useState(false);
     const [newName, setNewName] = useState("");
@@ -53,7 +54,12 @@ export function ProductCategoriesPanel({ categoryId, setField, error }: Categori
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        categoryApi.list().then(setCategories).catch(console.error);
+        async function fetchCategories() {
+            const data = await categoryApi.getAll();
+            console.log(data.data);
+            setCategories(data.data)
+        }
+        fetchCategories();
     }, []);
 
     async function handleCreate() {
@@ -72,25 +78,14 @@ export function ProductCategoriesPanel({ categoryId, setField, error }: Categori
         }
     }
 
-    const filtered = categories.filter(c =>
-        c.name.toLowerCase().includes(search.toLowerCase())
-    );
+    const filtered = categories
+
 
     return (
         <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 8, overflow: "hidden" }}>
             <SectionHeader title="Product categories" />
 
             <div style={{ padding: "10px 14px" }}>
-                {categories.length > 5 && (
-                    <input
-                        type="search"
-                        placeholder="Search categories…"
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        style={{ ...inputStyle, marginBottom: 8 }}
-                    />
-                )}
-
                 <div style={{ maxHeight: 180, overflowY: "auto", display: "flex", flexDirection: "column", gap: 2 }}>
                     {filtered.length === 0 && (
                         <span style={{ fontSize: 12, color: C.textFaint }}>No categories found</span>
@@ -108,7 +103,7 @@ export function ProductCategoriesPanel({ categoryId, setField, error }: Categori
                                 onChange={() => setField("categoryId", cat.id)}
                                 style={{ accentColor: C.accent }}
                             />
-                            <span style={{ fontSize: 13, color: C.text }}>{cat.name}</span>
+                            <span style={{ fontSize: 13, color: C.text }}>{cat.name['en']}</span>
                         </label>
                     ))}
                 </div>
@@ -160,79 +155,6 @@ export function ProductCategoriesPanel({ categoryId, setField, error }: Categori
                         </div>
                     )}
                 </div>
-            </div>
-        </div>
-    );
-}
-
-// ── TAGS ──────────────────────────────────────────────────────────────────────
-
-interface TagsProps {
-    tags: string[];
-    tagInput: string;
-    setTagInput: (v: string) => void;
-    addTag: (t: string) => void;
-    removeTag: (t: string) => void;
-    handleTagKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-}
-
-export function ProductTagsPanel({ tags, tagInput, setTagInput, addTag, removeTag, handleTagKeyDown }: TagsProps) {
-    return (
-        <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 8, overflow: "hidden" }}>
-            <SectionHeader title="Product tags" />
-            <div style={{ padding: 14 }}>
-                {/* Tag chips */}
-                {tags.length > 0 && (
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
-                        {tags.map(tag => (
-                            <span
-                                key={tag}
-                                style={{
-                                    display: "inline-flex", alignItems: "center", gap: 5,
-                                    background: C.accentLight, border: `1px solid rgba(34,113,177,0.3)`,
-                                    borderRadius: 20, padding: "3px 10px",
-                                    fontSize: 12, color: C.text,
-                                }}
-                            >
-                {tag}
-                                <button
-                                    onClick={() => removeTag(tag)}
-                                    style={{ background: "none", border: "none", color: C.textMuted, cursor: "pointer", padding: 0, lineHeight: 1, fontSize: 14 }}
-                                >
-                  ×
-                </button>
-              </span>
-                        ))}
-                    </div>
-                )}
-
-                {/* Input + Add button */}
-                <div style={{ display: "flex", gap: 6 }}>
-                    <input
-                        type="text"
-                        placeholder="Add tag…"
-                        value={tagInput}
-                        onChange={e => setTagInput(e.target.value)}
-                        onKeyDown={handleTagKeyDown}
-                        style={{ ...inputStyle, flex: 1 }}
-                    />
-                    <button
-                        onClick={() => addTag(tagInput)}
-                        disabled={!tagInput.trim()}
-                        style={{
-                            background: C.accent, border: "none", borderRadius: 4,
-                            color: "#fff", fontSize: 12, fontWeight: 600,
-                            padding: "6px 12px", cursor: !tagInput.trim() ? "not-allowed" : "pointer",
-                            fontFamily: "inherit", flexShrink: 0,
-                            opacity: !tagInput.trim() ? 0.5 : 1,
-                        }}
-                    >
-                        Add
-                    </button>
-                </div>
-                <p style={{ margin: "6px 0 0", fontSize: 11, color: C.textFaint }}>
-                    Press Enter or comma to add · Backspace to remove last
-                </p>
             </div>
         </div>
     );

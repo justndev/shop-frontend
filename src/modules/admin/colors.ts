@@ -1,4 +1,4 @@
-const C = {
+const C_old = {
     bg:       "#0d1117",
     surface:  "#1a1c1e",
     border:   "#2d3035",
@@ -12,4 +12,4 @@ const C = {
     faint:    "#555",
 };
 
-export default C;
+export default C_old;

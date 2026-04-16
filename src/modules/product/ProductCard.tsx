@@ -1,14 +1,18 @@
 'use client';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Button, Typography} from '@mui/material';
 import Link from 'next/link';
 import {ArrowUpRight, User} from "lucide-react";
 import {Product} from "@/src/types";
+import {useTranslation} from "react-i18next";
 
 
 export default function ProductCard({product}: {product: Product}) {
     const [hovered, setHovered] = useState(false);
+    const { i18n } = useTranslation();
+
+    const lastImageIndex = product.images.length - 1
 
     return (
         <Link href={`/product/${product.slug}`} style={{width: '100%', marginTop: 10}}>
@@ -59,7 +63,7 @@ export default function ProductCard({product}: {product: Product}) {
                             style={{
                                 position: 'absolute',
                                 inset: 0,
-                                backgroundImage: `url(/puerh-product.webp)`,
+                                backgroundImage: `url(${product.images[0]})`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 opacity: hovered ? 0 : 1,
@@ -72,7 +76,7 @@ export default function ProductCard({product}: {product: Product}) {
                             style={{
                                 position: 'absolute',
                                 inset: 0,
-                                backgroundImage: `url(/puerh-zoomed.png)`,
+                                backgroundImage: `url(${product.images[lastImageIndex]})`,
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 opacity: hovered ? 1 : 0,
@@ -98,7 +102,7 @@ export default function ProductCard({product}: {product: Product}) {
                                 lineHeight: 1.4,
                             }}
                         >
-                            {product.name}
+                            {product.name[i18n.language]}
                         </Typography>
                     </div>
 

@@ -1,4 +1,5 @@
 import apiClient from '../lib/apiClient'
+import {Product} from "@/src/types";
 
 // ── TYPES ─────────────────────────────────────────────────────────────────────
 
@@ -6,6 +7,7 @@ import apiClient from '../lib/apiClient'
 
 
 export interface CreateProductPayload {
+    slug: string;
     name: string
     description?: string
     shortDescription?: string
@@ -57,6 +59,11 @@ const productApi = {
         return res.data.data
     },
 
+    async getBySlug(slug: string): Promise<Product> {
+        const res = await apiClient.get(`/products/${slug}`)
+        return res.data.data
+    },
+
     async create(payload: CreateProductPayload): Promise<Product> {
         const res = await apiClient.post('/products', payload)
         return res.data.data
@@ -72,18 +79,5 @@ const productApi = {
     },
 }
 
-// ── CATEGORY API ──────────────────────────────────────────────────────────────
-
-export const categoryApi = {
-    async list(): Promise<Category[]> {
-        const res = await apiClient.get('/products/meta/categories')
-        return res.data.data
-    },
-
-    async create(name: string): Promise<Category> {
-        const res = await apiClient.post('/products/meta/categories', { name })
-        return res.data.data
-    },
-}
 
 export default productApi

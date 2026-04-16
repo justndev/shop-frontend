@@ -1,5 +1,5 @@
 import {useState} from "react";
-import C from "@/src/modules/admin/colors";
+import C_old from "@/src/modules/admin/colors";
 import NavItem from "@/src/modules/admin/Navitem";
 import {useRouter} from "next/navigation";
 
@@ -13,13 +13,13 @@ const NAV = [
 export default function MediaManagerSidebar({mobileOpen, onClose, selected, handleSelect}) {
     const content = (
         <div style={{
-            width: 220, height: "100%", background: C.sidebar,
+            width: 220, height: "100%", background: C_old.sidebar,
             display: "flex", flexDirection: "column", paddingTop: 10,
-            borderRight: `1px solid ${C.border}`,
+            borderRight: `1px solid ${C_old.border}`,
         }}>
             <div style={{padding: "10px 14px 8px", borderBottom: `1px solid #222527`}}>
         <span
-            style={{fontSize: 9, color: C.faint, textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700}}>
+            style={{fontSize: 9, color: C_old.faint, textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700}}>
           Action
         </span>
             </div>

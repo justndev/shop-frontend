@@ -1,0 +1,103 @@
+// ── TAGS ──────────────────────────────────────────────────────────────────────
+
+interface TagsProps {
+    tags: string[];
+    tagInput: string;
+    setTagInput: (v: string) => void;
+    addTag: (t: string) => void;
+    removeTag: (t: string) => void;
+    handleTagKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
+const SectionHeader = ({ title }: { title: string }) => (
+    <div style={{
+        padding: "10px 14px",
+        borderBottom: `1px solid ${C.border}`,
+        fontSize: 12, fontWeight: 700, color: C.text,
+        textTransform: "uppercase" as const, letterSpacing: "0.6px",
+        background: C.surfaceAlt,
+    }}>
+        {title}
+    </div>
+);
+const C = {
+    surface: "#22262a",
+    surfaceAlt: "#1e2226",
+    border: "#2e3338",
+    text: "#e8eaed",
+    textMuted: "#8b949e",
+    textFaint: "#545d67",
+    accent: "#2271b1",
+    accentLight: "rgba(34,113,177,0.15)",
+    inputBg: "#161b1f",
+    inputBorder: "#3d444d",
+    danger: "#d63638",
+};
+const inputStyle: React.CSSProperties = {
+    background: C.inputBg, border: `1px solid ${C.inputBorder}`,
+    borderRadius: 4, color: C.text, fontSize: 12,
+    padding: "6px 9px", fontFamily: "inherit", outline: "none",
+    width: "100%", boxSizing: "border-box" as const,
+};
+
+export default function ProductTagsPanel({ tags, tagInput, setTagInput, addTag, removeTag, handleTagKeyDown }: TagsProps) {
+    return (
+        <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 8, overflow: "hidden" }}>
+            <SectionHeader title="Product tags" />
+            <div style={{ padding: 14 }}>
+                {/* Tag chips */}
+                {tags.length > 0 && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 10 }}>
+                        {tags.map(tag => (
+                            <span
+                                key={tag}
+                                style={{
+                                    display: "inline-flex", alignItems: "center", gap: 5,
+                                    background: C.accentLight, border: `1px solid rgba(34,113,177,0.3)`,
+                                    borderRadius: 20, padding: "3px 10px",
+                                    fontSize: 12, color: C.text,
+                                }}
+                            >
+                {tag}
+                                <button
+                                    onClick={() => removeTag(tag)}
+                                    style={{ background: "none", border: "none", color: C.textMuted, cursor: "pointer", padding: 0, lineHeight: 1, fontSize: 14 }}
+                                >
+                  ×
+                </button>
+              </span>
+                        ))}
+                    </div>
+                )}
+
+                {/* Input + Add button */}
+                <div style={{ display: "flex", gap: 6 }}>
+                    <input
+                        type="text"
+                        placeholder="Add tag…"
+                        value={tagInput}
+                        onChange={e => setTagInput(e.target.value)}
+                        onKeyDown={handleTagKeyDown}
+                        style={{ ...inputStyle, flex: 1 }}
+                    />
+                    <button
+                        onClick={() => addTag(tagInput)}
+                        disabled={!tagInput.trim()}
+                        style={{
+                            background: C.accent, border: "none", borderRadius: 4,
+                            color: "#fff", fontSize: 12, fontWeight: 600,
+                            padding: "6px 12px", cursor: !tagInput.trim() ? "not-allowed" : "pointer",
+                            fontFamily: "inherit", flexShrink: 0,
+                            opacity: !tagInput.trim() ? 0.5 : 1,
+                        }}
+                    >
+                        Add
+                    </button>
+                </div>
+                <p style={{ margin: "6px 0 0", fontSize: 11, color: C.textFaint }}>
+                    Press Enter or comma to add · Backspace to remove last
+                </p>
+            </div>
+        </div>
+    );
+}

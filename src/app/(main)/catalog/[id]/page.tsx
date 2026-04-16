@@ -3,11 +3,25 @@
 import { usePathname } from 'next/dist/client/components/navigation';
 import { MOCKED_PRODUCTS } from '@/src/utils/mocks';
 import ProductCard from "@/src/modules/product/ProductCard";
+import {useEffect, useState} from "react";
+import productsApi from "@/src/api/productsApi";
+import {useTranslation} from "react-i18next";
 
 export default function CatalogPage() {
     const path = usePathname();
-    const catalogSlug = path.split('/').pop();
-    const products = MOCKED_PRODUCTS;
+    const categorySlug = path.split('/').pop();
+    const [products, setProducts] = useState([]);
+    const {i18n} = useTranslation();
+
+
+    useEffect(() => {
+        async function fetchProducts() {
+            const responseData = await productsApi.getAll({categorySlug});
+            setProducts(responseData.data);
+        }
+
+        fetchProducts();
+    }, [])
 
     return (
         <div className="catalog-page">
@@ -17,15 +31,10 @@ export default function CatalogPage() {
                 </aside>
 
                 <section className="catalog-grid">
-                    {products.map(product => (
+                    {products.map((product, index) => (
                         <ProductCard
-                            key={product.id}
-                            id={product.id}
-                            name={product.name}
-                            price={product.price}
-                            image={product.images[0]}
-                            hoverImage={product.images[1]}
-                            slug={product.slug}
+                            key={index}
+                            product={product}
                         />
                     ))}
                 </section>

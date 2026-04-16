@@ -1,6 +1,6 @@
 'use client';
 
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import {
     Button,
     IconButton,
@@ -16,22 +16,48 @@ import { addProduct } from '@/src/store/slices/productsSlice';
 import useCartHook from '@/src/hooks/useCartHook';
 import {addItem} from "@/src/store/slices/cartSlice";
 import {useDispatch} from "react-redux";
+import {Product} from "@/src/types";
+import productApi from "@/src/api/productApi";
+import {usePathname} from "next/dist/client/components/navigation";
+import {useTranslation} from "react-i18next";
 
 
 export default function ProductPage() {
     const dispatch = useDispatch();
+    const path = usePathname();
+    const productSlug = path.split('/').pop();
+    const {i18n} = useTranslation();
 
-    const product = MOCKED_PRODUCT;
-
+    const [product, setProduct] = useState<Product>(null);
     const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
-
-    const totalPrice = product.price * quantity;
+    const [loading, setLoading] = useState(true);
 
     const descRef = useRef<HTMLDivElement>(null);
 
+    useEffect(() => {
+        async function fetchProduct() {
+            try {
+                const responseData = await productApi.getBySlug(productSlug);
+                setProduct(responseData);
+                console.log(product)
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchProduct();
+    }, []);
+
     function addProductToCart() {
         dispatch(addItem({...product, quantity}));
+    }
+
+    const totalPrice = (product?.price || 0) * quantity;
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!product) {
+        return <div>Product not found</div>;
     }
 
     return (
@@ -188,14 +214,14 @@ export default function ProductPage() {
 
                         {/* Thumbnails */}
                         <div className="flex gap-3 mt-4 flex-wrap justify-center">
-                            {product.thumbnails.map((thumb, i) => (
+                            {product.images.map((image, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setSelectedImage(i)}
                                     className={`thumb-btn rounded-lg overflow-hidden border-2 ${i === selectedImage ? 'active' : 'border-transparent'}`}
                                     style={{width: 72, height: 72, flexShrink: 0}}
                                 >
-                                    <img src={thumb} alt={`View ${i + 1}`} className="w-full h-full object-cover"/>
+                                    <img src={getThumbnailUrl(image)} alt={`View ${i + 1}`} className="w-full h-full object-cover"/>
                                 </button>
                             ))}
                         </div>
@@ -211,12 +237,12 @@ export default function ProductPage() {
                             lineHeight: 1.15,
                             color: 'var(--ink)'
                         }}>
-                            {product.name}
+                            {product.name[i18n.language]}
                         </h1>
 
                         {/* Short description */}
                         <p className="mb-5 text-sm leading-relaxed" style={{color: 'var(--muted)'}}
-                           dangerouslySetInnerHTML={{__html: product.shortDescription}}/>
+                           dangerouslySetInnerHTML={{__html: product.shortDescription[i18n.language]}} />
 
                         {/* Price */}
                         <div className="flex items-baseline gap-3 mb-3">
@@ -313,10 +339,14 @@ export default function ProductPage() {
                         </div>
 
                         {/* Long description */}
-                        <div className="product-desc" dangerouslySetInnerHTML={{__html: product.description}}/>
+                        <div className="product-desc" dangerouslySetInnerHTML={{__html: product.description[i18n.language]}} />
                     </div>
                 </div>
             </div>
         </>
     );
+}
+
+function getThumbnailUrl(url: string) {
+    return url.replace('/uploads/', '/thumbs/');
 }

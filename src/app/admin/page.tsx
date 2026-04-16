@@ -2,14 +2,14 @@
 
 import StatCard from "@/src/modules/admin/StatCard";
 import icons from "@/src/modules/admin/icons";
-import C from "@/src/modules/admin/colors";
+import C_old from "@/src/modules/admin/colors";
 import CustomIcon from "@/src/modules/admin/CustomIcon";
 import {cardStyles} from "@/src/modules/admin/styles";
 import MediaManager from "@/src/modules/mediaManager/MediaManager";
 
 // ── MOCK DATA ─────────────────────────────────────────────────────────────────
 const STATS = [
-    { label: "Total Revenue", value: "€ 48,295", change: "+12.4%", up: true,  color: C.red,      icon: "payment" },
+    { label: "Total Revenue", value: "€ 48,295", change: "+12.4%", up: true,  color: C_old.red,      icon: "payment" },
     { label: "Orders",        value: "1,284",    change: "+8.1%",  up: true,  color: "#2196f3",  icon: "order" },
     { label: "Customers",     value: "3,920",    change: "+5.3%",  up: true,  color: "#4caf50",  icon: "people" },
     { label: "Products",      value: "500K+",    change: "-2.1%",  up: false, color: "#ff9800",  icon: "product" },
@@ -48,7 +48,7 @@ export default function DashboardMainPage() {
 
             <div style={{ marginBottom: 20 }}>
                 <div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>Dashboard</div>
-                <div style={{ fontSize: 12, color: C.sub }}>Welcome back, Admin. Here's what's happening today.</div>
+                <div style={{ fontSize: 12, color: C_old.sub }}>Welcome back, Admin. Here's what's happening today.</div>
             </div>
 
             {/* Stats grid */}
@@ -60,15 +60,15 @@ export default function DashboardMainPage() {
             <div className="grid-main" style={{ display: "grid", gap: 12, marginBottom: 16 }}>
                 {/* Orders table */}
                 <div style={cardStyles}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: `1px solid ${C.border}` }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: `1px solid ${C_old.border}` }}>
                         <span style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>Recent Orders</span>
-                        <span style={{ fontSize: 11, color: C.red, cursor: "pointer", fontWeight: 600 }}>View all →</span>
+                        <span style={{ fontSize: 11, color: C_old.red, cursor: "pointer", fontWeight: 600 }}>View all →</span>
                     </div>
                     <table style={{ width: "100%", borderCollapse: "collapse" }}>
                         <thead>
                         <tr>
                             {["Order", "Customer", "Product", "Status", "Amount"].map(h => (
-                                <th key={h} style={{ fontSize: 10, color: C.faint, textTransform: "uppercase", letterSpacing: "1px", textAlign: "left", padding: "8px 16px", borderBottom: `1px solid ${C.border}` }}>
+                                <th key={h} style={{ fontSize: 10, color: C_old.faint, textTransform: "uppercase", letterSpacing: "1px", textAlign: "left", padding: "8px 16px", borderBottom: `1px solid ${C_old.border}` }}>
                                     {h}
                                 </th>
                             ))}
@@ -77,9 +77,9 @@ export default function DashboardMainPage() {
                         <tbody>
                         {ORDERS.map(o => (
                             <tr key={o.id} className="table-row" style={{ cursor: "pointer" }}>
-                                <td style={{ padding: "10px 16px", fontSize: 12, color: C.red, fontWeight: 700, borderBottom: `1px solid #1a1c1e` }}>{o.id}</td>
+                                <td style={{ padding: "10px 16px", fontSize: 12, color: C_old.red, fontWeight: 700, borderBottom: `1px solid #1a1c1e` }}>{o.id}</td>
                                 <td style={{ padding: "10px 16px", fontSize: 12, color: "#ccc", borderBottom: `1px solid #1a1c1e` }}>{o.customer}</td>
-                                <td style={{ padding: "10px 16px", fontSize: 12, color: C.sub, borderBottom: `1px solid #1a1c1e`, maxWidth: 160, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{o.product}</td>
+                                <td style={{ padding: "10px 16px", fontSize: 12, color: C_old.sub, borderBottom: `1px solid #1a1c1e`, maxWidth: 160, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{o.product}</td>
                                 <td style={{ padding: "10px 16px", borderBottom: `1px solid #1a1c1e` }}>
                     <span style={{
                         fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 4,
@@ -96,7 +96,7 @@ export default function DashboardMainPage() {
 
                 {/* Low Stock */}
                 <div style={cardStyles}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: `1px solid ${C.border}` }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderBottom: `1px solid ${C_old.border}` }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                             <CustomIcon d={icons.warn} size={15} color="#ff9800" />
                             <span style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>Low Stock</span>
@@ -112,11 +112,11 @@ export default function DashboardMainPage() {
                                     <span style={{ fontSize: 11, color: "#ccc" }}>{item.name}</span>
                                     <span style={{ fontSize: 11, color: "#ff9800", fontWeight: 700 }}>{item.stock}</span>
                                 </div>
-                                <div style={{ height: 4, borderRadius: 2, background: C.border, overflow: "hidden" }}>
+                                <div style={{ height: 4, borderRadius: 2, background: C_old.border, overflow: "hidden" }}>
                                     <div style={{
                                         height: "100%", borderRadius: 2,
                                         width: `${(item.stock / item.max) * 100}%`,
-                                        background: item.stock < 5 ? C.red : "#ff9800",
+                                        background: item.stock < 5 ? C_old.red : "#ff9800",
                                     }} />
                                 </div>
                             </div>
@@ -129,13 +129,13 @@ export default function DashboardMainPage() {
             <div className="grid-3" style={{ display: "grid", gap: 12 }}>
                 {QUICK.map(block => (
                     <div key={block.title} style={cardStyles}>
-                        <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 16px", borderBottom: `1px solid ${C.border}` }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 16px", borderBottom: `1px solid ${C_old.border}` }}>
                             <span style={{ fontSize: 16 }}>{block.emoji}</span>
                             <span style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>{block.title}</span>
                         </div>
                         <div style={{ padding: 8 }}>
                             {block.items.map((item, i) => (
-                                <div key={i} className="quick-item" style={{ padding: "8px 10px", borderRadius: 4, cursor: "pointer", fontSize: 12, color: C.sub }}>
+                                <div key={i} className="quick-item" style={{ padding: "8px 10px", borderRadius: 4, cursor: "pointer", fontSize: 12, color: C_old.sub }}>
                                     {item}
                                 </div>
                             ))}

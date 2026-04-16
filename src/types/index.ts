@@ -12,9 +12,17 @@ export interface User {
 
 type StockStatus = 'IN_STOCK' | 'OUT_OF_STOCK';
 
+export interface TranslatedStrings { en: string; ru?: string; et?: string; }
+
+
+// < ------------- ENTITIES ------------- >
+
 export interface Category {
-  name: string;
+  id: string;
+  name: TranslatedStrings;
   slug: string;
+  image?: string;
+  createdAt: string;
 }
 
 export interface Product {

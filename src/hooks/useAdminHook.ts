@@ -5,7 +5,7 @@ import { useAppDispatch } from '@/src/hooks/redux'
 import { addProduct, removeProduct, addCategory } from '@/src/store/slices/productsSlice'
 import { setOrders } from '@/src/store/slices/ordersSlice'
 import productsApi from '@/src/api/productsApi'
-import categoriesApi from '@/src/api/categoriesApi'
+import categoryApi from '@/src/api/categoryApi'
 import mediaApiOld from '@/src/api/mediaApi.old'
 import ordersApi from '@/src/api/ordersApi'
 import { showToast } from '@/src/modules/ui/Toast'
@@ -62,7 +62,7 @@ export function useAdminHook() {
   async function handleCreateCategory(data: { name: string, slug: string }) {
     setLoading(true)
     try {
-      const res = await categoriesApi.create(data)
+      const res = await categoryApi.create(data)
       dispatch(addCategory(res.data))
       showToast('✅ Категория создана!')
       return { success: true }
