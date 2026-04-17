@@ -9,6 +9,21 @@ import CheckIcon from '@mui/icons-material/Check';
 import ErrorIcon from "@mui/icons-material/Error";
 
 
+import { TextFieldProps } from "@mui/material";
+
+function Field(props: TextFieldProps) {
+    return (
+        <TextField
+            {...props}
+            FormHelperTextProps={{
+                ...props.FormHelperTextProps,
+                sx: { margin: 0, paddingTop: '4px', ...props.FormHelperTextProps?.sx },
+            }}
+            sx={{ flex: 1, minWidth: 200, ...props.sx }}
+        />
+    );
+}
+
 export default function ProfileSection() {
     const {t} = useTranslation();
 
@@ -33,32 +48,36 @@ export default function ProfileSection() {
     const [showCurrent, setShowCurrent] = useState(false);
 
     return (
-        <div>
-            <Typography variant="h5">Personal information</Typography>
+        <section className='flex flex-col gap-4'>
+            <div className="flex justify-between items-end  h-[32]">
+                    <Typography variant="h5">Personal Information</Typography>
+            </div>
 
             {/* My information */}
-            <div className="bg-white border border-[#e8eeeb] rounded-xl p-6 my-5 shadow-sm">
-                <Typography variant="h6" className="mb-5">My information</Typography>
+            <div className="bg-white border border-[#e8eeeb] rounded-xl p-6 shadow-sm flex flex-col gap-4">
+                <Typography variant="h6">My information</Typography>
 
-                <div className="flex gap-4 flex-wrap mt-5">
-                    <TextField
+                <div className="flex gap-2 flex-wrap ">
+                    <Field
                         label={t("account.profile.first_name")}
                         value={profile.firstName}
                         onChange={e => handleChangeProfile('firstName', e.target.value)}
                         error={!!profileErrors.firstName}
-                        helperText={profileErrors.firstName ?? ' '}
-                        sx={{flex: 1, minWidth: 200}}
+                        helperText={profileErrors.firstName}   // no fallback — undefined = no helper = no space
                     />
-                    <TextField
+                    <Field
                         label={t("account.profile.last_name")}
                         value={profile.lastName}
                         onChange={e => handleChangeProfile('lastName', e.target.value)}
                         error={!!profileErrors.lastName}
-                        helperText={profileErrors.lastName ?? ' '}
-                        sx={{flex: 1, minWidth: 200}}
+                        helperText={profileErrors.lastName}
                     />
                 </div>
-                {profile.email}
+                <div>
+                    <Typography sx={{fontWeight: 600}}>Email:</Typography>
+                    <Typography>{profile.email}</Typography>
+                </div>
+
 
                 {profileAlert && (
                     <Alert
@@ -71,7 +90,7 @@ export default function ProfileSection() {
                     </Alert>
                 )}
 
-                <div className="flex flex-col sm:flex-row sm:justify-end sm:items-center gap-3">
+                <div className="flex flex-col sm:flex-row sm:justify-end sm:items-center">
                     <Button
                         variant="contained"
                         onClick={handleSaveProfile}
@@ -91,64 +110,61 @@ export default function ProfileSection() {
             </div>
 
             {/* Change password */}
-            <div className="bg-white border border-[#e8eeeb] rounded-xl p-6 mb-5 shadow-sm">
+            <div className="bg-white border border-[#e8eeeb] rounded-xl p-6 shadow-sm flex flex-col gap-4">
                 <Typography variant="h6">
                     {t("account.profile.change_password")}
                 </Typography>
 
-                <div className="flex gap-4 flex-wrap mt-5">
-                    <TextField
+                <div className="flex gap-y-4 gap-x-2 flex-wrap">
+                    <Field
                         label={t("account.profile.current_password")}
                         type={showCurrent ? 'text' : 'password'}
                         value={passwordFields.currentPassword}
                         onChange={e => handleChangePassword('currentPassword', e.target.value)}
                         error={!!passwordErrors.currentPassword}
-                        helperText={passwordErrors.currentPassword ?? ' '}
-                        sx={{flex: 1, minWidth: 200}}
+                        helperText={passwordErrors.currentPassword}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={() => setShowCurrent(p => !p)} edge="end">
-                                        {showCurrent ? <VisibilityOff/> : <Visibility/>}
+                                        {showCurrent ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
                             ),
                         }}
                     />
-                    <TextField
+                    <Field
                         label={t("account.profile.new_password")}
                         type={showNew ? 'text' : 'password'}
                         value={passwordFields.newPassword}
                         onChange={e => handleChangePassword('newPassword', e.target.value)}
                         error={!!passwordErrors.newPassword}
-                        helperText={passwordErrors.newPassword ?? ' '}
-                        sx={{flex: 1, minWidth: 200}}
+                        helperText={passwordErrors.newPassword}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={() => setShowNew(p => !p)} edge="end">
-                                        {showNew ? <VisibilityOff/> : <Visibility/>}
+                                        {showNew ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
-                            )
+                            ),
                         }}
                     />
-                    <TextField
+                    <Field
                         label={t("account.profile.repeat_password")}
                         type={showRepeat ? 'text' : 'password'}
                         value={passwordFields.repeatPassword}
                         onChange={e => handleChangePassword('repeatPassword', e.target.value)}
                         error={!!passwordErrors.repeatPassword}
-                        helperText={passwordErrors.repeatPassword ?? ' '}
-                        sx={{flex: 1, minWidth: 200}}
+                        helperText={passwordErrors.repeatPassword}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={() => setShowRepeat(p => !p)} edge="end">
-                                        {showRepeat ? <VisibilityOff/> : <Visibility/>}
+                                        {showRepeat ? <VisibilityOff /> : <Visibility />}
                                     </IconButton>
                                 </InputAdornment>
-                            )
+                            ),
                         }}
                     />
                 </div>
@@ -181,6 +197,6 @@ export default function ProfileSection() {
                     </Button>
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

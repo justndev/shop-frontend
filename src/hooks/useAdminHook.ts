@@ -7,7 +7,7 @@ import { setOrders } from '@/src/store/slices/ordersSlice'
 import productsApi from '@/src/api/productsApi'
 import categoryApi from '@/src/api/categoryApi'
 import mediaApiOld from '@/src/api/mediaApi.old'
-import ordersApi from '@/src/api/ordersApi'
+import orderApi from '@/src/api/orderApi'
 import { showToast } from '@/src/modules/ui/Toast'
 import { MediaImage, Product, Category } from '@/src/types'
 import {useDispatch} from "react-redux";
@@ -78,8 +78,8 @@ export function useAdminHook() {
     setLoading(true)
     try {
       // Note: API doc only shows GET /orders (user orders) — using same endpoint
-      // If backend adds admin endpoint later, update ordersApi
-      const res = await ordersApi.getMyOrders()
+      // If backend adds admin endpoint later, update orderApi
+      const res = await orderApi.getMyOrders()
       dispatch(setOrders(res.data))
     } catch {
       showToast('Не удалось загрузить заказы', 'error')

@@ -7,7 +7,7 @@ import { setOrders, addOrder } from '@/src/store/slices/ordersSlice'
 import { addItem, clearCart, openCart } from '@/src/store/slices/cartSlice'
 import productsApi from '@/src/api/productsApi'
 import categoryApi from '@/src/api/categoryApi'
-import ordersApi from '@/src/api/ordersApi'
+import orderApi from '@/src/api/orderApi'
 import cartApi from '@/src/api/cartApi'
 import paymentApi from '@/src/api/paymentApi'
 import { showToast } from '@/src/modules/ui/Toast'
@@ -83,7 +83,7 @@ export function useShopHook() {
       for (const item of cartItems) {
         await cartApi.addItem(item.id, item.quantity)
       }
-      const res = await ordersApi.createFromCart()
+      const res = await orderApi.createFromCart()
       dispatch(addOrder(res.data))
       dispatch(clearCart())
       showToast('🎉 Заказ оформлен!')
@@ -104,7 +104,7 @@ export function useShopHook() {
   async function fetchMyOrders() {
     setLoading(true)
     try {
-      const res = await ordersApi.getMyOrders()
+      const res = await orderApi.getMyOrders()
       dispatch(setOrders(res.data))
     } catch {
       showToast('Не удалось загрузить заказы', 'error')

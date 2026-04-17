@@ -139,7 +139,7 @@
     }
 
     .account-framer {
-        @apply flex flex-col justify-center w-full max-w-5xl mx-auto;
+        @apply flex flex-col justify-center w-full max-w-5xl mx-auto pt-12;
     }
 
     .auth-page {

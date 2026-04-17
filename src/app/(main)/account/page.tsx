@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react'
+import {SyntheticEvent, useState} from 'react'
 
 import withPrivateRoute from "@/src/utils/withPrivateRoute";
 import {useUserHook} from "@/src/hooks/useUserHook";
@@ -20,19 +20,18 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 type Tab = 'profile' | 'dashboard' | 'orders' | 'logout';
 
-const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
-    { id: 'profile',   label: 'account.nav.profile',   icon: <PersonOutlineIcon fontSize="small" /> },
-    { id: 'dashboard', label: 'account.nav.dashboard', icon: <DashboardOutlinedIcon fontSize="small" /> },
-    { id: 'orders',    label: 'account.nav.orders',    icon: <ReceiptLongOutlinedIcon fontSize="small" /> },
-    { id: 'logout', label: 'account.nav.logout', icon: <ExitToAppIcon fontSize="small" /> }
-];
 
 const SECTION_MAP: Record<Tab, React.ReactNode> = {
     profile:   <ProfileSection />,
-    dashboard: <DashboardSection />,
+    // dashboard: <DashboardSection />,
     orders:    <OrdersSection />,
 };
-
+const TABS: { id: TabType; label: string; icon: React.ReactNode }[] = [
+    { id: 'profile',   label: 'account.nav.profile',   icon: <PersonOutlineIcon fontSize="small" /> },
+    // { id: 'dashboard', label: 'account.nav.dashboard', icon: <DashboardOutlinedIcon fontSize="small" /> },
+    { id: 'orders',    label: 'account.nav.orders',    icon: <ReceiptLongOutlinedIcon fontSize="small" /> },
+    { id: 'logout', label: 'account.nav.logout', icon: <ExitToAppIcon fontSize="small" /> }
+];
 
 export default withPrivateRoute(AccountPage);
 function AccountPage() {
@@ -40,23 +39,26 @@ function AccountPage() {
     const [showDialog, setShowDialog] = useState<boolean>(false)
     const {user, handleLogout} = useUserHook()
 
+    const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+        setActiveTab(TABS[newValue].id)
+    };
+
     return (
         <div className="account-page">
             <div className="account-framer">
-                <AccountHeader user={user!}/>
 
                 <div className="flex">
                     {/* Mobile nav + content */}
-                    <div className="flex flex-col flex-1 md:hidden">
-                      <MobileNav TABS={TABS} activeTab={activeTab} setActiveTab={setActiveTab} showLogoutDialog={() => setShowDialog(true)}/>
+                    <div className="flex flex-col gap-4 md:hidden w-full">
+                      <MobileNav user={user} tabs={TABS} activeTab={activeTab} handleTabChange={handleTabChange} showLogoutDialog={() => setShowDialog(true)}/>
                         <main>
                             {SECTION_MAP[activeTab]}
                         </main>
                     </div>
 
                     {/* Desktop main content */}
-                    <main className="hidden md:flex">
-                        <DesktopSidebar TABS={TABS} activeTab={activeTab} setActiveTab={setActiveTab} showLogoutDialog={() => setShowDialog(true)} />
+                    <main className="hidden md:flex w-full">
+                        <DesktopSidebar user={user}  TABS={TABS} activeTab={activeTab} setActiveTab={setActiveTab} showLogoutDialog={() => setShowDialog(true)} />
                         {SECTION_MAP[activeTab]}
                     </main>
                 </div>

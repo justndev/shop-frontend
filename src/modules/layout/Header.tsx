@@ -20,7 +20,8 @@ import LanguageDropdown from "@/src/shared/ui/LanguageDropdown";
 import {useRouter} from "next/navigation";
 
 const NAV_LINKS = [
-    {label: 'header.nav.blog', href: '/blog'},
+    {label: 'header.nav.shop', href: '/shop'},
+    // {label: 'header.nav.blog', href: '/blog'},
     {label: 'header.nav.about', href: '/about'},
     {label: 'header.nav.contact', href: '/contact'},
 ];

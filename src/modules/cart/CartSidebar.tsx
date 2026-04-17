@@ -8,7 +8,8 @@ import useCartHook from '@/src/hooks/useCartHook';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/src/store";
 import {removeItem, toggleCart, updateQuantity} from "@/src/store/slices/cartSlice";
-import {useEffect} from "react"; // adjust path as needed
+import {useEffect} from "react";
+import {getThumbnailUrl} from "@/src/utils/functions"; // adjust path as needed
 
 interface CartSidebarProps {
   open: boolean;
@@ -392,8 +393,4 @@ export default function CartSidebar() {
         )}
       </Drawer>
   );
-}
-
-function getThumbnailUrl(url: string) {
-  return url.replace('/uploads/', '/thumbs/');
 }

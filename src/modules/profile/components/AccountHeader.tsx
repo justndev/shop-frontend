@@ -14,13 +14,10 @@ export default function AccountHeader({user}: {user: User}) {
     }
 
     return (
-        <header className="flex justify-between items-end mb-2">
+        <header className="flex justify-between items-end h-[32]">
             <div className="flex w-full gap-1 text-nowrap">
                 <Typography variant="subtitle1" color="textSecondary">Welcome, </Typography>
                 <Typography variant="subtitle1" fontWeight={600}>{displayName()}</Typography>
-            </div>
-            <div className="flex justify-end w-full text-nowrap">
-                <Typography variant="h5" fontWeight={600}>My account</Typography>
             </div>
         </header>
     );

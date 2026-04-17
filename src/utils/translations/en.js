@@ -405,13 +405,13 @@ export const en = {
         nav: {
             about: "About us",
             contact: "Contact",
-            blog: "Blog"
+            blog: "Blog",
+            shop: 'Shop'
         }
     },
     // ── Shared  ─────────────────────────────────────────────────────
     validation: {
-        first_name_too_long: "First name must be under 50 characters.",
-        last_name_too_long: "Last name must be under 50 characters.",
+        name_too_long: "Name must be under 50 characters.",
         email_required: "Email is required.",
         email_invalid: "Invalid email address.",
         email_too_long: "Email is too long.",
@@ -619,6 +619,8 @@ export const en = {
         orders_fetch_failed: "Failed to fetch orders.",
         order_fetch_failed: "Failed to fetch order.",
         order_status_update_failed: "Failed to update order status.",
+
+        // Profile Section Errors
         could_not_update_profile: "Could not update profile.",
         could_not_change_password: "Could not change password.",
         no_firstname_and_lastname_provided: "No firstname and lastname provided.",

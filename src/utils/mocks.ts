@@ -1,12 +1,18 @@
-import {Product} from "@/src/types";
+import {Order, Product} from "@/src/types";
 
 export const MOCKED_PRODUCT: Product = {
     id: '1',
     brand: 'MAMA KANA',
-    name: 'Golden Riger Pu-Erh',
+    name: {en: 'Golden Riger Pu-Erh', ru: 'Golden Riger Pu-Erh', et: 'Golden Riger Pu-Erh'},
     slug: 'vape-pen-cbd-amnesia',
-    shortDescription: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood.',
-    description: `
+    shortDescription: {
+        en: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood.',
+        ru: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood.',
+        et: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood'
+    },
+
+    description: {
+        en: `
     <h3>Exceptional cannabinoid concentration</h3>
     <p>Each pod contains <strong>95% CBD</strong> extract for up to 300 puffs of smooth, consistent vapor. No PG, no VG — just pure broad-spectrum hemp extract.</p>
     <h3>What's in the box</h3>
@@ -21,7 +27,38 @@ export const MOCKED_PRODUCT: Product = {
     <p>Every batch is independently tested for cannabinoid potency, residual solvents, pesticides, and heavy metals. Certificates of Analysis available on request.</p>
     <h3>Delivery &amp; returns 📦</h3>
     <p>All packages are neutral for fast, discreet CBD delivery. Minimum order 20 €. Free delivery from 49 € of purchase. You have 15 days to change your mind — unopened packages only.</p>
-  `,
+  `, ru: `
+    <h3>Exceptional cannabinoid concentration</h3>
+    <p>Each pod contains <strong>95% CBD</strong> extract for up to 300 puffs of smooth, consistent vapor. No PG, no VG — just pure broad-spectrum hemp extract.</p>
+    <h3>What's in the box</h3>
+    <ul>
+      <li>1× rechargeable vape pen battery (USB-C)</li>
+      <li>1× pre-filled Amnesia CBD pod (1 ml / 95% CBD)</li>
+      <li>1× USB-C charging cable</li>
+    </ul>
+    <h3>How to use</h3>
+    <p>Simply attach the pod, inhale gently, and enjoy. No buttons, no settings. The draw-activated mechanism fires instantly for a fuss-free experience anywhere.</p>
+    <h3>Lab-tested quality</h3>
+    <p>Every batch is independently tested for cannabinoid potency, residual solvents, pesticides, and heavy metals. Certificates of Analysis available on request.</p>
+    <h3>Delivery &amp; returns 📦</h3>
+    <p>All packages are neutral for fast, discreet CBD delivery. Minimum order 20 €. Free delivery from 49 € of purchase. You have 15 days to change your mind — unopened packages only.</p>
+  `, et: `
+    <h3>Exceptional cannabinoid concentration</h3>
+    <p>Each pod contains <strong>95% CBD</strong> extract for up to 300 puffs of smooth, consistent vapor. No PG, no VG — just pure broad-spectrum hemp extract.</p>
+    <h3>What's in the box</h3>
+    <ul>
+      <li>1× rechargeable vape pen battery (USB-C)</li>
+      <li>1× pre-filled Amnesia CBD pod (1 ml / 95% CBD)</li>
+      <li>1× USB-C charging cable</li>
+    </ul>
+    <h3>How to use</h3>
+    <p>Simply attach the pod, inhale gently, and enjoy. No buttons, no settings. The draw-activated mechanism fires instantly for a fuss-free experience anywhere.</p>
+    <h3>Lab-tested quality</h3>
+    <p>Every batch is independently tested for cannabinoid potency, residual solvents, pesticides, and heavy metals. Certificates of Analysis available on request.</p>
+    <h3>Delivery &amp; returns 📦</h3>
+    <p>All packages are neutral for fast, discreet CBD delivery. Minimum order 20 €. Free delivery from 49 € of purchase. You have 15 days to change your mind — unopened packages only.</p>
+  `
+    },
     price: 30,
     salePrice: null as number | null,
     stock: 10,
@@ -36,7 +73,7 @@ export const MOCKED_PRODUCT: Product = {
         '/product/golden-tiger2.jpg',
         '/product/golden-tiger3.jpg',
     ],
-    category: { name: 'Vape Pens', slug: 'vape-pens' },
+    category: {name: 'Vape Pens', slug: 'vape-pens'},
     tags: ['CBD', 'Amnesia', 'Vape', 'Broad-spectrum'],
 };
 
@@ -72,7 +109,7 @@ export const MOCKED_PRODUCTS: Product[] = [
             'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=120&q=60',
             'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120&q=60',
         ],
-        category: { name: 'Pu-erh Tea', slug: 'puerh-tea' },
+        category: {name: 'Pu-erh Tea', slug: 'puerh-tea'},
         tags: ['Pu-erh', 'Raw', 'Sheng', 'Yunnan'],
     },
     {
@@ -102,7 +139,7 @@ export const MOCKED_PRODUCTS: Product[] = [
         thumbnails: [
             'https://images.unsplash.com/photo-1544785349-c4a5301826fd?w=120&q=60',
         ],
-        category: { name: 'Pu-erh Tea', slug: 'puerh-tea' },
+        category: {name: 'Pu-erh Tea', slug: 'puerh-tea'},
         tags: ['Pu-erh', 'Ripe', 'Shu', 'Fermented'],
     },
     {
@@ -126,7 +163,7 @@ export const MOCKED_PRODUCTS: Product[] = [
         stockStatus: 'IN_STOCK',
         images: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80'],
         thumbnails: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&q=60'],
-        category: { name: 'Pu-erh Tea', slug: 'puerh-tea' },
+        category: {name: 'Pu-erh Tea', slug: 'puerh-tea'},
         tags: ['Pu-erh', 'Tuocha', 'Compressed'],
     },
     {
@@ -150,7 +187,7 @@ export const MOCKED_PRODUCTS: Product[] = [
         stockStatus: 'OUT_OF_STOCK',
         images: ['https://images.unsplash.com/photo-1527169402691-a1b58d0c1d4a?w=800&q=80'],
         thumbnails: ['https://images.unsplash.com/photo-1527169402691-a1b58d0c1d4a?w=120&q=60'],
-        category: { name: 'Pu-erh Tea', slug: 'puerh-tea' },
+        category: {name: 'Pu-erh Tea', slug: 'puerh-tea'},
         tags: ['Premium', 'Ancient Tree', 'Sheng'],
     },
     {
@@ -174,7 +211,7 @@ export const MOCKED_PRODUCTS: Product[] = [
         stockStatus: 'IN_STOCK',
         images: ['https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=800&q=80'],
         thumbnails: ['https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=120&q=60'],
-        category: { name: 'Pu-erh Tea', slug: 'puerh-tea' },
+        category: {name: 'Pu-erh Tea', slug: 'puerh-tea'},
         tags: ['Ripe', 'Luxury', 'Blend'],
     },
     {
@@ -198,7 +235,7 @@ export const MOCKED_PRODUCTS: Product[] = [
         stockStatus: 'IN_STOCK',
         images: ['https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&q=80'],
         thumbnails: ['https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=120&q=60'],
-        category: { name: 'Pu-erh Tea', slug: 'puerh-tea' },
+        category: {name: 'Pu-erh Tea', slug: 'puerh-tea'},
         tags: ['Loose Leaf', 'Sheng'],
     },
     {
@@ -222,7 +259,91 @@ export const MOCKED_PRODUCTS: Product[] = [
         stockStatus: 'IN_STOCK',
         images: ['https://images.unsplash.com/photo-1507914372368-b2b085b925a1?w=800&q=80'],
         thumbnails: ['https://images.unsplash.com/photo-1507914372368-b2b085b925a1?w=120&q=60'],
-        category: { name: 'Pu-erh Tea', slug: 'puerh-tea' },
+        category: {name: 'Pu-erh Tea', slug: 'puerh-tea'},
         tags: ['Mini', 'Tuocha', 'Portable'],
     },
 ];
+
+export const MOCKED_ORDERS: Order[] = [
+    {
+        id: 'o1',
+        userId: 'user1',
+        status: 'PENDING',
+        totalAmount: 1099,
+        createdAt: new Date().toISOString(),
+        items: [
+            {
+                id: 'oi1',
+                orderId: 'o1',
+                productId: 'p1',
+                product: MOCKED_PRODUCT,
+                name: 'iPhone 15 Pro',
+                price: 1099,
+                quantity: 1
+            }
+        ]
+    },
+    {
+        id: 'o2',
+        userId: 'user1',
+        status: 'PAID',
+        totalAmount: 1747,
+        createdAt: new Date().toISOString(),
+        items: [
+            {
+                id: 'oi2',
+                orderId: 'o2',
+                productId: 'p2',
+                product: MOCKED_PRODUCTS[1],
+                name: 'Galaxy S24',
+                price: 999,
+                quantity: 1
+            },
+            {
+                id: 'oi3',
+                orderId: 'o2',
+                productId: 'p3',
+                product: MOCKED_PRODUCTS[2],
+                name: 'Sony WH-1000XM5',
+                price: 349,
+                quantity: 2
+            }
+        ]
+    },
+    {
+        id: 'o3',
+        userId: 'user1',
+        status: 'FAILED',
+        totalAmount: 399,
+        createdAt: new Date().toISOString(),
+        items: [
+            {
+                id: 'oi4',
+                orderId: 'o3',
+                productId: 'p3',
+                product: MOCKED_PRODUCTS[2],
+                name: 'Sony WH-1000XM5',
+                price: 399,
+                quantity: 1
+            }
+        ]
+    },
+    {
+        id: 'o4',
+        userId: 'user1',
+        status: 'CANCELLED',
+        totalAmount: 1299,
+        createdAt: new Date().toISOString(),
+        items: [
+            {
+                id: 'oi5',
+                orderId: 'o4',
+                productId: 'p4',
+                product: MOCKED_PRODUCTS[3],
+                name: 'XPS 13',
+                price: 1299,
+                quantity: 1
+            }
+        ]
+    }
+]

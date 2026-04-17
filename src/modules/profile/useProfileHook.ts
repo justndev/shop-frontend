@@ -70,6 +70,10 @@ export function useProfileHook() {
     const [passwordAlert, setPasswordAlert] = useState<Alert | null>();
 
     function handleChangeProfile(field: keyof ProfileInfo, value: string | boolean) {
+        setProfileErrors(prevState => ({...prevState,
+            firstName: null,
+                lastName: null
+        }))
         setProfile(prev => ({...prev, [field]: value}));
     }
 
@@ -83,7 +87,10 @@ export function useProfileHook() {
 
         const errors = validateProfileInfo(profile, t);
         setProfileErrors(errors);
-        if (hasInfoErrors(errors)) return;
+        if (hasInfoErrors(errors)) {
+            setProfileLoading(false);
+            return
+        };
 
         try {
             const res = await userApi.updateInfo(profile);

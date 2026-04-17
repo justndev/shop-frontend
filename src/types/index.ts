@@ -1,5 +1,7 @@
 // < -- ENTITIES -- >
 
+import {string} from "slate";
+
 export interface User {
   id: string
   email: string
@@ -25,13 +27,19 @@ export interface Category {
   createdAt: string;
 }
 
+interface TranslatedStrings {
+  en: string;
+  ru: string;
+  et: string;
+}
+
 export interface Product {
   id: string;
   brand: string;
-  name: string;
+  name: TranslatedStrings;
   slug: string;
-  shortDescription: string;
-  description: string;
+  shortDescription: TranslatedStrings;
+  description: TranslatedStrings;
   price: number;
   salePrice: number | null;
   stockStatus: StockStatus;
@@ -43,7 +51,7 @@ export interface Product {
 
 // < -- HELPERS -- >
 
-export type Tab = 'profile' | 'dashboard' | 'orders ' | 'logout';
+export type Tab = 'profile' | 'dashboard' | 'orders' | 'logout';
 
 export interface AuthTokens {
   accessToken: string
@@ -79,23 +87,50 @@ export interface Cart {
   items: CartItem[]
 }
 
-export interface OrderItem {
-  id: string
-  orderId: string
-  productId: string
-  product?: Product
-  name: string
-  price: number
-  quantity: number
-}
-
 export interface Order {
   id: string;
+
   userId: string;
-  status: 'PENDING' | 'PAID' | 'FAILED' | 'CANCELLED';
+  status: OrderStatus;
+
   totalAmount: number;
-  items: OrderItem[];
+
+  // payment
+  mkTransactionId?: string | null;
+  mkPaymentMethod?: string | null;
+
+  // delivery
+  deliveryMethod?: string | null;
+  deliveryPrice?: number | null;
+
+  // customer info
+  contactInfo?: OrderContactInfo | null;
+
   createdAt: string;
+
+  items: OrderItem[];
+}
+
+export type OrderStatus = 'PENDING' | 'PAID' | 'FAILED' | 'CANCELLED';
+
+export interface OrderItem {
+  id: string;
+  orderId: string;
+
+  productId: string;
+  product?: Product; // optional → sometimes backend won’t include full product
+
+  name: string;      // snapshot (important!)
+  price: number;     // snapshot price
+  quantity: number;
+}
+
+export interface OrderContactInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  note?: string;
 }
 
 
