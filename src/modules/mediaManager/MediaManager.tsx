@@ -17,7 +17,6 @@ export default function MediaManager() {
                 return <AddMediaContent onClose={() => setOpen(false)} onInsert={(items) => console.log(items)} />
         }
         return <div style={{height: '100%'}}>
-ffffffffffffffffffffff
         </div>
     }
 

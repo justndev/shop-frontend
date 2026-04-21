@@ -77,6 +77,84 @@ export const MOCKED_PRODUCT: Product = {
     tags: ['CBD', 'Amnesia', 'Vape', 'Broad-spectrum'],
 };
 
+
+export const MOCKED_PRODUCT_2: Product = {
+    id: '1',
+    brand: 'MAMA KANA',
+    name: {en: 'Golden Riger Pu-Erh Golden Riger Pu-Erh Golden Riger Pu-E', ru: 'Golden Riger Pu-Erh', et: 'Golden Riger Pu-Erh'},
+    slug: 'vape-pen-cbd-amnesia',
+    shortDescription: {
+        en: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood.',
+        ru: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood.',
+        et: '<strong>A powerful, lemony, earthy flavor.</strong> Known for its invigorating effect, <em>Amnesia</em> seduces with its deep aromas of citrus, incense and wood'
+    },
+
+    description: {
+        en: `
+    <h3>Exceptional cannabinoid concentration</h3>
+    <p>Each pod contains <strong>95% CBD</strong> extract for up to 300 puffs of smooth, consistent vapor. No PG, no VG — just pure broad-spectrum hemp extract.</p>
+    <h3>What's in the box</h3>
+    <ul>
+      <li>1× rechargeable vape pen battery (USB-C)</li>
+      <li>1× pre-filled Amnesia CBD pod (1 ml / 95% CBD)</li>
+      <li>1× USB-C charging cable</li>
+    </ul>
+    <h3>How to use</h3>
+    <p>Simply attach the pod, inhale gently, and enjoy. No buttons, no settings. The draw-activated mechanism fires instantly for a fuss-free experience anywhere.</p>
+    <h3>Lab-tested quality</h3>
+    <p>Every batch is independently tested for cannabinoid potency, residual solvents, pesticides, and heavy metals. Certificates of Analysis available on request.</p>
+    <h3>Delivery &amp; returns 📦</h3>
+    <p>All packages are neutral for fast, discreet CBD delivery. Minimum order 20 €. Free delivery from 49 € of purchase. You have 15 days to change your mind — unopened packages only.</p>
+  `, ru: `
+    <h3>Exceptional cannabinoid concentration</h3>
+    <p>Each pod contains <strong>95% CBD</strong> extract for up to 300 puffs of smooth, consistent vapor. No PG, no VG — just pure broad-spectrum hemp extract.</p>
+    <h3>What's in the box</h3>
+    <ul>
+      <li>1× rechargeable vape pen battery (USB-C)</li>
+      <li>1× pre-filled Amnesia CBD pod (1 ml / 95% CBD)</li>
+      <li>1× USB-C charging cable</li>
+    </ul>
+    <h3>How to use</h3>
+    <p>Simply attach the pod, inhale gently, and enjoy. No buttons, no settings. The draw-activated mechanism fires instantly for a fuss-free experience anywhere.</p>
+    <h3>Lab-tested quality</h3>
+    <p>Every batch is independently tested for cannabinoid potency, residual solvents, pesticides, and heavy metals. Certificates of Analysis available on request.</p>
+    <h3>Delivery &amp; returns 📦</h3>
+    <p>All packages are neutral for fast, discreet CBD delivery. Minimum order 20 €. Free delivery from 49 € of purchase. You have 15 days to change your mind — unopened packages only.</p>
+  `, et: `
+    <h3>Exceptional cannabinoid concentration</h3>
+    <p>Each pod contains <strong>95% CBD</strong> extract for up to 300 puffs of smooth, consistent vapor. No PG, no VG — just pure broad-spectrum hemp extract.</p>
+    <h3>What's in the box</h3>
+    <ul>
+      <li>1× rechargeable vape pen battery (USB-C)</li>
+      <li>1× pre-filled Amnesia CBD pod (1 ml / 95% CBD)</li>
+      <li>1× USB-C charging cable</li>
+    </ul>
+    <h3>How to use</h3>
+    <p>Simply attach the pod, inhale gently, and enjoy. No buttons, no settings. The draw-activated mechanism fires instantly for a fuss-free experience anywhere.</p>
+    <h3>Lab-tested quality</h3>
+    <p>Every batch is independently tested for cannabinoid potency, residual solvents, pesticides, and heavy metals. Certificates of Analysis available on request.</p>
+    <h3>Delivery &amp; returns 📦</h3>
+    <p>All packages are neutral for fast, discreet CBD delivery. Minimum order 20 €. Free delivery from 49 € of purchase. You have 15 days to change your mind — unopened packages only.</p>
+  `
+    },
+    price: 30,
+    salePrice: null as number | null,
+    stock: 10,
+    stockStatus: 'IN_STOCK' as 'IN_STOCK' | 'OUT_OF_STOCK',
+    images: [
+        '/product/golden-tiger1.jpg',
+        '/product/golden-tiger2.jpg',
+        '/product/golden-tiger3.jpg',
+    ],
+    thumbnails: [
+        '/product/golden-tiger1.jpg',
+        '/product/golden-tiger2.jpg',
+        '/product/golden-tiger3.jpg',
+    ],
+    category: {name: 'Vape Pens', slug: 'vape-pens'},
+    tags: ['CBD', 'Amnesia', 'Vape', 'Broad-spectrum'],
+};
+
 export const MOCKED_PRODUCTS: Product[] = [
     {
         id: '1',
@@ -276,6 +354,15 @@ export const MOCKED_ORDERS: Order[] = [
                 id: 'oi1',
                 orderId: 'o1',
                 productId: 'p1',
+                product: MOCKED_PRODUCT,
+                name: 'iPhone 15 Pro',
+                price: 1099,
+                quantity: 1
+            },
+            {
+                id: 'oi2',
+                orderId: 'o2',
+                productId: 'p2',
                 product: MOCKED_PRODUCT,
                 name: 'iPhone 15 Pro',
                 price: 1099,

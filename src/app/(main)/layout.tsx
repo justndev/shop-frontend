@@ -13,7 +13,7 @@ export default function MainLayout({children}: { children: React.ReactNode }) {
     return (
         <>
             <Header toggleCart={toggleShowCart}/>
-            <main className="min-h-screen pt-15">{children}</main>
+            <main className="min-h-screen pt-15 w-full h-full">{children}</main>
             <CartSidebar open={showCart} onClose={toggleShowCart} />
             <ToastContainer/>
             <Footer/>

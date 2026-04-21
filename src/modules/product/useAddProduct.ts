@@ -103,7 +103,7 @@ function productToFormState(product: Product): ProductFormState {
         stock: product.stock?.toString() || '0',
         stockStatus: product.stockStatus || 'IN_STOCK',
         categoryId: product.categoryId || '',
-        tags: product.tags || [],
+        tags: product.tags && product.tags.map(tag => tag.id) || [],
         images: product.images || [],
         status: product.isActive ? 'published' : 'draft',
         reviewsEnabled: product.reviewsEnabled ?? true,
@@ -142,6 +142,8 @@ export function useAddProduct(existingProductId?: string) {
             try {
                 const product = await productApi.getById(existingProductId)
                 console.log('Fetched product:', product)
+                console.log('Fetched tags:', product.tags)
+
 
                 // Convert API response to form state
                 const formState = productToFormState(product)

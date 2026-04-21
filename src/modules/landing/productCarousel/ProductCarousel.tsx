@@ -9,7 +9,7 @@ import {
 import { useDotButton } from './ProductEmblaCarouselDotButton'
 import './product-embla.css'
 import {MOCKED_PRODUCTS} from "@/src/utils/mocks";
-import ProductCard from "@/src/modules/product/ProductCard";
+import ComplexProductCard from "@/src/modules/product/ComplexProductCard";
 import {Typography} from "@mui/material";
 
 
@@ -36,7 +36,7 @@ const EmblaCarousel = ({products = MOCKED_PRODUCTS, options = OPTIONS}) => {
                         <div className="products_embla__slide" key={index}>
                             <div key={index} style={{paddingLeft: 8, paddingRight: 8}}
                             >
-                                <ProductCard product={product} />
+                                <ComplexProductCard product={product} />
 
                             </div>
                         </div>

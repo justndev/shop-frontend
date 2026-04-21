@@ -9,7 +9,7 @@ import {
 import {DotButton, useDotButton} from './CategoriesEmblaCarouselDotButton'
 import './categories-embla.css'
 import {MOCKED_PRODUCTS} from "@/src/utils/mocks";
-import ProductCard from "@/src/modules/product/ProductCard";
+import ComplexProductCard from "@/src/modules/product/ComplexProductCard";
 import {Typography} from "@mui/material";
 import {ArrowRight, Award, Briefcase, Globe} from "lucide-react";
 import {useTranslation} from "react-i18next";

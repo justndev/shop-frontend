@@ -3,10 +3,8 @@ import { Product } from '@/src/types'
 
 const productsApi = {
   async getAll(params?: {
-    page?: number
-    limit?: number
-    minPrice?: number
-    maxPrice?: number
+    inStock?: boolean;
+    sort?: string
     slug?: string
   }): Promise<{ details: string; data: Product[] }> {
     const res = await apiClient.get('/products', { params })

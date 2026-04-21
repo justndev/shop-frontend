@@ -25,7 +25,7 @@ export interface UseMediaManagerReturn {
     refresh: () => void
 
     // ── Selection
-    selectedIds: Set<string>
+    selectedIds: string[]
     lastSelectedId: string | null
     selectedItems: MediaItem[]
     handleThumbnailClick: (e: React.MouseEvent, id: string) => void
@@ -57,7 +57,7 @@ export function useMediaManager(): UseMediaManagerReturn {
     const [filters, setFilters] = useState<MediaFilters>({ search: '', mimetype: '', page: 1 })
 
     // ── Selection state
-    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+    const [selectedIds, setSelectedIds] = useState<string[]>([])
     const [lastSelectedId, setLastSelectedId] = useState<string | null>(null)
 
     // ── Upload state
@@ -70,7 +70,6 @@ export function useMediaManager(): UseMediaManagerReturn {
     const debounceTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
 
     // ── Fetch ──────────────────────────────────────────────────────────────────
-
     const fetchPage = useCallback(async (f: MediaFilters, append = false) => {
         if (append) setIsLoadingMore(true)
         else setIsLoading(true)
@@ -97,7 +96,7 @@ export function useMediaManager(): UseMediaManagerReturn {
     useEffect(() => {
         fetchPage(filters, false)
         // Reset selection on filter change
-        setSelectedIds(new Set())
+        setSelectedIds([])
         setLastSelectedId(null)
     }, [filters.search, filters.mimetype]) // page changes handled by loadMore
 
@@ -135,37 +134,38 @@ export function useMediaManager(): UseMediaManagerReturn {
 
     const handleThumbnailClick = useCallback((e: React.MouseEvent, id: string) => {
         setSelectedIds((prev) => {
-            const next = new Set(prev)
             if (e.ctrlKey || e.metaKey) {
-                // Toggle
-                if (next.has(id)) {
-                    next.delete(id)
-                    setLastSelectedId(next.size > 0 ? [...next].at(-1)! : null)
+                if (prev.includes(id)) {
+                    // Remove — last selected becomes the new tail
+                    const next = prev.filter((x) => x !== id)
+                    setLastSelectedId(next.at(-1) ?? null)
+                    return next
                 } else {
-                    next.add(id)
+                    // Append in click order
                     setLastSelectedId(id)
+                    return [...prev, id]
                 }
             } else {
-                // Single select / deselect
-                if (prev.size === 1 && prev.has(id)) {
-                    next.clear()
+                // Single click: deselect if already the only one, otherwise select only this
+                if (prev.length === 1 && prev[0] === id) {
                     setLastSelectedId(null)
+                    return []
                 } else {
-                    next.clear()
-                    next.add(id)
                     setLastSelectedId(id)
+                    return [id]
                 }
             }
-            return next
         })
     }, [])
 
     const clearSelection = useCallback(() => {
-        setSelectedIds(new Set())
+        setSelectedIds([])
         setLastSelectedId(null)
     }, [])
 
-    const selectedItems = items.filter((m) => selectedIds.has(m.id))
+    const selectedItems = selectedIds
+        .map((id) => items.find((m) => m.id === id))
+        .filter(Boolean) as MediaItem[]
 
     // ── Upload ─────────────────────────────────────────────────────────────────
 
@@ -214,7 +214,7 @@ export function useMediaManager(): UseMediaManagerReturn {
             setItems((prev) => [...results, ...prev])
             setTotal((t) => t + results.length)
             // Auto-select the first uploaded item
-            setSelectedIds(new Set([results[0].id]))
+            setSelectedIds([results[0].id])
             setLastSelectedId(results[0].id)
         }
 
@@ -254,7 +254,7 @@ export function useMediaManager(): UseMediaManagerReturn {
         // Optimistic remove
         setItems((prev) => prev.filter((m) => m.id !== id))
         setTotal((t) => t - 1)
-        setSelectedIds((prev) => { const n = new Set(prev); n.delete(id); return n })
+        setSelectedIds((prev) => prev.filter((x) => x !== id))
         if (lastSelectedId === id) setLastSelectedId(null)
 
         try {

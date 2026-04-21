@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {
     Collapse,
     Typography,
@@ -8,10 +8,10 @@ import {
     IconButton,
     Divider
 } from '@mui/material';
-import { Order } from '@/src/api/orderApi';
+import {Order} from '@/src/api/orderApi';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { OrderItem } from '@/src/types';
+import {OrderItem} from '@/src/types';
 import {Minus, Plus, Trash2} from "lucide-react";
 import {getThumbnailUrl} from "@/src/utils/functions";
 
@@ -22,10 +22,10 @@ interface Props {
 }
 
 const STATUS_CONFIG: Record<string, { label: string; bg: string; color: string }> = {
-    PENDING: { label: 'Pending', bg: '#fef9c3', color: '#854d0e' },
-    PAID: { label: 'Paid', bg: '#dcfce7', color: '#166534' },
-    FAILED: { label: 'Failed', bg: '#fee2e2', color: '#991b1b' },
-    CANCELLED: { label: 'Cancelled', bg: '#f3f4f6', color: '#374151' },
+    PENDING: {label: 'Pending', bg: '#fef9c3', color: '#854d0e'},
+    PAID: {label: 'Paid', bg: '#dcfce7', color: '#166534'},
+    FAILED: {label: 'Failed', bg: '#fee2e2', color: '#991b1b'},
+    CANCELLED: {label: 'Cancelled', bg: '#f3f4f6', color: '#374151'},
 };
 
 const DELIVERY_LABELS: Record<string, string> = {
@@ -60,7 +60,7 @@ function formatPrice(n: number) {
     return n.toFixed(2) + ' €';
 }
 
-export default function OrderCard({ order, expanded, onToggle }: Props) {
+export default function OrderCard({order, expanded, onToggle}: Props) {
     const status = STATUS_CONFIG[order.status];
 
     const itemsCount = order.items.reduce((sum, i) => sum + i.quantity, 0);
@@ -79,49 +79,29 @@ export default function OrderCard({ order, expanded, onToggle }: Props) {
     const taxes = order.totalAmount * 0.2;
 
     return (
-        <div className="border rounded-xl p-4 bg-white">
+        <div className="border rounded-xl px-4 py-6 bg-white gap-2 flex flex-col">
             {/* HEADER */}
-            <div
+            <header
                 className="flex justify-between items-start cursor-pointer"
                 onClick={onToggle}
             >
-                <div className="flex flex-col gap-1">
+                <Typography variant="body2">
+                    {formatDateTime(order.createdAt)}
+                </Typography>
+
+                <div className="flex sm:flex-col md:flex-row gap-1 items-center">
                     <Typography variant="caption" color="text.secondary">
-                        Order ID
+                        Order ID:
                     </Typography>
                     <Typography variant="subtitle2">#{order.id}</Typography>
-
-                    <Typography variant="caption" color="text.secondary">
-                        Created
-                    </Typography>
-                    <Typography variant="body2">
-                        {formatDateTime(order.createdAt)}
-                    </Typography>
-                </div>
-
-                <div className="flex flex-col items-end gap-2">
-                    <Chip
-                        label={status.label}
-                        size="small"
-                        sx={{
-                            backgroundColor: status.bg,
-                            color: status.color,
-                            fontWeight: 500,
-                        }}
-                    />
-
-                    <Typography variant="subtitle2">
-                        {formatPrice(order.totalAmount)}
-                    </Typography>
-
                     <IconButton size="small">
-                        {expanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        {expanded ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>
                 </div>
-            </div>
+            </header>
 
             {/* QUICK INFO */}
-            <div className="grid grid-cols-3 gap-2 mt-4">
+            <div className="grid grid-cols-3 gap-2">
                 <div>
                     <Typography variant="caption" color="text.secondary">
                         Items
@@ -144,42 +124,46 @@ export default function OrderCard({ order, expanded, onToggle }: Props) {
                 </div>
             </div>
 
+            <Divider/>
+
             {/* EXPANDED */}
             <Collapse in={expanded}>
-                <div className="mt-4 flex flex-col gap-3 bg-[var(--mint)]">
-                    {order.items.map((item) => (
-                        <OrderCardItem key={item.id} orderItem={item} />
-                    ))}
+                <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-1">
+                        {order.items.map((item) => (
+                            <OrderCardItem key={item.id} orderItem={item}/>
+                        ))}
+                    </div>
 
-                    <Divider />
+
+
+                    <Divider/>
 
                     {/* PRICE BREAKDOWN */}
                     <div className="flex flex-col gap-1">
-                        <Row label="Subtotal" value={formatPrice(order.totalAmount - deliveryPrice)} />
-                        <Row label="Delivery" value={formatPrice(deliveryPrice)} />
-                        <Row label="Taxes (est.)" value={formatPrice(taxes)} />
+                        <Row label="Subtotal" value={formatPrice(order.totalAmount - deliveryPrice)}/>
+                        <Row label="Delivery" value={formatPrice(deliveryPrice)}/>
+                        <Row label="Taxes (est.)" value={formatPrice(taxes)}/>
 
-                        <Divider className="my-1" />
+                        <Divider className="my-1"/>
 
-                        <div>
 
-                        </div>
-                        <Row
-                            label="Total"
-                            value={formatPrice(order.totalAmount)}
-                            bold
-                        />
                     </div>
                 </div>
             </Collapse>
+            <Row
+                label="Total"
+                value={formatPrice(order.totalAmount)}
+                bold
+            />
         </div>
     );
 }
 
 /* ------------------ ITEM ------------------ */
 
-function OrderCardItem({ orderItem }: { orderItem: OrderItem }) {
-    const { i18n } = useTranslation();
+function OrderCardItem({orderItem}: { orderItem: OrderItem }) {
+    const {i18n} = useTranslation();
 
     const name =
         orderItem.product?.name?.[i18n.language as 'en' | 'ru' | 'et'] ||
@@ -192,8 +176,8 @@ function OrderCardItem({ orderItem }: { orderItem: OrderItem }) {
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: '72px 1fr auto',
-                gap: 16,
-                padding: '16px 24px',
+                gap: 10,
+                padding: '6px 4px',
                 alignItems: 'start',
             }}>
                 {/* Image */}
@@ -219,7 +203,7 @@ function OrderCardItem({ orderItem }: { orderItem: OrderItem }) {
                 </div>
 
                 {/* Info + qty controls */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
                     <p style={{
                         fontFamily: "'DM Sans', sans-serif",
                         fontWeight: 500,
@@ -252,15 +236,11 @@ function OrderCardItem({ orderItem }: { orderItem: OrderItem }) {
                     </p>
 
                     {/* Qty stepper */}
-                    <div style={{
-
-                    }}>
+                    <div style={{}}>
 
                         <Typography>
                             x {orderItem.quantity}
                         </Typography>
-
-
 
 
                     </div>

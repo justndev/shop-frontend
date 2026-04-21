@@ -1,4 +1,21 @@
 export const en = {
+    dev: {
+      tea: 'Tea'
+    },
+    catalog: {
+        showing: "Showing {{start}}–{{end}} of {{total}}",
+        noProducts: "No products found",
+        prev: "Prev",
+        next: "Next",
+        pageOf: "{{page}} / {{totalPages}}"
+    },
+    categories: {
+        "shu-puer": "Shu Puer",
+        "shen-puer": "Shen Puer\n" +
+            "(Coming soon)",
+        "white-tea": "White Tea",
+        "tea": "Tea"
+    },
     checkout: {
         pay_now: 'Pay now',
 
@@ -136,7 +153,7 @@ export const en = {
                 'last-updated': 'Last updated: {{date}}',
             },
             intro: {
-                p1: 'These Terms & Conditions govern all purchases made through {{shop}} operated by {{company}} (registry code {{reg}}), {{address}}. By placing an order you confirm that you agree to these Terms.',
+                p1: 'These Terms & Conditions govern all purchases made through {{catalog}} operated by {{company}} (registry code {{reg}}), {{address}}. By placing an order you confirm that you agree to these Terms.',
             },
             'section-1': {
                 h2: '1. Products',
@@ -229,7 +246,7 @@ export const en = {
                 'last-updated': 'Last updated: {{date}}',
             },
             intro: {
-                p1: 'This policy explains what cookies are, which ones we use on {{shop}}, and how you can control them.',
+                p1: 'This policy explains what cookies are, which ones we use on {{catalog}}, and how you can control them.',
             },
             'section-1': {
                 h2: '1. What are cookies',
@@ -386,11 +403,11 @@ export const en = {
         tagline: "With Tearoma, quality is never compromised.",
     },
 
-    categories: {
+    categoriesSection: {
         title: "Explore our tea collections",
         items: {
-            puer: "Puer Tea",
-            oolong: "Oolong Tea",
+            'shu-puer': "Shu Pu'er",
+            'shen-puer': "Shen Pu'er",
             green: "Green Tea",
             white: "White Tea",
             ceremony: "Tea Ceremony",

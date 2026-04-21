@@ -6,11 +6,7 @@ import { useRouter } from "next/navigation";
 import {Category} from "@/src/types";
 
 export type Locale = "en" | "ru" | "et";
-export const LOCALES: { code: Locale; label: string; flag: string }[] = [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "ru", label: "Russian", flag: "🇷🇺" },
-    { code: "et", label: "Estonian", flag: "🇪🇪" },
-];
+
 
 export interface CategoryFormState {
     name: Record<Locale, string>;

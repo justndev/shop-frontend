@@ -9,11 +9,11 @@ import {useEffect, useState} from "react";
 import categoryApi from "@/src/api/categoryApi";
 
 export const CATEGORIES = [
-    { key: 'puer',     image: '/categories/categories-puerh.jpg',     href: '/catalog/puer' },
-    { key: 'oolong',   image: '/categories/categories-oolong.webp',   href: '/catalog/oolong' },
-    { key: 'green',    image: '/categories/categories-green.jpg',    href: '/catalog/green' },
-    { key: 'white',    image: '/categories/categories-white.webp',    href: '/catalog/white' },
-    { key: 'ceremony', image: '/categories/categories-stuff.jpg', href: '/catalog/ceremony' },
+    { slug: 'shu-puer',     image: '/categories/categories-puerh.jpg'},
+    { slug: 'shen-puer',   image: '/categories/categories-oolong.webp'},
+    { slug: 'green',    image: '/categories/categories-green.jpg'},
+    { slug: 'white',    image: '/categories/categories-white.webp'},
+    { slug: 'ceremony', image: '/categories/categories-stuff.jpg'},
 ];
 
 export function CategoryCard ({ image, href, text }: { image: string; href: string; text: string }) {
@@ -55,13 +55,13 @@ export default function Categories() {
         <section className="w-full bg-[#f0f7f2] py-8 z-10">
             <div className="max-w-375 mx-auto">
                 <Typography variant="h2" sx={{ fontWeight: 500, marginBottom: 4 }} className="px-8 lg:font-3xl md:text-2xl lg:px-8">
-                    {t('categories.title')}
+                    {t('categoriesSection.title')}
                 </Typography>
 
                 {/* Desktop: grid */}
                 <div className="hidden lg:grid grid-cols-5 gap-4 mx-8">
-                    {categories.map((category, index) => (
-                        <CategoryCard key={index} text={t(`categories.items.${category.slug}`)} image={category.image} href={`catalog/${category.slug}`} />
+                    {CATEGORIES.map((category, index) => (
+                        <CategoryCard key={index} text={t(`categoriesSection.items.${category.slug}`)} image={category.image} href={`catalog/${category.slug}`} />
                     ))}
                 </div>
 

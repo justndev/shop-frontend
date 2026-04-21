@@ -20,7 +20,7 @@ import LanguageDropdown from "@/src/shared/ui/LanguageDropdown";
 import {useRouter} from "next/navigation";
 
 const NAV_LINKS = [
-    {label: 'header.nav.shop', href: '/shop'},
+    {label: 'header.nav.shop', href: '/catalog/shu-puer'},
     // {label: 'header.nav.blog', href: '/blog'},
     {label: 'header.nav.about', href: '/about'},
     {label: 'header.nav.contact', href: '/contact'},
@@ -80,7 +80,7 @@ export default function Header() {
                 <SmallHeader/>
 
                 <div className="bg-[#193028] border-b-1 border-[#374a43] shadow-sm">
-                    <div className="max-w-6xl mx-auto px-4 h-16 grid md:grid-cols-3 grid-cols-2 items-center gap-6">
+                    <div className="max-w-375 mx-auto px-4 h-16 grid md:grid-cols-3 grid-cols-2 items-center gap-6">
                         <Logo />
 
                         <nav className="hidden md:flex items-center justify-center gap-6 text-nowrap">

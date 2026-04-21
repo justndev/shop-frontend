@@ -408,7 +408,7 @@ function ProductRow({ product, selected, onToggle, onDelete, router }: {
 
             {/* Tags */}
             <td style={{ padding: "10px 12px", fontSize: 12, color: C.textMuted, maxWidth: 160 }}>
-                {product.tags.length > 0
+                {product.tags && product.tags.length > 0
                     ? product.tags.slice(0, 3).join(", ") + (product.tags.length > 3 ? `…` : "")
                     : <span style={{ color: C.textFaint }}>–</span>
                 }

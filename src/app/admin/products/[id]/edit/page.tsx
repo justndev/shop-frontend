@@ -365,11 +365,7 @@ export default function Page({ params }: Props) {
                     />
                     <ProductTagsPanel
                         tags={form.tags}
-                        tagInput={tagInput}
-                        setTagInput={setTagInput}
-                        addTag={addTag}
-                        removeTag={removeTag}
-                        handleTagKeyDown={handleTagKeyDown}
+                        setField={setField}
                     />
                     <ProductSlugField slug={form.slug} setField={setField} error={errors.slug} />
                 </div>

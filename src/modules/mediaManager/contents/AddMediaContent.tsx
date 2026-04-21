@@ -423,7 +423,7 @@ function MediaLibraryView({ manager }: { manager: ReturnType<typeof useMediaMana
                                     <MediaThumbnail
                                         key={item.id}
                                         item={item}
-                                        isSelected={selectedIds.has(item.id)}
+                                        isSelected={selectedIds.includes(item.id)}
                                         isLastSelected={lastSelectedId === item.id}
                                         onClick={(e) => handleThumbnailClick(e, item.id)}
                                     />

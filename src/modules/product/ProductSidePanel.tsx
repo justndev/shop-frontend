@@ -62,21 +62,6 @@ export default function ProductCategoriesPanel({ categoryId, setField, error }: 
         fetchCategories();
     }, []);
 
-    async function handleCreate() {
-        if (!newName.trim()) return;
-        setIsCreating(true);
-        try {
-            const created = await categoryApi.create(newName.trim());
-            setCategories(prev => [...prev, created].sort((a, b) => a.name.localeCompare(b.name)));
-            setField("categoryId", created.id);
-            setNewName("");
-            setIsAdding(false);
-        } catch {
-            // handle error
-        } finally {
-            setIsCreating(false);
-        }
-    }
 
     const filtered = categories
 
@@ -112,49 +97,6 @@ export default function ProductCategoriesPanel({ categoryId, setField, error }: 
                     <p style={{ margin: "6px 0 0", fontSize: 11, color: C.danger }}>{error}</p>
                 )}
 
-                {/* Add new category */}
-                <div style={{ marginTop: 10, borderTop: `1px solid ${C.border}`, paddingTop: 10 }}>
-                    {!isAdding ? (
-                        <button
-                            onClick={() => setIsAdding(true)}
-                            style={{ background: "none", border: "none", color: C.accent, fontSize: 12, cursor: "pointer", padding: 0, fontFamily: "inherit" }}
-                        >
-                            + Add new category
-                        </button>
-                    ) : (
-                        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                            <input
-                                type="text"
-                                placeholder="Category name"
-                                value={newName}
-                                onChange={e => setNewName(e.target.value)}
-                                onKeyDown={e => e.key === "Enter" && handleCreate()}
-                                autoFocus
-                                style={inputStyle}
-                            />
-                            <div style={{ display: "flex", gap: 6 }}>
-                                <button
-                                    onClick={handleCreate}
-                                    disabled={isCreating || !newName.trim()}
-                                    style={{
-                                        background: C.accent, border: "none", borderRadius: 3,
-                                        color: "#fff", fontSize: 12, padding: "5px 12px",
-                                        cursor: isCreating ? "not-allowed" : "pointer", fontFamily: "inherit",
-                                        opacity: isCreating ? 0.6 : 1,
-                                    }}
-                                >
-                                    {isCreating ? "Creating…" : "Add"}
-                                </button>
-                                <button
-                                    onClick={() => { setIsAdding(false); setNewName(""); }}
-                                    style={{ background: "none", border: "none", color: C.textMuted, fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </div>
             </div>
         </div>
     );

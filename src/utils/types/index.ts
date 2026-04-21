@@ -26,11 +26,18 @@ export interface Category {
   image?: string;
   createdAt: string;
 }
+export const LOCALES: { code: Locale; label: string; flag: string }[] = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "ru", label: "Russian", flag: "🇷🇺" },
+  { code: "et", label: "Estonian", flag: "🇪🇪" },
+];
 
-interface TranslatedStrings {
-  en: string;
-  ru: string;
-  et: string;
+export type Locale = "en" | "ru" | "et";
+
+export interface Tag {
+  id: string;
+  name: TranslatedStrings;
+  createdAt: string;
 }
 
 export interface Product {

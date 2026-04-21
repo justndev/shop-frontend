@@ -11,7 +11,8 @@ const NAV = [
             {label: "All Products", slug: 'products'},
             {label: "Add Product", slug: 'products/add'},
             {label: "Categories", slug: 'categories'},
-            {label:  "Tags", slug: 'tags'},
+            {label: "Tags", slug: 'tags'},
+
         ]},
     {label: "Orders", icon: "order"},
     {label: "Media", icon: "media"},
