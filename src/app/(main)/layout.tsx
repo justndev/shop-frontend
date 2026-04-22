@@ -1,9 +1,8 @@
 'use client'
 
 import CartSidebar from '@/src/modules/cart/CartSidebar'
-import {ToastContainer} from '@/src/modules/ui/Toast'
 import Header from "@/src/modules/layout/Header";
-import useCartHook from "@/src/hooks/useCartHook";
+import useCartHook from "@/src/modules/cart/useCartHook";
 import Footer from "@/src/modules/layout/Footer";
 
 
@@ -15,7 +14,6 @@ export default function MainLayout({children}: { children: React.ReactNode }) {
             <Header toggleCart={toggleShowCart}/>
             <main className="min-h-screen pt-15 w-full h-full">{children}</main>
             <CartSidebar open={showCart} onClose={toggleShowCart} />
-            <ToastContainer/>
             <Footer/>
         </>
     )

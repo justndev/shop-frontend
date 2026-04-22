@@ -1,13 +1,13 @@
-// src/app/admin/tags/page.tsx
+// src/app/admin/tag/page.tsx
 "use client";
 
 import Link from "next/link";
-import TagHeader from "@/src/modules/tags/TagHeader";
+import TagHeader from "@/src/modules/tag/TagHeader";
 import {C} from "@/src/utils/customColors";
-import TagRow from "@/src/modules/tags/TagRow";
+import TagRow from "@/src/modules/tag/TagRow";
 import {useState} from "react";
 import {Alert} from "@mui/material";
-import {useTagList} from "@/src/hooks/useTagList";
+import {useTagList} from "@/src/modules/tag/useTagList";
 
 const TABS = ["Name", "Created", ""];
 

@@ -1,10 +1,10 @@
-// src/app/admin/tags/[id]/edit/page.tsx
+// src/app/admin/tag/[id]/edit/page.tsx
 "use client";
 
 import { use, useEffect, useState } from "react";
-import TagsFormPage from "@/src/modules/tags/TagsFormPage";
+import TagsFormPage from "@/src/modules/tag/TagsFormPage";
 import {Tag} from "@/src/utils/types";
-import tagApi from "@/src/api/tagApi";
+import tagApi from "@/src/modules/tag/tagApi";
 
 export default function EditTagsPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);

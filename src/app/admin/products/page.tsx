@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import productApi, { Product, ProductListParams } from "@/src/api/productApi";
-import categoryApi from "@/src/api/categoryApi";
+import categoryApi from "@/src/modules/category/categoryApi";
 import {Category} from "@/src/types";
 
 // ── COLORS ────────────────────────────────────────────────────────────────────

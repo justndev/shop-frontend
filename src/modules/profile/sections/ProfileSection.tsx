@@ -9,7 +9,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import ErrorIcon from "@mui/icons-material/Error";
 
 
-import { TextFieldProps } from "@mui/material";
+import {TextFieldProps} from "@mui/material";
 
 function Field(props: TextFieldProps) {
     return (
@@ -17,9 +17,9 @@ function Field(props: TextFieldProps) {
             {...props}
             FormHelperTextProps={{
                 ...props.FormHelperTextProps,
-                sx: { margin: 0, paddingTop: '4px', ...props.FormHelperTextProps?.sx },
+                sx: {margin: 0, paddingTop: '4px', ...props.FormHelperTextProps?.sx},
             }}
-            sx={{ flex: 1, minWidth: 200, ...props.sx }}
+            sx={{flex: 1, minWidth: 200, ...props.sx}}
         />
     );
 }
@@ -49,8 +49,8 @@ export default function ProfileSection() {
 
     return (
         <section className='flex flex-col gap-4'>
-            <div className="flex justify-between items-end  h-[32]">
-                    <Typography variant="h5">Personal Information</Typography>
+            <div className="flex justify-between items-end h-[32]">
+                <Typography variant="h5">Personal Information</Typography>
             </div>
 
             {/* My information */}
@@ -127,7 +127,7 @@ export default function ProfileSection() {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={() => setShowCurrent(p => !p)} edge="end">
-                                        {showCurrent ? <VisibilityOff /> : <Visibility />}
+                                        {showCurrent ? <VisibilityOff/> : <Visibility/>}
                                     </IconButton>
                                 </InputAdornment>
                             ),
@@ -144,7 +144,7 @@ export default function ProfileSection() {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={() => setShowNew(p => !p)} edge="end">
-                                        {showNew ? <VisibilityOff /> : <Visibility />}
+                                        {showNew ? <VisibilityOff/> : <Visibility/>}
                                     </IconButton>
                                 </InputAdornment>
                             ),
@@ -161,7 +161,7 @@ export default function ProfileSection() {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={() => setShowRepeat(p => !p)} edge="end">
-                                        {showRepeat ? <VisibilityOff /> : <Visibility />}
+                                        {showRepeat ? <VisibilityOff/> : <Visibility/>}
                                     </IconButton>
                                 </InputAdornment>
                             ),

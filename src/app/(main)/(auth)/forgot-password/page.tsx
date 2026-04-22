@@ -10,10 +10,11 @@ import { Button, TextField, Typography } from "@mui/material";
 import UnderlineButton from "@/src/shared/ui/buttons/UnderlineButton";
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
+
 export default withPublicRoute(ForgotPasswordPage);
 function ForgotPasswordPage() {
-  const { loadings, handleForgotPassword } = useAuthHook();
   const { t } = useTranslation();
+  const { loadings, handleForgotPassword } = useAuthHook();
 
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);

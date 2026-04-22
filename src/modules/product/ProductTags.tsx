@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ProductFormState } from "@/src/modules/product/useAddProduct";
-import tagApi from "@/src/api/tagApi";
+import tagApi from "@/src/modules/tag/tagApi";
 import { Tag } from "@/src/utils/types";
 
 const C = {
@@ -32,7 +32,7 @@ const SectionHeader = ({ title }: { title: string }) => (
 );
 
 interface TagsPanelProps {
-    tags: string[];  // currently selected tag IDs from form.tags
+    tags: string[];  // currently selected tag IDs from form.tag
     setField: <K extends keyof ProductFormState>(k: K, v: ProductFormState[K]) => void;
     error?: string;
 }
@@ -100,7 +100,7 @@ export default function ProductTagsPanel({ tags, setField, error }: TagsPanelPro
                 <div style={{ maxHeight: 180, overflowY: "auto", display: "flex", flexDirection: "column", gap: 1 }}>
                     {filtered.length === 0 && (
                         <span style={{ fontSize: 12, color: C.textFaint, padding: "4px 0" }}>
-                            {search ? "No tags match your search" : "No tags found"}
+                            {search ? "No tag match your search" : "No tag found"}
                         </span>
                     )}
                     {filtered.map(tag => {

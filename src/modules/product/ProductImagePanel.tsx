@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Dialog } from "@mui/material";
-import type { MediaItem } from "@/src/api/mediaApi";
-import AddMediaContent from "@/src/modules/mediaManager/contents/AddMediaContent";
+import type { MediaItem } from "@/src/modules/media/mediaApi";
+import AddMediaContent from "@/src/modules/media/contents/AddMediaContent";
 
 const C = {
     surface: "#22262a",

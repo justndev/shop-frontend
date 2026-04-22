@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { redirect } from "next/navigation";
-import {useUserHook} from "@/src/hooks/useUserHook";
+import {useUserHook} from "@/src/lib/useUserHook";
 
 
 export default function withPublicRoute<T extends object>(Component: React.ComponentType<T>) {

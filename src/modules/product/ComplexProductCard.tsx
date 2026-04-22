@@ -1,14 +1,16 @@
+
 'use client';
 
 import {useState, useRef, useCallback, useEffect} from 'react';
-import {Button, Typography} from '@mui/material';
-import Link from 'next/link';
-import {ArrowUpRight} from "lucide-react";
-import {Product} from "@/src/types";
 import {useTranslation} from "react-i18next";
+
+import {Product} from "@/src/utils/types";
 import {cutTitle} from "@/src/utils/functions";
 
-// Inject keyframes once into the document head
+import Link from 'next/link';
+import {Button, Typography} from '@mui/material';
+import {ArrowUpRight} from "lucide-react";
+
 const KEYFRAMES = `
 @keyframes greenSlide {
   0%   { background-position: 200% 50%; }
@@ -26,8 +28,6 @@ if (typeof document !== 'undefined') {
     }
 }
 
-// The gradient is always present on the button — we just animate it on card hover.
-// This eliminates the flash caused by toggling backgroundImage on/off.
 const BUTTON_GRADIENT = `linear-gradient(
     90deg,
     #1a3c2e 0%,
@@ -63,10 +63,6 @@ export default function ComplexProductCard({product}: { product: Product }) {
         setImageOffset({x: 0, y: 0});
     };
 
-    useEffect(() => {
-        console.log(product)
-    }, []);
-
     if (!product) return null;
 
     return (
@@ -76,39 +72,22 @@ export default function ComplexProductCard({product}: { product: Product }) {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onMouseMove={handleMouseMove}
+            className="h-full flex flex-col rounded-xl overflow-hidden bg-white border border-[#e8ede9] cursor-pointer"
             style={{
-                height: '100%',          // ← add this
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                backgroundColor: '#ffffff',
-                border: '1px solid #e8ede9',
-                cursor: 'pointer',
-                transition: 'box-shadow 0.25s ease, transform 0.25s ease',
+                // Dynamic: change on hover state
                 boxShadow: hovered ? '0 8px 24px rgba(26,60,46,0.12)' : '0 1px 4px rgba(0,0,0,0.06)',
                 transform: hovered ? 'translateY(-2px)' : 'none',
+                transition: 'box-shadow 0.25s ease, transform 0.25s ease',
             }}
         >
-
             {/* Square image area */}
-            <div
-                style={{
-                    position: 'relative',
-                    width: '100%',
-                    aspectRatio: '1 / 1',
-                    background: '#f2f5f2',
-                    overflow: 'hidden',
-                }}
-            >
+            <div className="relative w-full overflow-hidden bg-[#f2f5f2]" style={{aspectRatio: '1 / 1'}}>
                 {/* Base image */}
                 <div
+                    className="absolute inset-0 bg-cover bg-center"
                     style={{
-                        position: 'absolute',
-                        inset: 0,
+                        // Dynamic: backgroundImage URL + opacity on hover
                         backgroundImage: `url(${product.images[0]})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
                         opacity: hovered ? 0 : 1,
                         transition: 'opacity 0.5s ease',
                     }}
@@ -116,12 +95,11 @@ export default function ComplexProductCard({product}: { product: Product }) {
 
                 {/* Hover image — parallax layer */}
                 <div
+                    className="absolute bg-cover bg-center"
                     style={{
-                        position: 'absolute',
+                        // Dynamic: transform changes per mouse position + opacity on hover
                         inset: '-20px',
                         backgroundImage: `url(${product.images[2]})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
                         opacity: hovered ? 1 : 0,
                         transform: hovered
                             ? `translate(${imageOffset.x}px, ${imageOffset.y}px) scale(1.01)`
@@ -134,43 +112,28 @@ export default function ComplexProductCard({product}: { product: Product }) {
             </div>
 
             {/* Green accent divider */}
-            <div style={{height: '3px', background: '#1a3c2e'}}/>
+            <div className="h-[3px] bg-(--swamp-green)"/>
 
             {/* Card body */}
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,                          // ← add this
-                justifyContent: 'space-between',  // ← add this
-                backgroundColor: '#ffffff',
-                gap: 10,
-                padding: '14px 16px 16px',
-            }}>
+            <div className="flex flex-col justify-between bg-white gap-3 p-4">
                 {/* Name */}
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <Typography
-                        variant="body2"
-                        style={{
-                            fontWeight: 600,
-                            letterSpacing: '0.02em',
-                            lineHeight: 1.4,
-                            color: '#1a1a14',
-                        }}
-                    >
-                        {cutTitle(product.name[i18n.language])}
-                    </Typography>
-                </div>
+                <Typography
+                    variant="body2"
+                    sx={{
+                        fontWeight: 'bold',
+                        color: 'var(--swamp-green)'
+                    }}
+                >
+                    {cutTitle(product.name[i18n.language])}
+                </Typography>
 
                 {/* Price */}
                 <Typography
                     variant="h6"
-                    style={{
-                        fontWeight: 700,
-                        fontSize: '1.35rem',
-                        letterSpacing: '-0.01em',
-                        lineHeight: 1.2,
+                    sx={{
+                        fontWeight: 'bold',
+                        color: 'var(--green-pale)',
                         fontStyle: 'italic',
-                        color: '#1a3c2e',
                     }}
                 >
                     €{product.price}
@@ -189,21 +152,13 @@ export default function ComplexProductCard({product}: { product: Product }) {
                         py: 1.25,
                         fontFamily: "'DM Sans', sans-serif",
                         boxShadow: 'none',
-                        color: '#fff',
-
-                        // Always-on gradient — toggling backgroundImage is what caused the flash
+                        color: 'white',
                         backgroundImage: BUTTON_GRADIENT,
                         backgroundSize: '300% 100%',
-                        // At rest: clamp position so only the dark-left segment is visible
                         backgroundPosition: hovered ? undefined : '0% 50%',
-                        // On card hover: run the sweep
                         animation: hovered ? 'greenSlide 5.6s linear infinite' : 'none',
-
-                        // Must stay transparent — any opaque backgroundColor will flash on MUI hover
                         backgroundColor: 'transparent',
-
                         transition: 'box-shadow 0.2s ease',
-
                         '&:hover': {
                             boxShadow: 'none',
                             backgroundColor: 'transparent',

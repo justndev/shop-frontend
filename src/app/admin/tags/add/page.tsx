@@ -1,7 +1,7 @@
-// src/app/admin/tags/add/page.tsx (or wherever your routing sits)
+// src/app/admin/tag/add/page.tsx (or wherever your routing sits)
 "use client";
 
-import useAddEditTagForm from "@/src/hooks/useAddEditTagForm";
+import useAddEditTagForm from "@/src/modules/tag/useAddEditTagForm";
 import { LOCALES } from '@/src/utils/types'
 const C = {
     bg: "#1a1d1e",

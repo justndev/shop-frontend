@@ -3,7 +3,7 @@
 
 import { use, useEffect, useState } from "react";
 import CategoryFormPage from "@/src/modules/category/CategoryFormPage";
-import categoryApi from "@/src/api/categoryApi";
+import categoryApi from "@/src/modules/category/categoryApi";
 import {Category} from "@/src/types";
 
 export default function EditCategoryPage({ params }: { params: Promise<{ id: string }> }) {

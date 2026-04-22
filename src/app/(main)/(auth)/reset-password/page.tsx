@@ -7,16 +7,16 @@ import { useSearchParams } from 'next/navigation';
 import withPublicRoute from "@/src/utils/withPublicRoute";
 import { useAuthHook } from '@/src/modules/auth/useAuthHook';
 
-import { Button, TextField, Typography, InputAdornment, IconButton, Alert } from "@mui/material";
+import { Button, TextField, Typography, InputAdornment, IconButton } from "@mui/material";
 import UnderlineButton from "@/src/shared/ui/buttons/UnderlineButton";
-import CheckIcon from '@mui/icons-material/Check';
-import ErrorIcon from "@mui/icons-material/Error";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 
 export default withPublicRoute(ResetPasswordPage);
 function ResetPasswordPage() {
+    const { t } = useTranslation();
   const { loadings, handleResetPassword } = useAuthHook();
-  const { t } = useTranslation();
+
   const searchParams = useSearchParams();
   const token = searchParams.get('token') || '';
 

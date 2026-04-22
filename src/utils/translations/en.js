@@ -1,3 +1,9 @@
+export const LOCALES= [
+    { code: "en", label: "English", flag: "🇬🇧" },
+    { code: "ru", label: "Russian", flag: "🇷🇺" },
+    { code: "et", label: "Estonian", flag: "🇪🇪" },
+];
+
 export const en = {
     dev: {
       tea: 'Tea'

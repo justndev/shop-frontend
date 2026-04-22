@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/navigation';
 
 import authApi from '@/src/modules/auth/authApi'
-import { setUser, setInitialized, clearUser } from '@/src/store/slices/userSlice'
+import { setUser, clearUser } from '@/src/store/slices/userSlice'
 import {validateLogin} from "@/src/utils/validations";
 
-import {Alert} from "@/src/types";
+import {Alert} from "@/src/utils/types";
 
 
 export interface LoginFields {
@@ -31,12 +31,6 @@ export function useLoginHook() {
     const [errors, setErrors] = useState<LoginErrors>({ email: null, password: null});
     const [loginAlert, setLoginAlert] = useState<Alert | null>();
 
-    function validate(fields: LoginFields): boolean {
-        const result = validateLogin(fields, t);
-        setErrors(result);
-        return !result.email && !result.password;
-    }
-
     async function handleLogin(fields: LoginFields) {
         if (!validate(fields)) return;
 
@@ -54,22 +48,6 @@ export function useLoginHook() {
             setLoginAlert({type: 'error', message: t(key)});
         } finally {
             setLoading(false);
-        }
-    }
-
-    /** @deprecated use initializeAuth from useAuthHook or a dedicated provider */
-    async function initializeAuth() {
-        if (!authApi.isAuthenticated()) {
-            dispatch(setInitialized());
-            return;
-        }
-        try {
-            const res = await authApi.getMe();
-            dispatch(setUser(res.data));
-        } catch {
-            authApi.clearTokens();
-        } finally {
-            dispatch(setInitialized());
         }
     }
 
@@ -104,12 +82,17 @@ export function useLoginHook() {
         }
     }
 
+    function validate(fields: LoginFields): boolean {
+        const result = validateLogin(fields, t);
+        setErrors(result);
+        return !result.email && !result.password;
+    }
+
     return {
         loading,
         errors,
         loginAlert,
 
-        initializeAuth,
         handleLogin,
         handleLoginWithEmailLink,
         handleLogout,

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import authApi from '@/src/modules/auth/authApi';
 import {validateRegister} from "@/src/utils/validations";
-import {Alert} from "@/src/types";
+import {Alert} from "@/src/utils/types";
 
 
 export interface RegisterFields {
@@ -35,12 +35,6 @@ export function useRegisterHook() {
     });
     const [signupAlert, setSignupAlert] = useState<Alert | null>();
 
-    function validate(fields: RegisterFields): boolean {
-        const result = validateRegister(fields, t);
-        setErrors(result);
-        return !hasErrors(result);
-    };
-
     async function handleRegister(fields: RegisterFields, onSuccess: () => void) {
         setSuccess(false);
         if (!validate(fields)) return;
@@ -64,6 +58,16 @@ export function useRegisterHook() {
         }
     }
 
+    function validate(fields: RegisterFields): boolean {
+        const result = validateRegister(fields, t);
+        setErrors(result);
+        return !hasErrors(result);
+    }
+
+    function hasErrors(errors: RegisterErrors): boolean {
+        return Object.values(errors).some(v => v !== null);
+    }
+
     return {
         loading,
         errors,
@@ -71,8 +75,4 @@ export function useRegisterHook() {
         handleRegister,
         signupAlert
     }
-}
-
-function hasErrors(errors: RegisterErrors): boolean {
-    return Object.values(errors).some(v => v !== null);
 }

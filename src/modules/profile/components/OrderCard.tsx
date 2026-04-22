@@ -8,7 +8,7 @@ import {
     IconButton,
     Divider
 } from '@mui/material';
-import {Order} from '@/src/api/orderApi';
+import {Order} from '@/src/modules/profile/orderApi';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {OrderItem} from '@/src/types';

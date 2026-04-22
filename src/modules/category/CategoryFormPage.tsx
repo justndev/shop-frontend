@@ -5,10 +5,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Dialog } from "@mui/material";
-import AddMediaContent from "@/src/modules/mediaManager/contents/AddMediaContent";
-import type { MediaItem } from "@/src/api/mediaApi";
+import AddMediaContent from "@/src/modules/media/contents/AddMediaContent";
+import type { MediaItem } from "@/src/modules/media/mediaApi";
 import {Category} from "@/src/types";
-import useCategoryForm, {Locale, LOCALES} from "@/src/hooks/useCategoryForm";
+import useCategoryForm, {Locale, LOCALES} from "@/src/modules/category/hooks/useCategoryForm";
 
 const C = {
     bg: "#1a1d1e",

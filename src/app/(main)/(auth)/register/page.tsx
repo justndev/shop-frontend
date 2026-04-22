@@ -15,11 +15,15 @@ import Link from "next/link";
 import CheckIcon from '@mui/icons-material/Check';
 import ErrorIcon from "@mui/icons-material/Error";
 import { Visibility, VisibilityOff } from "@mui/icons-material"
+import config from "@/src/config";
+
+
+const OAUTH_URL = config.BACKEND_API_URL + "/auth/google";
 
 export default withPublicRoute(RegisterPage)
 function RegisterPage() {
-  const { loading, errors, handleRegister, success, signupAlert} = useRegisterHook()
   const { t } = useTranslation()
+  const { loading, errors, handleRegister, signupAlert} = useRegisterHook()
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -88,7 +92,7 @@ function RegisterPage() {
 
           <DividerWithText text={t("auth.register.or")} />
 
-          <Link href="http://localhost:4000/api/auth/google" className="w-full">
+          <Link href={OAUTH_URL} className="w-full">
             <Button fullWidth variant="outlined" startIcon={<GoogleColorIcon />}
                     sx={{ borderRadius: '999px', py: 1.5, textTransform: 'none', fontSize: '1rem' }}>
               {t("auth.register.sign_up_google")}

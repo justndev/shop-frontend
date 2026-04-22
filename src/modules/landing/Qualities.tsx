@@ -6,7 +6,7 @@ import { Typography } from '@mui/material';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { usePrevNextButtons } from '@/src/modules/landing/achievementsCarouselOld/AchievementsCarouselArrows';
-import QualitiesEmblaCarousel from "@/src/modules/landing/qualityCarousel/QualitiesCarousel";
+import QualitiesEmblaCarousel from "@/src/modules/landing/qualitiesCarousel/QualitiesCarousel";
 
 function LeafPattern({ color }: { color: string }) {
     return (

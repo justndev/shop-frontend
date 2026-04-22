@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import CategoriesCarousel from "@/src/modules/landing/categoriesCarousel/CategoriesCarousel";
 import {useEffect, useState} from "react";
-import categoryApi from "@/src/api/categoryApi";
+import categoryApi from "@/src/modules/category/categoryApi";
 
 export const CATEGORIES = [
     { slug: 'shu-puer',     image: '/categories/categories-puerh.jpg'},

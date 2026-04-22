@@ -5,7 +5,6 @@ import {ThemeProvider} from "@mui/material";
 import {PersistGate} from "redux-persist/integration/react";
 
 import {persistor, store} from '@/src/store'
-import AppInitializer from '@/src/modules/AppInitializer'
 import {theme} from "@/src/utils/theme";
 import '@/src/utils/i18n';
 
@@ -32,9 +31,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <PersistGate persistor={persistor}>
             <Provider store={store}>
                 <ThemeProvider theme={theme}>
-                    <AppInitializer>
-                        {children}
-                    </AppInitializer>
+                    {children}
                 </ThemeProvider>
 
             </Provider>

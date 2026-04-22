@@ -1,4 +1,5 @@
 "use client";
+
 import "@prisma/studio-core/ui/index.css";
 import { ReactNode } from "react";
 

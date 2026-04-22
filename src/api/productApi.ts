@@ -1,28 +1,25 @@
 import apiClient from '../lib/apiClient'
-import {Product} from "@/src/types";
-
-// ── TYPES ─────────────────────────────────────────────────────────────────────
-
-
-
+import { Product, StockStatus, TranslatedStrings } from "@/src/utils/types";
+import {useTranslation} from "react-i18next";
+import {usePathname} from "next/navigation";
 
 export interface CreateProductPayload {
+    name: TranslatedStrings;
     slug: string;
-    name: string
-    description?: string
-    shortDescription?: string
-    price: number
-    salePrice?: number | null
+    description: TranslatedStrings;
+    shortDescription: TranslatedStrings;
+    price: number;
+    salePrice?: number;
     sku?: string
-    stock?: number
-    stockStatus?: StockStatus
-    images?: string[]
-    tags?: string[]
-    isActive?: boolean
+    stock: number;
+    stockStatus: string;
+    images: string[];
+    isActive: boolean;
     purchaseNote?: string
-    menuOrder?: number
-    reviewsEnabled?: boolean
-    categoryId: string
+    menuOrder?: number;
+    reviewsEnabled?: boolean;
+    tags?: string[];
+    categoryId?: string;
 }
 
 export type UpdateProductPayload = Partial<CreateProductPayload>
@@ -46,9 +43,16 @@ export interface ProductListResponse {
     limit: number
 }
 
-// ── PRODUCT API ───────────────────────────────────────────────────────────────
-
 const productApi = {
+    async getAll(params?: {
+        inStock?: boolean;
+        sort?: string
+        slug?: string
+    }): Promise<ProductListResponse> {
+        const res = await apiClient.get('/products', { params })
+        return res.data
+    },
+
     async list(params: ProductListParams = {}): Promise<ProductListResponse> {
         const res = await apiClient.get('/products', { params })
         return res.data
@@ -79,5 +83,4 @@ const productApi = {
     },
 }
 
-
-export default productApi
+export default productApi;

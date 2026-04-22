@@ -16,7 +16,9 @@ import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from '@mui/icons-material/Error';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {Button, TextField, Typography, InputAdornment, IconButton, Alert} from "@mui/material";
+import config from "@/src/config";
 
+const OAUTH_URL = config.BACKEND_API_URL + "/auth/google";
 
 export default withPublicRoute(LoginPage);
 function LoginPage() {
@@ -87,7 +89,7 @@ function LoginPage() {
                     {t("auth.login.sign_in_with_email")}
                 </Button>
 
-                <Link href="http://localhost:4000/api/auth/google" className="w-full">
+                <Link href={OAUTH_URL} className="w-full">
                     <Button fullWidth variant="outlined" startIcon={<GoogleColorIcon/>}
                             sx={{borderRadius: '999px', py: 1.5, mt: 1, textTransform: 'none', fontSize: '1rem'}}>
                         {t("auth.login.sign_in_google")}

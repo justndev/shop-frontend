@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie';
 
 import apiClient from "@/src/lib/apiClient";
-import { AuthTokens, User } from '@/src/types';
+import {AuthTokens, BackendResponse, User} from '@/src/utils/types';
 
-interface RegisterDto {
+export interface RegisterDto {
   email: string;
   password: string;
   firstName?: string;
@@ -11,32 +11,32 @@ interface RegisterDto {
 }
 
 const authApi = {
-  async register(data: RegisterDto): Promise<{ details: string; data: { email: string } }> {
+  async register(data: RegisterDto): Promise<BackendResponse<{email: string}>> {
     const res = await apiClient.post('/auth/register', data);
     return res.data;
   },
 
-  async verifyEmail(token: string): Promise<{ details: string, data: AuthTokens }> {
+  async verifyEmail(token: string): Promise<BackendResponse<AuthTokens>> {
     const res = await apiClient.get(`/auth/verify-email?token=${token}`);
     return res.data;
   },
 
-  async login(email: string, password: string): Promise<{ details: string; data: AuthTokens }> {
+  async login(email: string, password: string): Promise<BackendResponse<AuthTokens>> {
     const res = await apiClient.post('/auth/login', { email, password });
     return res.data;
   },
 
-  async forgotPassword(email: string): Promise<{ details: string }> {
+  async forgotPassword(email: string): Promise<BackendResponse<undefined>> {
     const res = await apiClient.post('/auth/forgot-password', { email });
     return res.data;
   },
 
-  async resetPassword(token: string, password: string): Promise<{ details: string }> {
+  async resetPassword(token: string, password: string): Promise<BackendResponse<undefined>> {
     const res = await apiClient.post('/auth/reset-password', { token, password });
     return res.data;
   },
 
-  async refresh(refreshToken: string): Promise<{ details: string; data: AuthTokens }> {
+  async refresh(refreshToken: string): Promise<BackendResponse<AuthTokens>> {
     const res = await apiClient.post('/auth/refresh', { refreshToken });
     return res.data;
   },
@@ -46,17 +46,17 @@ const authApi = {
     return res.data;
   },
 
-  async getMe(): Promise<{ details: string; data: User }> {
+  async getMe(): Promise<BackendResponse<User>> {
     const res = await apiClient.get('/users/me');
     return res.data;
   },
 
-  async loginWithEmailLink(email: string): Promise<{ details: string; }> {
+  async loginWithEmailLink(email: string): Promise<BackendResponse<undefined>> {
     const res = await apiClient.post('/auth/magic-link', {email});
     return res.data;
   },
 
-  async verifyMagicLink(token: string): Promise<{ details: string; data: AuthTokens }> {
+  async verifyMagicLink(token: string): Promise<BackendResponse<AuthTokens>> {
     const res = await apiClient.get(`/auth/magic-link/verify?token=${token}`);
     return res.data;
   },

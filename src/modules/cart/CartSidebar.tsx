@@ -3,41 +3,28 @@
 import { useTranslation } from 'react-i18next';
 import { Drawer, IconButton, Divider, Button } from '@mui/material';
 import { X, Trash2, Plus, Minus } from 'lucide-react';
-import Image from 'next/image';
-import useCartHook from '@/src/hooks/useCartHook';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/src/store";
 import {removeItem, toggleCart, updateQuantity} from "@/src/store/slices/cartSlice";
-import {useEffect} from "react";
-import {getThumbnailUrl} from "@/src/utils/functions"; // adjust path as needed
+import {getThumbnailUrl} from "@/src/utils/functions";
 
-interface CartSidebarProps {
-  open: boolean;
-  onClose: () => void;
-}
 
 export default function CartSidebar() {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const { items, isOpen } = useSelector((state: RootState) => state.cart);
 
-  useEffect(() => {
-    console.log(items)
-  })
-
   function handleToggleCart() {
     dispatch(toggleCart());
   }
 
   function handleUpdateQuantity(id: string, quantity: number) {
-    console.log(`quantity: ${quantity}`);
     dispatch(updateQuantity({id, quantity}));
   }
 
   function handleRemoveItem(id: string) {
     dispatch(removeItem(id));
   }
-  // const { items, removeItem, updateQuantity, showCart, toggleShowCart } = useCartHook();
 
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 

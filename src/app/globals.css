@@ -79,12 +79,21 @@
     --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
     --sidebar-border: oklch(0.923 0.003 48.717);
     --sidebar-ring: oklch(0.709 0.01 56.259);
+
     --mint: #f0f7f2;
     --bordfer: #e0ddd5;
+
+    --cream: #f7f5f0;
+    --ink: #1a1a18;
     --sage-light: #5a7d56;
     --sage-pale: #e8efe7;
+    --accent: #c8a96e;
+    --muted: #6b6b60;
+
     --swamp-green: #193028;
     --swamp-green-dark: #08120C;
+    --green-pale: #1a3c2e;
+    --white-dim: #FCFCFC;
 }
 
 .dark {

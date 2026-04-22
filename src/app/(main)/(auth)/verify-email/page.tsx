@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { useSearchParams } from 'next/navigation';
 
 import { useAuthHook } from '@/src/modules/auth/useAuthHook';
@@ -11,11 +10,12 @@ import Link from 'next/link';
 import { Typography } from '@mui/material';
 
 
+// TODO
 export default function VerifyEmailPage() {
     const { t } = useTranslation();
     const { errors, loadings, handleVerifyEmail } = useAuthHook();
-
     const searchParams = useSearchParams();
+
     const token = searchParams.get('token') || '';
     const hasRun = useRef(false);
 

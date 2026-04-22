@@ -1,6 +1,6 @@
 'use client'
 
-import BannerCarousel from "@/src/modules/landing/carousel/BannerCarousel";
+import BannerCarousel from "@/src/modules/landing/bannerCarousel/BannerCarousel";
 import PromotionTitleAndParagraph from "@/src/modules/landing/PromotionTitleAndParagraph";
 import WhyUs from "@/src/modules/landing/WhyUs";
 import Categories from "@/src/modules/landing/Categories";
@@ -13,7 +13,6 @@ import AdvantagesText from "@/src/modules/landing/AdvantagesText";
 import OurProducts from "@/src/modules/landing/OurProducts";
 import QualityParagraph from "@/src/modules/landing/QualityParagraph";
 import Achievements from "@/src/modules/landing/Achievements";
-import {useEffect} from "react";
 
 
 export default function HomePage() {
@@ -34,12 +33,9 @@ export default function HomePage() {
             <Categories/>
             <OurProducts/>
             <QualityCards/>
-                <QualityParagraph/>
-
-
+            <QualityParagraph/>
 
             <FAQ/>
-
 
             <ExpertiseParagraph/>
 

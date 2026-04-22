@@ -3,10 +3,10 @@
 
 import { useState } from "react";
 import { Dialog } from "@mui/material";
-import AddMediaContent from "@/src/modules/mediaManager/contents/AddMediaContent";
-import type { MediaItem } from "@/src/api/mediaApi";
-import useCategory from "@/src/hooks/useAddCategory";
-import {LOCALES} from "@/src/hooks/useCategoryForm";
+import AddMediaContent from "@/src/modules/media/contents/AddMediaContent";
+import type { MediaItem } from "@/src/modules/media/mediaApi";
+import useCategory from "@/src/modules/category/hooks/useAddCategory";
+import {LOCALES} from "@/src/modules/category/hooks/useCategoryForm";
 
 const C = {
     bg: "#1a1d1e",

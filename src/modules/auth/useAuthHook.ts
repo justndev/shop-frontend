@@ -5,10 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next'
 import {useDispatch} from "react-redux";
 
-import { setUser, setInitialized, clearUser } from '@/src/store/slices/userSlice'
+import { setUser, clearUser } from '@/src/store/slices/userSlice'
 import authApi from '@/src/modules/auth/authApi'
-import {LoginFields} from "@/src/modules/auth/useLoginHook";
-import {validateEmail, validateLogin, validateNewPassword, validatePassword} from "@/src/utils/validations";
+import {validateEmail, validateNewPassword} from "@/src/utils/validations";
 
 
 export interface AuthErrors {
@@ -30,26 +29,17 @@ export function useAuthHook() {
   const router = useRouter()
   const { t } = useTranslation()
 
-  const [errors, setErrors] = useState<AuthErrors>({verifyEmail: null, verifyMagicLink: null});
-  const [loadings, setLoadings] = useState<AuthLoadings>({verifyEmail: false, verifyMagicLink: false});
+  const [errors, setErrors] = useState<AuthErrors>({
+    forgotPassword: null,
+    resetPassword: null,
+    verifyEmail: null,
+    verifyMagicLink: null});
 
-  /**
-   * @deprecated Move to a top-level AuthProvider. Called once on app mount.
-   */
-  async function initializeAuth() {
-    if (!authApi.isAuthenticated()) {
-      dispatch(setInitialized());
-      return;
-    }
-    try {
-      const res = await authApi.getMe();
-      dispatch(setUser(res.data));
-    } catch {
-      authApi.clearTokens();
-    } finally {
-      dispatch(setInitialized());
-    }
-  }
+  const [loadings, setLoadings] = useState<AuthLoadings>({
+    forgotPassword: false,
+    resetPassword: false,
+    verifyEmail: false,
+    verifyMagicLink: false});
 
   async function handleLogout() {
     const refreshToken = authApi.getRefreshToken();
@@ -77,18 +67,6 @@ export function useAuthHook() {
     } finally {
       setLoadings(prev => ({ ...prev, verifyEmail: false }));
     }
-  }
-
-  function handleValidateEmail(email: string): boolean {
-    const result = validateEmail(email, t);
-    setErrors(prev => ({ ...prev, email: result }));
-    return !result;
-  }
-
-  function handleValidatePassword(password: string): boolean {
-    const result = validateNewPassword(password, t);
-    setErrors(prev => ({ ...prev, email: result }));
-    return !result;
   }
 
   async function handleForgotPassword(email: string) {
@@ -137,8 +115,19 @@ export function useAuthHook() {
     }
   }
 
+  function handleValidateEmail(email: string): boolean {
+    const result = validateEmail(email, t);
+    setErrors(prev => ({ ...prev, email: result }));
+    return !result;
+  }
+
+  function handleValidatePassword(password: string): boolean {
+    const result = validateNewPassword(password, t);
+    setErrors(prev => ({ ...prev, email: result }));
+    return !result;
+  }
+
   return {
-    initializeAuth,
     handleLogout,
     handleVerifyEmail,
     handleForgotPassword,

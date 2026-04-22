@@ -3,7 +3,7 @@
 import { useTranslation } from 'react-i18next';
 import {Typography, Skeleton, CircularProgress} from '@mui/material';
 import OrderCard from '@/src/modules/profile/components/OrderCard';
-import {useOrdersHook} from "@/src/hooks/useOrderHook";
+import {useOrdersHook} from "@/src/modules/profile/useOrderHook";
 
 export default function OrdersSection() {
     const { t } = useTranslation();

@@ -1,8 +1,8 @@
 import {Typography} from "@mui/material";
 import {Trans, useTranslation} from "react-i18next";
-import ProductCarousel from "@/src/modules/landing/productCarousel/ProductCarousel";
+import ProductCarousel from "@/src/modules/landing/productsCarousel/ProductCarousel";
 import {useEffect, useState} from "react";
-import productsApi from "@/src/api/productsApi";
+import productApi from "@/src/api/productApi";
 
 
 
@@ -14,7 +14,7 @@ export default function OurProducts() {
         console.log('OurProducts Page rendered')
 
         async function fetchProducts() {
-            const responseData = await productsApi.getAll();
+            const responseData = await productApi.getAll();
             setProducts(responseData.data);
         }
 

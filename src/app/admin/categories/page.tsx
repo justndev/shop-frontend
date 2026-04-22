@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import {useCategoryList} from "@/src/hooks/useCategoryList";
+import {useCategoryList} from "@/src/modules/category/hooks/useCategoryList";
 import CategoryHeader from "@/src/modules/category/CategoryHeader";
 import {C} from "@/src/utils/customColors";
 import {CategoryCard} from "@/src/modules/landing/Categories";

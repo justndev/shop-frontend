@@ -17,17 +17,14 @@ import {Menu, ShoppingCart, User, X} from "lucide-react";
 import {useDispatch} from "react-redux";
 import {toggleCart} from "@/src/store/slices/cartSlice";
 import LanguageDropdown from "@/src/shared/ui/LanguageDropdown";
-import {useRouter} from "next/navigation";
 
 const NAV_LINKS = [
     {label: 'header.nav.shop', href: '/catalog/shu-puer'},
-    // {label: 'header.nav.blog', href: '/blog'},
     {label: 'header.nav.about', href: '/about'},
     {label: 'header.nav.contact', href: '/contact'},
 ];
 
 export default function Header() {
-    const router = useRouter();
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const [scrollbarWidth, setScrollbarWidth] = useState(0);
@@ -41,10 +38,6 @@ export default function Header() {
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
-
-    function goToAccount() {
-        router.push('/account')
-    }
 
     useEffect(() => {
         const onResize = () => {
@@ -93,10 +86,12 @@ export default function Header() {
 
                         <div className="flex items-center justify-end gap-1">
                             <LanguageDropdown />
+                            <Link href={'/account'}>
+                                <IconButton size="small" sx={{color: '#ffffff'}}>
+                                    <User size={20} strokeWidth={1.5}/>
+                                </IconButton>
+                            </Link>
 
-                            <IconButton size="small" sx={{color: '#ffffff'}} onClick={goToAccount}>
-                                <User size={20} strokeWidth={1.5}/>
-                            </IconButton>
                             <IconButton size="small" sx={{color: '#ffffff'}} onClick={handleToggleCart}>
                                 <Badge badgeContent={0}>
                                     <ShoppingCart size={20} strokeWidth={1.5}/>

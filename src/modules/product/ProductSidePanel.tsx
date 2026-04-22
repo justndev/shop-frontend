@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import {ProductFormState} from "@/src/modules/product/useAddProduct";
-import categoryApi from "@/src/api/categoryApi";
+import categoryApi from "@/src/modules/category/categoryApi";
 import {Category} from "@/src/types";
 
 const C = {

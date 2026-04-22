@@ -142,7 +142,7 @@ export function useAddProduct(existingProductId?: string) {
             try {
                 const product = await productApi.getById(existingProductId)
                 console.log('Fetched product:', product)
-                console.log('Fetched tags:', product.tags)
+                console.log('Fetched tag:', product.tags)
 
 
                 // Convert API response to form state
