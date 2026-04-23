@@ -2,7 +2,7 @@ import {Typography} from "@mui/material";
 import {Trans, useTranslation} from "react-i18next";
 import ProductCarousel from "@/src/modules/landing/productsCarousel/ProductCarousel";
 import {useEffect, useState} from "react";
-import productApi from "@/src/api/productApi";
+import productApi from "@/src/lib/productApi";
 
 
 

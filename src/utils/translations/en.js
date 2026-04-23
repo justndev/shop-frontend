@@ -5,6 +5,28 @@ export const LOCALES= [
 ];
 
 export const en = {
+    contact: {
+        info_heading: "Contact Information",
+        badge: "Get in touch",
+        heading: "Contact Us",
+        subheading:
+            "Have a question or a proposal? We'd love to hear from you.",
+        email_label: "Email",
+        telegram_label: "Telegram",
+        business_label: "Business",
+        form_heading: "Send a Message",
+        field_name: "Your name",
+        field_email: "Your email",
+        field_subject: "Subject",
+        field_message: "Message",
+        submit: "Send Message",
+        success_title: "Message sent!",
+        success_body:
+            "Thank you for reaching out. We'll get back to you shortly.",
+        send_another: "Send another",
+        required: "This field is required",
+        invalid_email: "Enter a valid email address",
+    },
     dev: {
       tea: 'Tea'
     },
@@ -13,7 +35,12 @@ export const en = {
         noProducts: "No products found",
         prev: "Prev",
         next: "Next",
-        pageOf: "{{page}} / {{totalPages}}"
+        pageOf: "{{page}} / {{totalPages}}",
+        options: {
+            new: "New",
+            cheap: "Cheap",
+            expensive: "Expensive"
+        }
     },
     categories: {
         "shu-puer": "Shu Puer",
@@ -78,15 +105,15 @@ export const en = {
         },
     },
     cart: {
-        title: 'Your shopping cart',
+        title: 'Cart',
         item: 'item',
         items: 'items',
-        'col-product': 'Product',
-        'col-total': 'Total',
+        col_product: 'Product',
+        col_total: 'Total',
         empty: 'Your cart is empty.',
-        'estimated-total': 'Estimated total',
-        'tax-note': 'Tax included. Shipping calculated at checkout.',
-        'proceed-to-payment': 'Proceed to payment',
+        estimated_total: 'Estimated total',
+        tax_note: 'Tax included. Shipping calculated at checkout.',
+        proceed_to_payment: 'Proceed to payment',
     },
     legal: {
         'privacy-policy': {

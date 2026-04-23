@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useTranslation } from "react-i18next";
 
-import productApi from "@/src/api/productApi";
+import productApi from "@/src/lib/productApi";
 import ComplexProductCard from "@/src/modules/product/ComplexProductCard";
 
 export default function CatalogPage() {

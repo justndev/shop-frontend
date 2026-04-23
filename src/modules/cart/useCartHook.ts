@@ -1,56 +1,51 @@
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../store"
+import { RootState } from "@/src/store"
 import {
-  addItem as addItemAction,
-  removeItem as removeItemAction,
-  updateQuantity as updateQuantityAction,
-  clearCart as clearCartAction, closeCart,
+  addItem,
+  removeItem,
+  updateQuantity,
+  clearCart,
+  CartItem, toggleCart, closeCart, openCart
 } from "@/src/store/slices/cartSlice"
-import { CartItem } from "@/src/store/slices/cartSlice"
-import {useState} from "react";
+
 
 export default function useCartHook() {
   const dispatch = useDispatch();
+  const {items, isOpen} = useSelector((state: RootState) => state.cart)
 
-  const [showCart, setShowCart] = useState(false);
-
-  const items = useSelector((state: RootState) => state.cart.items)
-  // const isOpen = useSelector((state: RootState) => state.cart.isOpen)
-
-  function toggleShowCart() {
-    console.log('showCart', showCart)
-    setShowCart(!showCart)
+  function handleToggleShowCart() {
+    dispatch(toggleCart())
   }
 
-  function closeCart() {
-    setShowCart(false);
+  function handleCloseCart() {
+    dispatch(closeCart())
   }
 
-  function addItem(item: CartItem) {
-    dispatch(addItemAction(item));
-    setShowCart(true);
+  function handleAddItem(item: CartItem) {
+    dispatch(addItem(item));
+    dispatch(openCart())
   }
 
-  function removeItem(id: string) {
-    dispatch(removeItemAction(id))
+  function handleRemoveItem(id: string) {
+    dispatch(removeItem(id))
   }
 
-  function updateQuantity(id: string, quantity: number) {
-    dispatch(updateQuantityAction({ id, quantity }))
+  function handleUpdateQuantity(id: string, quantity: number) {
+    dispatch(updateQuantity({ id, quantity }))
   }
 
-  function clearCart() {
-    dispatch(clearCartAction())
+  function handleClearCart() {
+    dispatch(clearCart())
   }
 
   return {
     items,
-    toggleShowCart,
-    closeCart,
-    showCart,
-    addItem,
-    removeItem,
-    updateQuantity,
-    clearCart,
+    handleToggleShowCart,
+    handleCloseCart,
+    handleAddItem,
+    handleRemoveItem,
+    handleUpdateQuantity,
+    handleClearCart,
+    isOpen,
   }
 }

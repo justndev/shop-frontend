@@ -3,14 +3,13 @@
 import { Checkbox, FormControlLabel, MenuItem, Select, Typography } from "@mui/material";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import {useTranslation} from "react-i18next";
 
-const SORT_OPTIONS = [
-    { value: "new",       label: "Newest first" },
-    { value: "cheap",     label: "Price: low to high" },
-    { value: "expensive", label: "Price: high to low" },
-];
+
+const SORT_OPTIONS = ["new", "cheap", "expensive"];
 
 export default function FiltersBar() {
+    const {t} = useTranslation();
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -22,7 +21,7 @@ export default function FiltersBar() {
         (key: string, value: string | null) => {
             const params = new URLSearchParams(searchParams.toString());
             if (value === null || value === "new" || value === "false") {
-                params.delete(key); // keep URL clean when value is default
+                params.delete(key);
             } else {
                 params.set(key, value);
             }
@@ -31,9 +30,10 @@ export default function FiltersBar() {
         [router, pathname, searchParams]
     );
 
-    return (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 8, marginBottom: 20 }}>
 
+    return (
+        // <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 8, marginBottom: 20 }}>
+            <div className='flex items-center justify-end gap-2 mb-8'>
             <FormControlLabel
                 control={
                     <Checkbox
@@ -57,8 +57,8 @@ export default function FiltersBar() {
                 }}
             >
                 {SORT_OPTIONS.map(opt => (
-                    <MenuItem key={opt.value} value={opt.value} sx={{ fontSize: '0.85rem' }}>
-                        {opt.label}
+                    <MenuItem key={opt} value={opt} sx={{ fontSize: '0.85rem' }}>
+                        {t(`catalog.options.${opt}`)}
                     </MenuItem>
                 ))}
             </Select>

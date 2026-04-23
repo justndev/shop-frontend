@@ -56,12 +56,12 @@ apiClient.interceptors.response.use(
       if (!refreshToken) {
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
-        if (typeof window !== 'undefined') window.location.href = '/login';
+        // if (typeof window !== 'undefined') window.location.href = '/login';
         return Promise.reject(error);
       }
 
       try {
-        const { data } = await axios.post(`${API_URL}/auth/refresh`, { refreshToken });
+        const { data } = await axios.post(`${BACKEND_API_URL}/auth/refresh`, { refreshToken });
         Cookies.set('accessToken', data.data.accessToken, { expires: 1 / 24 });
         Cookies.set('refreshToken', data.data.refreshToken, { expires: 7 });
         apiClient.defaults.headers.common.Authorization = `Bearer ${data.data.accessToken}`;
@@ -72,7 +72,7 @@ apiClient.interceptors.response.use(
         processQueue(err, null);
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
-        if (typeof window !== 'undefined') window.location.href = '/login';
+        // if (typeof window !== 'undefined') window.location.href = '/login';
         return Promise.reject(err);
       } finally {
         isRefreshing = false;

@@ -34,6 +34,7 @@ export interface Product {
   price: number;
   salePrice: number | null;
   stockStatus: StockStatus;
+  stock: number;
   images: string[];
   thumbnails: string[];
   category: Category;

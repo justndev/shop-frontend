@@ -1,4 +1,4 @@
-import apiClient from '../lib/apiClient'
+import apiClient from './apiClient'
 import { Product, StockStatus, TranslatedStrings } from "@/src/utils/types";
 import {useTranslation} from "react-i18next";
 import {usePathname} from "next/navigation";

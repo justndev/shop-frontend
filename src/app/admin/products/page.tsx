@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
-import productApi, { Product, ProductListParams } from "@/src/api/productApi";
+import productApi, { Product, ProductListParams } from "@/src/lib/productApi";
 import categoryApi from "@/src/modules/category/categoryApi";
 import {Category} from "@/src/types";
 

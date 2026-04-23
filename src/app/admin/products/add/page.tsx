@@ -4,7 +4,7 @@ import RichTextEditor from "@/src/modules/product/RichTextEditor";
 import ProductDataPanel from "@/src/modules/product/ProductDataPanel";
 import ProductPublishPanel from "@/src/modules/product/ProductPublishPanel";
 import ProductImagesPanel from "@/src/modules/product/ProductImagePanel";
-import { Product } from "@/src/api/productApi";
+import { Product } from "@/src/lib/productApi";
 import { useAddProduct, LOCALES, Locale } from "@/src/modules/product/useAddProduct";
 import ProductCategoriesPanel from "@/src/modules/product/ProductSidePanel";
 import ProductTagsPanel from "@/src/modules/product/ProductTags";

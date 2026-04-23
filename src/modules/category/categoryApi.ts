@@ -1,5 +1,5 @@
 import apiClient from '../../lib/apiClient'
-import {Category, TranslatedStrings} from '@/src/types'
+import {Category, TranslatedStrings} from '@/src/utils/types'
 
 export interface CreateCategoryPayload {
   name: TranslatedStrings;
@@ -35,4 +35,4 @@ const categoryApi = {
   }
 }
 
-export default categoryApi
+export default categoryApi;

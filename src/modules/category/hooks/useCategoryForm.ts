@@ -1,15 +1,11 @@
 // src/modules/category/useCategory.ts
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {Category} from "@/src/types";
-import categoryApi, {CreateCategoryPayload} from "@/src/modules/category/categoryApi";
 
-export type Locale = "en" | "ru" | "et";
-export const LOCALES: { code: Locale; label: string; flag: string }[] = [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "ru", label: "Russian", flag: "🇷🇺" },
-    { code: "et", label: "Estonian", flag: "🇪🇪" },
-];
+import categoryApi, {CreateCategoryPayload} from "@/src/modules/category/categoryApi";
+import {categoryToForm, toSlug} from "@/src/utils/functions";
+import {Category, Locale} from "@/src/utils/types";
+
 
 export interface CategoryFormState {
     name: Record<Locale, string>;
@@ -20,23 +16,6 @@ export interface CategoryFormState {
 export interface CategoryFormErrors {
     name?: string;
     slug?: string;
-}
-
-function toSlug(str: string) {
-    return str.toLowerCase().trim().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
-}
-
-function categoryToForm(cat: Category): CategoryFormState {
-    console.log("categoryToForm", cat);
-    return {
-        name: {
-            en: (cat.name as any).en ?? "",
-            ru: (cat.name as any).ru ?? "",
-            et: (cat.name as any).et ?? "",
-        },
-        slug: cat.slug,
-        image: cat.image ?? "",
-    };
 }
 
 export default function useCategoryForm(existing?: Category) {
@@ -58,6 +37,27 @@ export default function useCategoryForm(existing?: Category) {
             setSlugLocked(true);
         }
     }, [existing?.id]);
+
+    async function handleSubmit() {
+        if (!validate()) return;
+        setSaveStatus("saving");
+        try {
+            const payload: CreateCategoryPayload = {
+                name: form.name,
+                slug: form.slug,
+                image: form.image || undefined,
+            };
+            if (isEditing && existing) {
+                await categoryApi.update(existing.id, payload);
+            } else {
+                await categoryApi.create(payload);
+            }
+            setSaveStatus("saved");
+            setTimeout(() => router.push("/admin/categories"), 800);
+        } catch {
+            setSaveStatus("error");
+        }
+    }
 
     function setName(locale: Locale, value: string) {
         setForm((prev) => {
@@ -85,27 +85,6 @@ export default function useCategoryForm(existing?: Category) {
         else if (!/^[a-z0-9-]+$/.test(form.slug)) errs.slug = "Only lowercase letters, numbers, and hyphens";
         setErrors(errs);
         return Object.keys(errs).length === 0;
-    }
-
-    async function handleSubmit() {
-        if (!validate()) return;
-        setSaveStatus("saving");
-        try {
-            const payload: CreateCategoryPayload = {
-                name: form.name,
-                slug: form.slug,
-                image: form.image || undefined,
-            };
-            if (isEditing && existing) {
-                await categoryApi.update(existing.id, payload);
-            } else {
-                await categoryApi.create(payload);
-            }
-            setSaveStatus("saved");
-            setTimeout(() => router.push("/admin/categories"), 800);
-        } catch {
-            setSaveStatus("error");
-        }
     }
 
     return {

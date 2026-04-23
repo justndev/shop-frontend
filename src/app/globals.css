@@ -94,6 +94,11 @@
     --swamp-green-dark: #08120C;
     --green-pale: #1a3c2e;
     --white-dim: #FCFCFC;
+    --beige: #faf9f7;
+    --beige-dark: #d8d4cc;
+
+    --beige-grey: #888880;
+    --grey-light: #b8b5aa;
 }
 
 .dark {

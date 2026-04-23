@@ -17,6 +17,7 @@ import {Menu, ShoppingCart, User, X} from "lucide-react";
 import {useDispatch} from "react-redux";
 import {toggleCart} from "@/src/store/slices/cartSlice";
 import LanguageDropdown from "@/src/shared/ui/LanguageDropdown";
+import useCartHook from "@/src/modules/cart/useCartHook";
 
 const NAV_LINKS = [
     {label: 'header.nav.shop', href: '/catalog/shu-puer'},
@@ -25,15 +26,11 @@ const NAV_LINKS = [
 ];
 
 export default function Header() {
-    const { t } = useTranslation();
-    const dispatch = useDispatch();
+    const {t} = useTranslation();
+    const { handleToggleShowCart } = useCartHook();
     const [scrollbarWidth, setScrollbarWidth] = useState(0);
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<HTMLButtonElement>(null);
-
-    function handleToggleCart() {
-        dispatch(toggleCart());
-    }
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
@@ -60,21 +57,21 @@ export default function Header() {
             const bodyPad = parseInt(document.body.style.paddingRight || '0', 10);
             setScrollbarWidth(bodyPad);
         });
-        observer.observe(document.body, { attributes: true, attributeFilter: ['style'] });
+        observer.observe(document.body, {attributes: true, attributeFilter: ['style']});
         return () => observer.disconnect();
     }, [])
 
     return (
         <ClickAwayListener onClickAway={() => setOpen(false)}>
             <header className="fixed top-0 left-0 right-0 z-50 flex flex-col"
-                    style={{ paddingRight: scrollbarWidth }}
+                    style={{paddingRight: scrollbarWidth}}
 
             >
                 <SmallHeader/>
 
                 <div className="bg-[#193028] border-b-1 border-[#374a43] shadow-sm">
                     <div className="max-w-375 mx-auto px-4 h-16 grid md:grid-cols-3 grid-cols-2 items-center gap-6">
-                        <Logo />
+                        <Logo/>
 
                         <nav className="hidden md:flex items-center justify-center gap-6 text-nowrap">
                             {NAV_LINKS.map(({label, href}) => (
@@ -85,14 +82,14 @@ export default function Header() {
                         </nav>
 
                         <div className="flex items-center justify-end gap-1">
-                            <LanguageDropdown />
+                            <LanguageDropdown/>
                             <Link href={'/account'}>
                                 <IconButton size="small" sx={{color: '#ffffff'}}>
                                     <User size={20} strokeWidth={1.5}/>
                                 </IconButton>
                             </Link>
 
-                            <IconButton size="small" sx={{color: '#ffffff'}} onClick={handleToggleCart}>
+                            <IconButton size="small" sx={{color: '#ffffff'}} onClick={handleToggleShowCart}>
                                 <Badge badgeContent={0}>
                                     <ShoppingCart size={20} strokeWidth={1.5}/>
                                 </Badge>

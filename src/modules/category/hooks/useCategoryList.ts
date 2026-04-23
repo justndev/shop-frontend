@@ -1,14 +1,16 @@
 // src/modules/category/useCategoryList.ts
 import { useState, useEffect, useCallback } from "react";
+
 import categoryApi from "@/src/modules/category/categoryApi";
-import {Alert, AlertType, Category} from "@/src/types";
+
+import {Alert, Category} from "@/src/utils/types";
 import {AxiosError} from "axios";
+
 
 export function useCategoryList() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const [categoryAlert, setCategoryAlert] = useState<Alert | null>(null);
-    const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -29,11 +31,6 @@ export function useCategoryList() {
     useEffect(() => { load(); }, [load]);
 
     async function handleDelete(id: string) {
-        setShowDeleteDialog(true);
-        setCategoryAlert(null)
-    }
-
-    async function handleDeleteConfirm(id: string) {
         setCategoryAlert(null);
 
         try {

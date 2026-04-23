@@ -1,307 +1,160 @@
 'use client';
 
-import { useTranslation } from 'react-i18next';
-import { Drawer, IconButton, Divider, Button } from '@mui/material';
-import { X, Trash2, Plus, Minus } from 'lucide-react';
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/src/store";
+import {useTranslation} from 'react-i18next';
 import {removeItem, toggleCart, updateQuantity} from "@/src/store/slices/cartSlice";
 import {getThumbnailUrl} from "@/src/utils/functions";
-
+import {Drawer, IconButton, Divider, Button} from '@mui/material';
+import {X, Trash2, Plus, Minus} from 'lucide-react';
+import {RootState} from "@/src/store";
+import {useEffect, useRef} from "react";
+import useCartHook from "@/src/modules/cart/useCartHook";
 
 export default function CartSidebar() {
-  const { t, i18n } = useTranslation();
-  const dispatch = useDispatch();
-  const { items, isOpen } = useSelector((state: RootState) => state.cart);
+  const {t, i18n} = useTranslation();
 
-  function handleToggleCart() {
-    dispatch(toggleCart());
-  }
+  const {
+    items,
+    handleToggleShowCart,
+    handleCloseCart,
+    handleAddItem,
+    handleRemoveItem,
+    handleUpdateQuantity,
+    handleClearCart,
+    isOpen,
+  } = useCartHook();
 
-  function handleUpdateQuantity(id: string, quantity: number) {
-    dispatch(updateQuantity({id, quantity}));
-  }
-
-  function handleRemoveItem(id: string) {
-    dispatch(removeItem(id));
-  }
-
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
       <Drawer
           anchor="right"
           open={isOpen}
-          onClose={handleToggleCart}
+          onClose={handleCloseCart}
           PaperProps={{
             sx: {
-              width: { xs: '100vw', sm: 420 },
-              background: '#faf9f7',
+              width: {xs: '100vw', sm: 420},
+              background: 'var(--beige)',
               display: 'flex',
               flexDirection: 'column',
-              borderLeft: '0.5px solid #d8d4cc',
-              boxShadow: '-8px 0 40px rgba(0,0,0,0.08)',
+              borderLeft: '0.5px solid var(--beige-dark)',
             },
           }}
       >
         {/* Header */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '20px 24px',
-          borderBottom: '0.5px solid #e0ddd6',
-        }}>
+        <div className="flex items-center justify-between px-6 py-5 border-b border-grey">
           <div>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 700,
-              fontSize: '1.15rem',
-              color: '#1a1a14',
-              margin: 0,
-              letterSpacing: '-0.01em',
-            }}>
+            <p className="font-bold text-[1.15rem] text-[#1a1a14] m-0 tracking-[-0.01em]"
+               style={{fontFamily: "'DM Sans', sans-serif"}}>
               {t('cart.title')}
             </p>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '0.8rem',
-              color: '#888880',
-              margin: '2px 0 0',
-            }}>
-              {items.length} {items.length === 1
-                ? t('cart.item', 'item')
-                : t('cart.items', 'items')}
+            <p className="text-[0.8rem] text-(--beige-grey) m-0 mt-[2px]"
+               style={{fontFamily: "'DM Sans', sans-serif"}}>
+              {items.length} {items.length === 1 ? t('cart.item') : t('cart.items')}
             </p>
           </div>
           <IconButton
-              onClick={handleToggleCart}
+              onClick={handleToggleShowCart}
               size="small"
-              sx={{
-                color: '#4a4a42',
-                '&:hover': { background: '#f0ede6' },
-              }}
           >
-            <X size={20} />
+            <X size={20}/>
           </IconButton>
         </div>
 
         {/* Column headers */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr auto',
-          padding: '10px 24px',
-          borderBottom: '0.5px solid #e0ddd6',
-        }}>
-          <span style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '0.7rem',
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#888880',
-          }}>
-            {t('cart.col_product', 'Product')}
-          </span>
-          <span style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '0.7rem',
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#888880',
-          }}>
-            {t('cart.col_total', 'Total')}
-          </span>
+        <div className="grid px-6 py-[10px] border-b border-grey" style={{gridTemplateColumns: '1fr auto'}}>
+                <a className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-(--beige-grey)"
+                      style={{fontFamily: "'DM Sans', sans-serif"}}>
+                    {t('cart.col_product')}
+                </a>
+          <span className="text-[0.7rem] font-semibold tracking-[0.1em] uppercase text-(--beige-grey)"
+                style={{fontFamily: "'DM Sans', sans-serif"}}>
+                    {t('cart.col_total')}
+                </span>
         </div>
 
         {/* Items */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '8px 0' }}>
+        <div className="flex-1 overflow-y-auto py-2">
           {items.length === 0 ? (
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100%',
-                padding: '48px 24px',
-                gap: 12,
-              }}>
-                <p style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '0.95rem',
-                  color: '#888880',
-                  margin: 0,
-                  textAlign: 'center',
-                }}>
-                  {t('cart.empty', 'Your cart is empty.')}
+              <div className="flex flex-col items-center justify-center h-full px-6 py-12 gap-3">
+                <p className="text-[0.95rem] text-(--beige-grey) m-0 text-center"
+                   style={{fontFamily: "'DM Sans', sans-serif"}}>
+                  {t('cart.empty')}
                 </p>
               </div>
           ) : (
               items.map((item, index) => (
-                  <div key={item.id}>
-                    <div style={{
-                      display: 'grid',
-                      gridTemplateColumns: '72px 1fr auto',
-                      gap: 16,
-                      padding: '16px 24px',
-                      alignItems: 'start',
-                    }}>
+                  <div key={item.product.id}>
+                    <div className="grid gap-4 px-6 py-4 items-start"
+                         style={{gridTemplateColumns: '72px 1fr auto'}}>
+
                       {/* Image */}
-                      <div style={{
-                        width: 72,
-                        height: 72,
-                        background: '#ffffff',
-                        border: '0.5px solid #e0ddd6',
-                        borderRadius: 8,
-                        overflow: 'hidden',
-                        flexShrink: 0,
-                        position: 'relative',
-                      }}>
+                      <div className="w-[72px] h-[72px] bg-white border border-[#e0ddd6] rounded-lg overflow-hidden flex-shrink-0 relative">
                         <img
-                            src={getThumbnailUrl(item.images[0])}
-                            alt={item.name}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'cover',
-                            }}
+                            src={getThumbnailUrl(item.product.images[0])}
+                            alt={item.product.name[i18n.language]}
+                            className="w-full h-full object-cover"
                         />
                       </div>
 
                       {/* Info + qty controls */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                        <p style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontWeight: 500,
-                          fontSize: '0.9rem',
-                          color: '#1a1a14',
-                          margin: 0,
-                          lineHeight: 1.3,
-                        }}>
-                          {item.name[i18n.language]}
+                      <div className="flex flex-col gap-2">
+                        <p className="font-medium text-[0.9rem] text-[#1a1a14] m-0 leading-[1.3]"
+                           style={{fontFamily: "'DM Sans', sans-serif"}}>
+                          {item.product.name[i18n.language]}
                         </p>
 
-                        {item.variant && (
-                            <p style={{
-                              fontFamily: "'DM Sans', sans-serif",
-                              fontSize: '0.78rem',
-                              color: '#888880',
-                              margin: 0,
-                            }}>
-                              {item.variant}
-                            </p>
-                        )}
-
-                        <p style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontSize: '0.82rem',
-                          color: '#6b6b5e',
-                          margin: 0,
-                        }}>
-                          {item.price}€
+                        <p className="text-[0.82rem] text-[#6b6b5e] m-0"
+                           style={{fontFamily: "'DM Sans', sans-serif"}}>
+                          {item.product.price}€
                         </p>
 
                         {/* Qty stepper */}
-                        <div style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          border: '0.5px solid #d8d4cc',
-                          borderRadius: 6,
-                          overflow: 'hidden',
-                          width: 'fit-content',
-                          background: '#fff',
-                        }}>
+                        <div className="inline-flex items-center border border-[#d8d4cc] rounded-md overflow-hidden w-fit bg-white">
                           <button
-                              onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
-                              style={{
-                                width: 32,
-                                height: 32,
-                                border: 'none',
-                                background: 'transparent',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: '#4a4a42',
-                                transition: 'background 0.15s',
-                              }}
-                              onMouseEnter={e => (e.currentTarget.style.background = '#f5f2ec')}
-                              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                              className="w-8 h-8 border-none bg-transparent cursor-pointer flex items-center justify-center text-[#4a4a42] transition-colors duration-150 hover:bg-[#f5f2ec]"
                           >
-                            <Minus size={13} />
+                            <Minus size={13}/>
                           </button>
 
-                          <span style={{
-                            fontFamily: "'DM Sans', sans-serif",
-                            fontSize: '0.85rem',
-                            fontWeight: 500,
-                            color: '#1a1a14',
-                            minWidth: 28,
-                            textAlign: 'center',
-                            borderLeft: '0.5px solid #e0ddd6',
-                            borderRight: '0.5px solid #e0ddd6',
-                            lineHeight: '32px',
-                          }}>
-                            {item.quantity}
-                          </span>
+                          <span
+                              className="text-[0.85rem] font-medium text-[#1a1a14] min-w-[28px] text-center border-l border-r border-[#e0ddd6] leading-8"
+                              style={{fontFamily: "'DM Sans', sans-serif"}}>
+                                            {item.quantity}
+                                        </span>
 
                           <button
-                              onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
-                              style={{
-                                width: 32,
-                                height: 32,
-                                border: 'none',
-                                background: 'transparent',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: '#4a4a42',
-                                transition: 'background 0.15s',
-                              }}
-                              onMouseEnter={e => (e.currentTarget.style.background = '#f5f2ec')}
-                              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                              className="w-8 h-8 border-none bg-transparent cursor-pointer flex items-center justify-center text-[#4a4a42] transition-colors duration-150 hover:bg-[#f5f2ec]"
                           >
-                            <Plus size={13} />
+                            <Plus size={13}/>
                           </button>
                         </div>
                       </div>
 
                       {/* Line total + remove */}
-                      <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-end',
-                        gap: 8,
-                      }}>
-                        <p style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontWeight: 700,
-                          fontSize: '0.95rem',
-                          color: '#1a3c2e',
-                          margin: 0,
-                          whiteSpace: 'nowrap',
-                        }}>
-                          {(item.price * item.quantity).toFixed(2)}€
+                      <div className="flex flex-col items-end gap-2">
+                        <p className="font-bold text-[0.95rem] text-[#1a3c2e] m-0 whitespace-nowrap"
+                           style={{fontFamily: "'DM Sans', sans-serif"}}>
+                          {(item.product.price * item.quantity).toFixed(2)}€
                         </p>
-
                         <IconButton
-                            onClick={() => handleRemoveItem(item.id)}
+                            onClick={() => removeItem(item.product.id)}
                             size="small"
                             sx={{
                               color: '#b0a898',
                               p: '4px',
-                              '&:hover': { color: '#c0392b', background: 'transparent' },
+                              '&:hover': {color: '#c0392b', background: 'transparent'},
                             }}
                         >
-                          <Trash2 size={15} />
+                          <Trash2 size={15}/>
                         </IconButton>
                       </div>
                     </div>
 
                     {index < items.length - 1 && (
-                        <Divider sx={{ borderColor: '#f0ede6', mx: '24px' }} />
+                        <Divider sx={{borderColor: '#f0ede6', mx: '24px'}}/>
                     )}
                   </div>
               ))
@@ -310,47 +163,21 @@ export default function CartSidebar() {
 
         {/* Footer */}
         {items.length > 0 && (
-            <div style={{
-              borderTop: '0.5px solid #e0ddd6',
-              padding: '20px 24px 24px',
-              background: '#faf9f7',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 16,
-            }}>
+            <div className="border-t border-[#e0ddd6] px-6 pt-5 pb-6 bg-[#faf9f7] flex flex-col gap-4">
               <div>
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'baseline',
-                  marginBottom: 4,
-                }}>
-                  <span style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontWeight: 500,
-                    fontSize: '0.95rem',
-                    color: '#1a1a14',
-                  }}>
-                    {t('cart.estimated_total', 'Estimated total')}
-                  </span>
-                  <span style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontWeight: 700,
-                    fontSize: '1.2rem',
-                    color: '#1a3c2e',
-                    letterSpacing: '-0.01em',
-                  }}>
-                    €{total.toFixed(2)}
-                  </span>
+                <div className="flex justify-between items-baseline mb-1">
+                            <span className="font-medium text-[0.95rem] text-[#1a1a14]"
+                                  style={{fontFamily: "'DM Sans', sans-serif"}}>
+                                {t('cart.estimated_total')}
+                            </span>
+                  <span className="font-bold text-[1.2rem] text-[#1a3c2e] tracking-[-0.01em]"
+                        style={{fontFamily: "'DM Sans', sans-serif"}}>
+                                €{total.toFixed(2)}
+                            </span>
                 </div>
-                <p style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '0.75rem',
-                  color: '#888880',
-                  margin: 0,
-                  lineHeight: 1.5,
-                }}>
-                  {t('cart.tax_note', 'Tax included. Shipping calculated at checkout.')}
+                <p className="text-[0.75rem] text-(--beige-grey) m-0 leading-[1.5]"
+                   style={{fontFamily: "'DM Sans', sans-serif"}}>
+                  {t('cart.tax_note')}
                 </p>
               </div>
 
@@ -368,13 +195,10 @@ export default function CartSidebar() {
                     borderRadius: '8px',
                     py: 1.5,
                     boxShadow: 'none',
-                    '&:hover': {
-                      backgroundColor: '#2d5c46',
-                      boxShadow: 'none',
-                    },
+                    '&:hover': {backgroundColor: '#2d5c46', boxShadow: 'none'},
                   }}
               >
-                {t('cart.proceed_to_payment', 'Proceed to payment')}
+                {t('cart.proceed_to_payment')}
               </Button>
             </div>
         )}

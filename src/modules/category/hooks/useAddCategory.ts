@@ -1,11 +1,10 @@
 // src/modules/category/useCategory.ts
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import categoryApi from "@/src/modules/category/categoryApi";
 import {CreateCategoryPayload } from "@/src/modules/category/categoryApi";
-import { useRouter } from "next/navigation";
-import {Category} from "@/src/types";
-
-export type Locale = "en" | "ru" | "et";
+import {Category, Locale} from "@/src/utils/types";
 
 
 export interface CategoryFormState {
@@ -55,6 +54,27 @@ export default function useCategory(existing?: Category) {
         }
     }, [existing?.id]);
 
+    async function handleSubmit() {
+        if (!validate()) return;
+        setSaveStatus("saving");
+        try {
+            const payload: CreateCategoryPayload = {
+                name: form.name,
+                slug: form.slug,
+                image: form.image || undefined,
+            };
+            if (isEditing && existing) {
+                await categoryApi.update(existing.id, payload);
+            } else {
+                await categoryApi.create(payload);
+            }
+            setSaveStatus("saved");
+            setTimeout(() => router.push("/admin/categories"), 800);
+        } catch {
+            setSaveStatus("error");
+        }
+    }
+
     function setName(locale: Locale, value: string) {
         setForm((prev) => {
             const next = { ...prev, name: { ...prev.name, [locale]: value } };
@@ -81,27 +101,6 @@ export default function useCategory(existing?: Category) {
         else if (!/^[a-z0-9-]+$/.test(form.slug)) errs.slug = "Only lowercase letters, numbers, and hyphens";
         setErrors(errs);
         return Object.keys(errs).length === 0;
-    }
-
-    async function handleSubmit() {
-        if (!validate()) return;
-        setSaveStatus("saving");
-        try {
-            const payload: CreateCategoryPayload = {
-                name: form.name,
-                slug: form.slug,
-                image: form.image || undefined,
-            };
-            if (isEditing && existing) {
-                await categoryApi.update(existing.id, payload);
-            } else {
-                await categoryApi.create(payload);
-            }
-            setSaveStatus("saved");
-            setTimeout(() => router.push("/admin/categories"), 800);
-        } catch {
-            setSaveStatus("error");
-        }
     }
 
     return {

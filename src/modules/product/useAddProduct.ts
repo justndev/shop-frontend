@@ -6,7 +6,7 @@ import productApi, {
     CreateProductPayload,
     StockStatus,
     Product,
-} from '@/src/api/productApi'
+} from '@/src/lib/productApi'
 
 // ── TYPES ─────────────────────────────────────────────────────────────────────
 

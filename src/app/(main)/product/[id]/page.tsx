@@ -9,7 +9,7 @@ import BreadcrumbNav from "@/src/modules/product/BreadcrumbNav";
 import {addItem} from "@/src/store/slices/cartSlice";
 import {useDispatch} from "react-redux";
 import {Product} from "@/src/types";
-import productApi from "@/src/api/productApi";
+import productApi from "@/src/lib/productApi";
 import {usePathname} from "next/dist/client/components/navigation";
 import {useTranslation} from "react-i18next";
 
@@ -40,7 +40,7 @@ export default function ProductPage() {
     }, []);
 
     function addProductToCart() {
-        dispatch(addItem({...product, quantity}));
+        dispatch(addItem({product, quantity}));
     }
 
     const totalPrice = (product?.price || 0) * quantity;
@@ -222,7 +222,7 @@ export default function ProductPage() {
                         {product.tags.map(tag => (
                             <Chip
                                 key={tag}
-                                label={tag}
+                                label={tag[i18n.language]}
                                 size="small"
                                 sx={{
                                     background: 'transparent',
