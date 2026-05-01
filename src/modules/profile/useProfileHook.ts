@@ -8,7 +8,7 @@ import userApi from "@/src/modules/profile/userApi";
 import {setUser} from "@/src/store/slices/userSlice";
 import {validatePassword, validateProfileInfo} from "@/src/utils/validations";
 
-import {Alert} from "@/src/types";
+import {Alert} from "@/src/utils/types";
 import {RootState} from "@/src/store";
 
 

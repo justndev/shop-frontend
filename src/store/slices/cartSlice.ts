@@ -22,7 +22,10 @@ const cartSlice = createSlice({
     addItem(state, action: PayloadAction<CartItem>) {
       const existing = state.items.find(i => i.product.id === action.payload.product.id)
       if (existing) {
-        existing.quantity = Math.min(existing.quantity + action.payload.quantity, existing.product.stock)
+        const quantityToAdd  = existing.quantity + action.payload.quantity;
+
+        existing.quantity = quantityToAdd;
+
       } else {
         state.items.push(action.payload)
       }
@@ -32,7 +35,8 @@ const cartSlice = createSlice({
     },
     updateQuantity(state, action: PayloadAction<{ id: string; quantity: number }>) {
       const item = state.items.find(i => i.product.id === action.payload.id)
-      if (item) item.quantity = Math.max(1, Math.min(action.payload.quantity, item.product.stock))
+
+      if (item) item.quantity = Math.max(1, action.payload.quantity)
     },
     clearCart(state) {
       state.items = []

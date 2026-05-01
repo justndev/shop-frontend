@@ -21,7 +21,7 @@ export default function useCartHook() {
     dispatch(closeCart())
   }
 
-  function handleAddItem(item: CartItem) {
+  async function handleAddItem(item: CartItem) {
     dispatch(addItem(item));
     dispatch(openCart())
   }

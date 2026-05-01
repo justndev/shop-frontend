@@ -21,7 +21,7 @@ import useCartHook from "@/src/modules/cart/useCartHook";
 
 const NAV_LINKS = [
     {label: 'header.nav.shop', href: '/catalog/shu-puer'},
-    {label: 'header.nav.about', href: '/about'},
+    {label: 'header.nav.about', href: '/about-us'},
     {label: 'header.nav.contact', href: '/contact'},
 ];
 

@@ -1,17 +1,15 @@
 'use client';
 
-import {useDispatch, useSelector} from "react-redux";
 import {useTranslation} from 'react-i18next';
-import {removeItem, toggleCart, updateQuantity} from "@/src/store/slices/cartSlice";
 import {getThumbnailUrl} from "@/src/utils/functions";
 import {Drawer, IconButton, Divider, Button} from '@mui/material';
 import {X, Trash2, Plus, Minus} from 'lucide-react';
-import {RootState} from "@/src/store";
-import {useEffect, useRef} from "react";
 import useCartHook from "@/src/modules/cart/useCartHook";
+import {useRouter} from "next/navigation";
 
 export default function CartSidebar() {
   const {t, i18n} = useTranslation();
+  const router = useRouter();
 
   const {
     items,
@@ -25,6 +23,11 @@ export default function CartSidebar() {
   } = useCartHook();
 
   const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+
+  function proceedToPayment() {
+    router.push("/checkout");
+    handleCloseCart();
+  }
 
   return (
       <Drawer
@@ -112,7 +115,7 @@ export default function CartSidebar() {
                         {/* Qty stepper */}
                         <div className="inline-flex items-center border border-[#d8d4cc] rounded-md overflow-hidden w-fit bg-white">
                           <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                              onClick={() => handleUpdateQuantity(item.product.id, item.quantity - 1)}
                               className="w-8 h-8 border-none bg-transparent cursor-pointer flex items-center justify-center text-[#4a4a42] transition-colors duration-150 hover:bg-[#f5f2ec]"
                           >
                             <Minus size={13}/>
@@ -125,7 +128,7 @@ export default function CartSidebar() {
                                         </span>
 
                           <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                              onClick={() => handleUpdateQuantity(item.product.id, item.quantity + 1)}
                               className="w-8 h-8 border-none bg-transparent cursor-pointer flex items-center justify-center text-[#4a4a42] transition-colors duration-150 hover:bg-[#f5f2ec]"
                           >
                             <Plus size={13}/>
@@ -140,7 +143,7 @@ export default function CartSidebar() {
                           {(item.product.price * item.quantity).toFixed(2)}€
                         </p>
                         <IconButton
-                            onClick={() => removeItem(item.product.id)}
+                            onClick={() => handleRemoveItem(item.product.id)}
                             size="small"
                             sx={{
                               color: '#b0a898',
@@ -181,25 +184,26 @@ export default function CartSidebar() {
                 </p>
               </div>
 
-              <Button
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    backgroundColor: '#1a3c2e',
-                    color: '#fff',
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontWeight: 500,
-                    fontSize: '0.9rem',
-                    letterSpacing: '0.04em',
-                    textTransform: 'uppercase',
-                    borderRadius: '8px',
-                    py: 1.5,
-                    boxShadow: 'none',
-                    '&:hover': {backgroundColor: '#2d5c46', boxShadow: 'none'},
-                  }}
-              >
-                {t('cart.proceed_to_payment')}
-              </Button>
+                <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={proceedToPayment}
+                    sx={{
+                      backgroundColor: '#1a3c2e',
+                      color: '#fff',
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontWeight: 500,
+                      fontSize: '0.9rem',
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                      borderRadius: '8px',
+                      py: 1.5,
+                      boxShadow: 'none',
+                      '&:hover': {backgroundColor: '#2d5c46', boxShadow: 'none'},
+                    }}
+                >
+                  {t('cart.proceed_to_payment')}
+                </Button>
             </div>
         )}
       </Drawer>

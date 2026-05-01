@@ -6,16 +6,16 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import BreadcrumbNav from "@/src/modules/product/BreadcrumbNav";
-import {addItem} from "@/src/store/slices/cartSlice";
-import {useDispatch} from "react-redux";
-import {Product} from "@/src/types";
+import {Product} from "@/src/utils/types";
 import productApi from "@/src/lib/productApi";
 import {usePathname} from "next/dist/client/components/navigation";
 import {useTranslation} from "react-i18next";
+import useCartHook from "@/src/modules/cart/useCartHook";
+import { CartItem } from "@/src/store/slices/cartSlice";
 
 export default function ProductPage() {
-    const {i18n} = useTranslation();
-    const dispatch = useDispatch();
+    const {t, i18n} = useTranslation();
+    const {items, handleAddItem} = useCartHook();
     const path = usePathname();
 
     const productSlug = path.split('/').pop();
@@ -23,6 +23,7 @@ export default function ProductPage() {
     const [product, setProduct] = useState<Product>(null);
     const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const [currentQuantity, setCurrentQuantity] = useState(0);
     const [loading, setLoading] = useState(true);
 
     const descRef = useRef<HTMLDivElement>(null);
@@ -39,14 +40,25 @@ export default function ProductPage() {
         fetchProduct();
     }, []);
 
-    function addProductToCart() {
-        dispatch(addItem({product, quantity}));
+    useEffect(() => {
+        if (items && product) {
+            items.map((item: CartItem) => {
+                if (item.product.id === product.id) {
+                    setCurrentQuantity(item.quantity);
+                }
+            })
+        }
+    }, [items]);
+
+    function handleAddToCart() {
+        handleAddItem({product, quantity})
+        setQuantity(1);
     }
 
     const totalPrice = (product?.price || 0) * quantity;
 
-    if (loading) return <div>Loading...</div>;
-    if (!product) return <div>Product not found</div>;
+    if (loading) return <div>{t('product.loading')}</div>;
+    if (!product) return <div>{t('product.not_found')}</div>;
 
     return (
         <div style={{fontFamily: "'DM Sans', sans-serif"}}>
@@ -81,7 +93,6 @@ export default function ProductPage() {
                                     width: 72,
                                     height: 72,
                                     flexShrink: 0,
-                                    // Dynamic: active state border
                                     borderColor: i === selectedImage ? '#3d5c3a' : 'transparent',
                                     outline: i === selectedImage ? '2px solid #3d5c3a' : 'none',
                                     outlineOffset: '2px',
@@ -89,7 +100,7 @@ export default function ProductPage() {
                             >
                                 <img
                                     src={getThumbnailUrl(image)}
-                                    alt={`View ${i + 1}`}
+                                    alt={`${t('product.view')} ${i + 1}`}
                                     className="w-full h-full object-cover"
                                 />
                             </button>
@@ -108,7 +119,6 @@ export default function ProductPage() {
                         className="mb-3 leading-[1.15] text-[#1a1a18]"
                         style={{
                             fontFamily: "'DM Serif Display', serif",
-                            // Dynamic: clamp() not possible in Tailwind
                             fontSize: 'clamp(1.8rem, 3vw, 2.6rem)',
                         }}
                     >
@@ -137,7 +147,7 @@ export default function ProductPage() {
                     {/* Quantity */}
                     <div className="mb-6">
                         <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-[#6b6b60]">
-                            Quantity
+                            {t('product.quantity')}{currentQuantity !== 0 && <span> ({`${currentQuantity} ${t('product.in_basket')}`})</span>}
                         </p>
                         <div className="flex items-center gap-3">
                             <div
@@ -177,8 +187,8 @@ export default function ProductPage() {
 
                             <span className="text-sm">
                                 {product.stockStatus === 'IN_STOCK'
-                                    ? <span className="text-[#3d5c3a]">● In stock</span>
-                                    : <span className="text-[#c0392b]">● Out of stock</span>
+                                    ? <span className="text-[#3d5c3a]">● {t('product.in_stock')}</span>
+                                    : <span className="text-[#c0392b]">● {t('product.out_of_stock')}</span>
                                 }
                             </span>
                         </div>
@@ -187,7 +197,7 @@ export default function ProductPage() {
                     {/* CTA Button */}
                     <div className="flex flex-col gap-3 mb-6">
                         <Button
-                            onClick={addProductToCart}
+                            onClick={handleAddToCart}
                             fullWidth
                             variant="contained"
                             startIcon={<ShoppingCartOutlinedIcon/>}
@@ -210,7 +220,7 @@ export default function ProductPage() {
                                 },
                             }}
                         >
-                            Add to cart
+                            {t('product.add_to_cart')}
                         </Button>
                     </div>
 
@@ -235,7 +245,7 @@ export default function ProductPage() {
                         ))}
                     </div>
 
-                    {/* Long description — rich text needs global styles, minimal inline possible */}
+                    {/* Long description */}
                     <div
                         className="text-[#6b6b60] leading-[1.75]"
                         dangerouslySetInnerHTML={{__html: product.description[i18n.language]}}

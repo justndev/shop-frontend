@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import authApi from '@/src/modules/auth/authApi';
-import {validateRegister} from "@/src/utils/validations";
+import {hasErrors, validateRegister} from "@/src/utils/validations";
 import {Alert} from "@/src/utils/types";
 
 
@@ -62,10 +62,6 @@ export function useRegisterHook() {
         const result = validateRegister(fields, t);
         setErrors(result);
         return !hasErrors(result);
-    }
-
-    function hasErrors(errors: RegisterErrors): boolean {
-        return Object.values(errors).some(v => v !== null);
     }
 
     return {

@@ -4,7 +4,7 @@ import AddMediaContent from "@/src/modules/media/contents/AddMediaContent";
 
 
 export default function MediaManager() {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     return (
 

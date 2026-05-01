@@ -92,6 +92,10 @@
 
     --swamp-green: #193028;
     --swamp-green-dark: #08120C;
+
+    --footer-bg: #0e2218;
+    --mint-pale: #9ab5a8;
+
     --green-pale: #1a3c2e;
     --white-dim: #FCFCFC;
     --beige: #faf9f7;
@@ -99,6 +103,26 @@
 
     --beige-grey: #888880;
     --grey-light: #b8b5aa;
+    --coal: #1a1a14;
+    --beige-light: #f5f2ec;
+
+    /* Used for normal text in paragraphs */
+    --coal-bright: #4a4a42;
+
+    /* Used for Telegram icons in Contact */
+    --blue-sky: #0277bd;
+    --blue-light: #e3f2fd;
+}
+
+/* Animation used for sections in About Us page */
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .dark {

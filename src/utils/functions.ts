@@ -9,7 +9,7 @@ export function getThumbnailUrl(url: string) {
         .replace(/\.[^/.]+$/, '.jpg');
 }
 
-export function cutTitle(title: string, maxLength = 50): string {
+export function cutTitle(title: string, maxLength = 25): string {
     if (title.length <= maxLength) return title;
 
     const lastSpace = title.lastIndexOf(' ', maxLength);

@@ -71,10 +71,6 @@ const authApi = {
     Cookies.remove('refreshToken');
   },
 
-  isAuthenticated(): boolean {
-    return !!Cookies.get('accessToken') || !!Cookies.get('refreshToken');
-  },
-
   getRefreshToken(): string | undefined {
     return Cookies.get('refreshToken');
   },

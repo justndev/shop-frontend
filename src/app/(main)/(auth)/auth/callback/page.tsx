@@ -25,9 +25,7 @@ export default function AuthCallback() {
                 router.replace('/login?error=oauth_failed')
                 return
             }
-
-            Cookies.set('accessToken', accessToken);
-            Cookies.set('refreshToken', refreshToken);
+            authApi.saveTokens({accessToken, refreshToken})
 
             const meRes = await authApi.getMe();
             dispatch(setUser(meRes.data));

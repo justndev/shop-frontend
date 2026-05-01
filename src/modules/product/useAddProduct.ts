@@ -317,7 +317,7 @@ export function useAddProduct(existingProductId?: string) {
             }
             setForm(prev => ({ ...prev, status: 'published' }))
             setSaveStatus('saved')
-            router.push(`/admin/products/${product.id}`)
+            router.push(`/admin/products`)
         } catch (error) {
             console.error('Publish failed:', error)
             setSaveStatus('error')

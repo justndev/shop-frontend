@@ -1,10 +1,88 @@
-export const LOCALES= [
-    { code: "en", label: "English", flag: "🇬🇧" },
-    { code: "ru", label: "Russian", flag: "🇷🇺" },
-    { code: "et", label: "Estonian", flag: "🇪🇪" },
-];
-
 export const en = {
+    countries: {
+        estonia:   'Estonia',
+        latvia:    'Latvia',
+        lithuania: 'Lithuania',
+        finland:   'Finland',
+    },
+    product: {
+        in_basket: 'in basket',
+        quantity: 'Quantity',
+        in_stock: 'In stock',
+        out_of_stock: 'Out of stock',
+        add_to_cart: 'Add to cart',
+        loading: 'Loading...',
+        not_found: 'Product not found',
+    },
+    about: {
+        // ─── Hero ───────────────────────────────────────────────────────────────
+        badge: "Our story",
+        heading: "About Us",
+        subheading: "Puer tea, honest prices, and the people behind it all.",
+        intro: "We are a small family-run business united by a genuine belief in the power of Puer tea — its taste, its effect, and its potential to become part of your daily life. This page is our story: who we are, what we sell, and why we care.",
+
+        // ─── Puer intro ─────────────────────────────────────────────────────────
+        puer_heading: "What is Puer Tea?",
+        puer_p1:
+            "Puer tea has remarkable and well-documented potential as a <b>high-energy drink</b>. Good puer contains caffeine — the same substance that makes coffee what it is — yet the true secret of a great puer lies far beyond caffeine alone.",
+        puer_p2:
+            "Puer owes its <b>unique and unforgettable taste</b> to its production process and fermentation. The flavour is distantly related to black tea, yet carries subtle earthy notes in its aroma. A well-made puer holds its taste consistently, no matter which pour you are on or how strongly it is brewed.",
+
+        // ─── Qualities list ─────────────────────────────────────────────────────
+        puer_qualities_heading: "What makes a great puer:",
+        puer_quality_1: "Consistent aroma and taste <b>across multiple infusions</b>",
+        puer_quality_2: "Rich, layered flavour that <b>deepens with each pour</b>",
+        puer_quality_3: "Smooth finish — <b>never bitter, never flat</b>",
+
+        // ─── Effects ────────────────────────────────────────────────────────────
+        puer_effects_heading: "The Effect — Why Puer is Different",
+        puer_effects_p1:
+            "The most fascinating quality of puer is not its taste, but its <b>effect on the mind and body</b>. Puer contains caffeine, though in significantly smaller amounts than regular coffee. Caffeine delivers energy by blocking the brain's adenosine receptors — the receptors responsible for signalling tiredness.",
+        puer_effects_p2:
+            "So what sets puer apart from coffee? The answer lies in <b>L-Theanine</b> — an amino acid naturally present in all teas, and especially abundant in green tea. L-Theanine has a calming, grounding effect on its own; in higher doses it is even used to improve sleep quality. But the real magic happens when <b>L-Theanine is combined with caffeine</b>.",
+        puer_effects_p3:
+            "Together, they form a powerful duo: caffeine provides the energy, while L-Theanine smooths out the edges. The result is not the sharp, overwhelming buzz of coffee, but a <b>clear, focused, and sustained state of alertness</b> — boosting productivity, creativity, and efficiency without the crash.",
+        puer_effects_p4:
+            "It really does come down to two chemical substances. But the practical implications are significant — puer is an outstanding source of energy for anyone seeking a <b>reliable daily boost</b>, and a genuine alternative to coffee.",
+        puer_effects_p5:
+            "A cup of coffee before bed can severely disrupt sleep. Puer, on the other hand, tends to <b>preserve sleep quality</b> even when consumed throughout the day. It is still advisable not to drink any tea immediately before sleep, but regular puer consumption during the day does not carry the same sleep-disrupting risk that coffee or pure caffeine does.",
+        puer_effects_p6:
+            "Beyond energy, puer has shown potential to <b>reduce appetite</b> and support weight management. It is also widely associated with digestive benefits — known for its cleansing qualities for the gut and stomach.",
+        puer_effects_p7:
+            "Overall, puer is a tea of outstanding qualities — as a flavour experience, an energy source, and a daily ritual. Its effects can be individual: some drink it every day to sharpen their focus, others simply love the taste. Either way, <b>puer won't hurt — and it is absolutely worth trying</b>.",
+        why_it_works: 'Why it works',
+        dou: '— the duo that makes Puer uniquely effective',
+        caffeine_lteanine: 'Caffeine + L-Theanine',
+        // ─── Who we are ─────────────────────────────────────────────────────────
+        who_heading: "Who We Are",
+        who_p1:
+            "We are a small team of puer enthusiasts based in Estonia, united by a shared belief that <b>great tea should be accessible to everyone</b> — not just those willing to pay inflated import prices.",
+        based_in_estonia: 'Based in Tallinn, Estonia',
+
+        // ─── Mission ────────────────────────────────────────────────────────────
+        mission_heading: "Our Mission",
+        mission_p1:
+            "The founders of this company drink puer <b>daily</b> — for focus, for productivity, and yes, we are coffee people too. But the problem that pushed us to start selling tea was simple: price.",
+        mission_p2:
+            "Puer is genuinely one of the more expensive teas to source. High transport costs and a lengthy production process are part of the reality. But many sellers take that further — marking up prices to the point where <b>great puer becomes unaffordable</b>.",
+        mission_p3:
+            "We want to change that in Estonia. Our goal is to make quality puer <b>accessible, fairly priced, and well understood</b>. There is a clear lack of information about puer's true potential here, and as people who live and breathe this tea, we aim to fix that.",
+        mission_p4:
+            "Our priorities are straightforward: <b>fair price, quality tea, honest taste, real effect, and customer satisfaction</b>. Nothing more, nothing less.",
+        fair_price: 'Fair price',
+        honest_taste: 'Honest taste',
+        real_effect: 'Real effect',
+        quality_tea: 'Quality tea',
+        // ─── About the site ─────────────────────────────────────────────────────
+        site_heading: "About This Website",
+        site_p1:
+            "This website was built from scratch by a talented developer with a genuine passion for clean, purposeful software. He studied hard, spent countless hours sharpening his skills, and brings to every project a <b>powerful, diverse skillset and a limitless but grounded mindset</b>.",
+        site_p2:
+            "His goal is straightforward: to build software that works beautifully — <b>no bugs, no data selling, no unnecessary bloat</b>. Just a great experience for the people using it.",
+        site_p3:
+            "He is also, it must be said, a true coffee lover. Coffee carried him through years of study and late-night coding sessions. But then puer came along — and as they say, <b>life has not been quite the same since</b>.",
+        no_bloat: 'Built with purpose — no bloat, no data selling, just great tea.'
+    },
     contact: {
         info_heading: "Contact Information",
         badge: "Get in touch",
@@ -26,6 +104,7 @@ export const en = {
         send_another: "Send another",
         required: "This field is required",
         invalid_email: "Enter a valid email address",
+        commitment: "We genuinely listen to every message we receive. Writing to us means your feedback goes directly to the people improving this service — your experience shapes what we build next."
     },
     dev: {
       tea: 'Tea'
@@ -50,15 +129,15 @@ export const en = {
         "tea": "Tea"
     },
     checkout: {
+        "item": "item",
+        "items": "items",
         pay_now: 'Pay now',
-
         contact: {
             title: 'Contact',
             sign_in: 'Sign in',
             email: 'Email',
             newsletter: 'Email me with news and offers',
         },
-
         delivery: {
             title: 'Delivery',
             country: 'Country / Region',
@@ -71,37 +150,45 @@ export const en = {
             phone: 'Phone',
             save_info: 'Save this information for next time',
         },
-
         shipping: {
-            title: 'Shipping method',
+            title:                 'Shipping method',
+            select_parcel_machine: 'Select a parcel machine',
+            enter_address:         'Enter delivery address',
+            city:                  'City',
+            pickup_point:          'Parcel machine',
+            methods: {
+                smartpost_parcel:    'SmartPost parcel machine',
+                smartpost_courier:   'SmartPost courier',
+                omniva_parcel:       'Omniva parcel machine',
+            },
         },
-
         payment: {
             title: 'Payment',
             subtitle: 'All transactions are secure and encrypted.',
             credit_card: 'Credit card',
             card_number: 'Card number',
-            expiry: 'Expiration date (MM / YY)',
+            expiry: 'Expiration date',
             cvv: 'Security code',
             name_on_card: 'Name on card',
             billing_same: 'Use shipping address as billing address',
         },
-
         summary: {
-            discount_placeholder: 'Discount code or gift card',
+            loading: 'Loading items...',
+            empty: 'Your cart is empty.',
+            discount_placeholder: 'Discount code',
             apply: 'Apply',
             subtotal: 'Subtotal',
             shipping: 'Shipping',
             total: 'Total',
             tax_note: 'Including €{{amount}} in taxes',
-            secure: 'All transactions are secure and encrypted.',
+            secure: 'All transactions are secure and encrypted',
+            order: 'Your order',
         },
-
         footer: {
-            'refund-policy': 'Refund policy',
-            'terms-of-service': 'Terms of service',
-            'privacy-policy': 'Privacy policy',
-            'cookie-policy': 'Cookie policy',
+            refund_policy: 'Refund policy',
+            terms_of_service: 'Terms of service',
+            privacy_policy: 'Privacy policy',
+            cookie_policy: 'Cookie policy',
         },
     },
     cart: {
@@ -342,11 +429,30 @@ export const en = {
             },
         },
     },
-
-    general: {
-        home: 'Home'
+    "footer": {
+        "quick_links": {
+            "title": "Quick links",
+            "account": "Account",
+            "shop": "Shop",
+            'home': 'Home',
+        },
+        "information": {
+            "title": "Information",
+            "who_are_we": "Who are we?",
+            "shipping": "Shipping & Return Policy",
+            "legal": "Legal Notice",
+            "privacy": "Use & Privacy"
+        },
+        "contact": {
+            "title": "Contact",
+            "phone": "+3725550001",
+            "email": "info@puerexpert.ee",
+            "note": "Questions or special requirements? Contact us via Telegram <b>{{telegram}}</b>"
+        },
+        "bottom": {
+            "copyright": "© {{year}} MAMA KANA. All rights reserved."
+        }
     },
-
     faq: {
         title: "Why choose TheWholesalerCBD.com?",
         items: {
@@ -461,16 +567,32 @@ export const en = {
     },
     // ── Shared  ─────────────────────────────────────────────────────
     validation: {
-        name_too_long: "Name must be under 50 characters.",
+        required: "This field is required",
+        name_too_long: "Name must be under 100 characters.",
         email_required: "Email is required.",
         email_invalid: "Invalid email address.",
         email_too_long: "Email is too long.",
+        subject_too_long: "Subject is too long.",
+        message_too_long: "Message is too long.",
+
+
         password_required: "Password is required.",
         password_too_short: "Password must be at least 8 characters.",
         password_too_long: "Password must be under 128 characters.",
         repeat_password_required: "Please repeat your password.",
         passwords_do_not_match: "Passwords do not match.",
         current_password_required: "Current password is required.",
+
+        first_name_required:     'First name is required',
+        last_name_required:      'Last name is required',
+        phone_required:          'Phone number is required',
+        phone_invalid:           'Please enter a valid phone number',
+        country_required:        'Please select a country',
+        shipping_method_required:'Please select a shipping method',
+        city_required:           'Please select a city',
+        pickup_point_required:   'Please select a pickup point',
+        address_required:        'Address is required',
+        postal_code_required:    'Postal code is required',
     },
 
     account: {
@@ -676,4 +798,15 @@ export const en = {
         no_firstname_and_lastname_provided: "No firstname and lastname provided.",
         firstname_and_lastname_are_same: "Firstname and lastname are the same.",
     },
+
+    backend: {
+        // Contact Module
+        message_delivered: "Message delivered",
+        validation_failed: "Validation failed",
+        message_delivery_failed: "Message delivery failed",
+    },
+
+    general: {
+        something_went_wrong: "Something went wrong. Please try again."
+    }
 }
