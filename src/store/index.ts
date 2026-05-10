@@ -10,11 +10,12 @@ import cartReducer from './slices/cartSlice';
 import productsReducer from './slices/productsSlice';
 import ordersReducer from './slices/ordersSlice';
 
+
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   products: productsReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
 })
 
 const getDynamicStorage = (persistent: boolean = true) => {

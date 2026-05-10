@@ -11,7 +11,6 @@ const MESSAGES = [
 export default function SmallHeader() {
     const [atTop, setAtTop] = useState(true);
     const [index, setIndex] = useState(0);
-    const [animating, setAnimating] = useState(false);
     const {t} = useTranslation();
 
     const [slide, setSlide] = useState<'idle' | 'exit' | 'enter'>('idle');
@@ -25,13 +24,13 @@ export default function SmallHeader() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setSlide('exit'); // slide out to right
+            setSlide('exit');
             setTimeout(() => {
                 setIndex(prev => (prev + 1) % MESSAGES.length);
-                setSlide('enter'); // instantly place new text on left
+                setSlide('enter');
                 setTimeout(() => {
-                    setSlide('idle'); // slide in to center
-                }, 50); // tiny delay so browser registers the enter position first
+                    setSlide('idle');
+                }, 50);
             }, 400);
         }, 8000);
         return () => clearInterval(interval);
@@ -44,10 +43,9 @@ export default function SmallHeader() {
     };
 
     return (
-        <div className={`header-topbar ${atTop ? 'header-topbar--visible' : 'header-topbar--hidden'}`}>
-            <div className="header-topbar__inner overflow-hidden">
+        <div className={`bg-white text-(--swamp-green-dark) text-sm overflow-hidden transition-all duration-300 ease-in-out ${atTop ? 'max-h-14 opacity-100' : 'max-h-0'}`}>
+            <div className="max-w-6xl mx-auto px-4 h-10 flex items-center justify-center gap-4">
                 <Typography
-                    className="header-topbar__message"
                     style={{
                         fontSize: '12px',
                         fontWeight: '600',

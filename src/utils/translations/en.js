@@ -1,9 +1,57 @@
 export const en = {
+    "order": {
+        "order_id": "Order ID",
+        "status": "Status",
+        "paid_notice": "Your order has been paid. Check your email for confirmation.",
+        "item": "item",
+        "items": "items",
+        "statuses": {
+            "pending": "Pending",
+            "paid": "Paid",
+            "failed": "Failed",
+            "cancelled": "Cancelled",
+            "completed": "Completed",
+            "aborted": "Aborted",
+            "expired": "Expired"
+        },
+        "summary": {
+            "order": "Order summary",
+            "subtotal": "Subtotal",
+            "shipping": "Shipping",
+            "total": "Total",
+            "tax_note": "Including €{{amount}} in taxes"
+        },
+        "actions": {
+            "pay": "Pay now",
+            "cancel": "Cancel order",
+            "back_to_shop": "Back to shop"
+        },
+        "errors": {
+            "no_order_id": "No order ID was provided in the URL.",
+            "fetch_failed": "We couldn't load your order. Please check the link or try again.",
+            "cancel_failed": "Failed to cancel the order. Please try again."
+        },
+        "cancel_dialog": {
+            "title": "Cancel this order?",
+            "body": "This action cannot be undone. Your reservation will be released.",
+            "confirm": "Yes, cancel",
+            "back": "Go back"
+        }
+    },
+    layout: {
+        'cancel_order': {
+            title: 'Waiting payment for order',
+            body: 'There is established order which is waiting for your payment. If you want to change cart items it would be removed.',
+            confirm: 'Confirm',
+            cancel: 'Cancel',
+        }
+    },
+
     countries: {
-        estonia:   'Estonia',
-        latvia:    'Latvia',
+        estonia: 'Estonia',
+        latvia: 'Latvia',
         lithuania: 'Lithuania',
-        finland:   'Finland',
+        finland: 'Finland',
     },
     product: {
         in_basket: 'in basket',
@@ -14,6 +62,21 @@ export const en = {
         loading: 'Loading...',
         not_found: 'Product not found',
     },
+    utils: {
+        more: 'More',
+    },
+    "pages": {
+        "home": "Home",
+        "catalog": "Catalog",
+        "about-us": "About Us",
+        "contact": "Contact",
+        "legal": "Legal",
+        "returns": "Return Policy",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "cookies": "Cookie Policy"
+    },
+
     about: {
         // ─── Hero ───────────────────────────────────────────────────────────────
         badge: "Our story",
@@ -51,12 +114,11 @@ export const en = {
         puer_effects_p7:
             "Overall, puer is a tea of outstanding qualities — as a flavour experience, an energy source, and a daily ritual. Its effects can be individual: some drink it every day to sharpen their focus, others simply love the taste. Either way, <b>puer won't hurt — and it is absolutely worth trying</b>.",
         why_it_works: 'Why it works',
-        dou: '— the duo that makes Puer uniquely effective',
+        duo: ' — the duo that makes Puer uniquely effective',
         caffeine_lteanine: 'Caffeine + L-Theanine',
         // ─── Who we are ─────────────────────────────────────────────────────────
         who_heading: "Who We Are",
-        who_p1:
-            "We are a small team of puer enthusiasts based in Estonia, united by a shared belief that <b>great tea should be accessible to everyone</b> — not just those willing to pay inflated import prices.",
+        who_p1: "We are a small team of puer enthusiasts based in Estonia, united by a shared belief that <b>great tea should be accessible to everyone</b> — not just those willing to pay inflated import prices.",
         based_in_estonia: 'Based in Tallinn, Estonia',
 
         // ─── Mission ────────────────────────────────────────────────────────────
@@ -107,7 +169,7 @@ export const en = {
         commitment: "We genuinely listen to every message we receive. Writing to us means your feedback goes directly to the people improving this service — your experience shapes what we build next."
     },
     dev: {
-      tea: 'Tea'
+        tea: 'Tea'
     },
     catalog: {
         showing: "Showing {{start}}–{{end}} of {{total}}",
@@ -122,11 +184,8 @@ export const en = {
         }
     },
     categories: {
-        "shu-puer": "Shu Puer",
-        "shen-puer": "Shen Puer\n" +
-            "(Coming soon)",
-        "white-tea": "White Tea",
-        "tea": "Tea"
+        "shu-puer": "Shu Pu'er",
+        "shen-puer": "Shen Pu'er (Coming soon)"
     },
     checkout: {
         "item": "item",
@@ -151,15 +210,15 @@ export const en = {
             save_info: 'Save this information for next time',
         },
         shipping: {
-            title:                 'Shipping method',
+            title: 'Shipping method',
             select_parcel_machine: 'Select a parcel machine',
-            enter_address:         'Enter delivery address',
-            city:                  'City',
-            pickup_point:          'Parcel machine',
+            enter_address: 'Enter delivery address',
+            city: 'City',
+            pickup_point: 'Parcel machine',
             methods: {
-                smartpost_parcel:    'SmartPost parcel machine',
-                smartpost_courier:   'SmartPost courier',
-                omniva_parcel:       'Omniva parcel machine',
+                smartpost_parcel: 'SmartPost parcel machine',
+                smartpost_courier: 'SmartPost courier',
+                omniva_parcel: 'Omniva parcel machine',
             },
         },
         payment: {
@@ -314,6 +373,7 @@ export const en = {
             },
         },
 
+
         returns: {
             'page-header': {
                 overline: 'Legal',
@@ -321,41 +381,38 @@ export const en = {
                 'last-updated': 'Last updated: {{date}}',
             },
             intro: {
-                p1: 'Your satisfaction is important to us. As a consumer purchasing from an Estonian online store you have statutory withdrawal rights under EU law. This page explains those rights and our process.',
+                p1: 'As a consumer, you have the right to withdraw from your order without giving any reason — within 14 calendar days of receiving your goods.',
             },
             'section-1': {
                 h2: '1. Right of withdrawal',
-                p1: 'You have the right to withdraw from your purchase within 14 calendar days of the day you (or a person you nominate) physically receives the goods — without giving any reason.',
-                p2: 'To exercise this right, notify us before the 14-day period expires by emailing {{email}} with your order number and a clear statement that you wish to withdraw.',
+                p1: 'The 14-day withdrawal period begins on the day you or a person you nominate physically receives the goods.',
+                p2: 'To exercise this right, send us a written withdrawal notice by email to {{email}} before the 14-day period expires. Please include your order number in the message.',
             },
             'section-2': {
-                h2: '2. Exceptions',
-                p1: 'The right of withdrawal does not apply to:',
-                'li-1': 'Sealed goods that have been opened after delivery and are unsuitable for return due to health protection or hygiene reasons',
-                'li-2': 'Goods that have been clearly personalised',
-                'li-3': 'Perishable goods that have expired',
-                p2: 'Unsealed tea products that have been opened cannot be returned for hygiene reasons.',
+                h2: '2. Required information in your notice',
+                p1: 'Your written withdrawal notice must include the following:',
+                'li-1': 'Your order number',
+                'li-2': 'The IBAN of the bank account to which the refund should be transferred',
+                'li-3': 'The full name of the bank account holder',
+                p2: 'We cannot process your refund until we have received all of the above details.',
             },
             'section-3': {
-                h2: '3. How to return',
-                p1: 'Once you have notified us of your withdrawal:',
-                'li-1': 'Repack the items securely in their original packaging where possible',
-                'li-2': 'Send the goods back to us within 14 days of notifying us',
-                'li-3': 'You are responsible for the cost of return shipping unless the item is faulty',
-                p2: 'Please email {{email}} before sending to receive the return address and a return reference number.',
+                h2: '3. Returning the goods',
+                p1: 'After sending your withdrawal notice, you must return the goods promptly and no later than 14 calendar days from the date of the notice:',
+                'li-1': 'Goods must be unused, undamaged, and in their original packaging where possible',
+                'li-2': 'Send the return to: {{address}}, Tallinn',
+                'li-3': 'You are responsible for all shipping and return delivery costs',
+                p2: 'Unsealed or opened tea and food products cannot be returned for hygiene reasons.',
             },
             'section-4': {
                 h2: '4. Refunds',
-                p1: 'We will process your refund within 14 days of receiving the returned goods (or proof of return, whichever is earlier).',
-                p2: 'The refund will be made to your original payment method and will include the standard delivery cost you paid. We may deduct an amount if the goods have been handled beyond what is necessary to inspect them.',
+                p1: 'We will refund the amount paid for the goods no later than 14 calendar days from the date we receive your withdrawal notice — but not before we have received the returned goods or proof that they have been dispatched back to us.',
+                p2: 'If you return only part of your order, we will refund the delivery cost proportionally. If the returned goods show signs of use or damage beyond what is necessary to inspect them, we reserve the right to deduct a sum reflecting the reduction in value — up to the full sale price of the item.',
             },
             'section-5': {
                 h2: '5. Faulty or incorrect items',
-                p1: 'If you received a faulty, damaged, or incorrect item, contact us within 48 hours of delivery at {{email}} with your order number and a photo.',
-                p2: 'We will arrange a replacement or full refund at no cost to you, including return shipping.',
-            },
-            'footer-note': {
-                p1: 'Questions about a return? Contact us at {{email}} — we aim to respond within 1 business day.',
+                p1: 'If you received a faulty, damaged, or incorrect item, contact us within 48 hours of delivery at {{email}} with your order number and a photo of the issue.',
+                p2: 'In such cases we will arrange a replacement or full refund at no cost to you, including return shipping.',
             },
         },
 
@@ -430,6 +487,7 @@ export const en = {
         },
     },
     "footer": {
+        "promotion_text": "Premium pu'er tea sourced directly from Yunnan — fairly priced and delivered fast across Baltics.",
         "quick_links": {
             "title": "Quick links",
             "account": "Account",
@@ -438,10 +496,12 @@ export const en = {
         },
         "information": {
             "title": "Information",
-            "who_are_we": "Who are we?",
-            "shipping": "Shipping & Return Policy",
-            "legal": "Legal Notice",
-            "privacy": "Use & Privacy"
+            "about": "About",
+            "returns": "Return Policy",
+            "cookies": "Cookies Policy",
+            "privacy": "Privacy Policy",
+            "terms": "Terms and Conditions",
+
         },
         "contact": {
             "title": "Contact",
@@ -450,64 +510,83 @@ export const en = {
             "note": "Questions or special requirements? Contact us via Telegram <b>{{telegram}}</b>"
         },
         "bottom": {
-            "copyright": "© {{year}} MAMA KANA. All rights reserved."
+            "copyright": "© {{year}} ndev OÜ. All rights reserved."
+        }
+    },
+    "banner-slider": {
+        "slide1": {
+            "eyebrow": "New arrival",
+            "title": "Aged Puer\nFrom Yunnan",
+            "subtitle": "Deep, earthy complexity — 10 years in the making.",
+            "cta": "Shop now"
+        },
+        "slide2": {
+            "eyebrow": "only high quality",
+            "title": "And Low Prices",
+            "cta": "Explore"
+        },
+        "slide3": {
+            "eyebrow": "Learn",
+            "title": "More than a tea",
+            "subtitle": "Better than coffee and powerful that energy drinks ",
+            "cta": "Read more"
         }
     },
     faq: {
-        title: "Why choose TheWholesalerCBD.com?",
+        title: "Why choose PuerExpert.ee?",
         items: {
-            organic_farming: {
-                question: "Organic farming and hemp grown in Europe",
-                answer: "We prioritize sustainably grown European hemp, cultivated under strict organic farming practices to ensure purity, consistency, and environmental responsibility across all products."
+            fast_delivery: {
+                title: "Fast delivery across Estonia",
+                body: "We dispatch every order within 24 hours. Whether you're in Tallinn or Tartu, your tea arrives quickly — with tracking from the moment it leaves us. Orders over €50 ship free.",
             },
-            certified_quality: {
-                question: "Cheap CBD and certified premium quality",
-                answer: "Affordable, lab-tested CBD you can trust."
+            fair_prices: {
+                title: "Fair prices — no inflated margins",
+                body: "We source directly from producers in Yunnan and pass the savings on to you. No middlemen, no markups. Our prices are consistently lower than what other European sellers charge for the same quality.",
             },
-            expertise_catalog: {
-                question: "Recognized expertise and comprehensive catalog",
-                answer: "With years of industry experience, we offer a carefully curated catalog that spans a wide range of CBD products, meeting diverse customer needs while maintaining high standards of quality and compliance."
+            high_quality: {
+                title: "Carefully selected, high-quality tea",
+                body: "Every tea in our catalog is hand-picked from trusted Yunnan producers. We only stock teas we drink ourselves — if it doesn't meet our standard for aroma, taste, and consistency across infusions, it doesn't make the cut.",
             },
-            packaging_delivery: {
-                question: "Packaging and fast delivery of CBD wholesale and retail",
-                answer: "Fast delivery with secure packaging for all orders."
-            }
-        }
+            puer_effect: {
+                title: "We know the puer effect — and we care about it",
+                body: "Most tea sellers focus only on taste. We go further. We specialise in the unique energy puer delivers — the caffeine and L-Theanine combination that gives you clear, focused alertness without the crash. It's why we drink it daily, and why we built this store.",
+            },
+        },
     },
     promo: {
-        title: "Premium Tea from the Source — Delivered Across Europe",
-        subtitle: "The finest single-origin teas, sourced directly from trusted growers",
+        title: "Premium and proven Pu'er tea — Delivered Across Baltics",
+        subtitle: "The finest single-origin teas, sourced directly from trusted manufacturer",
         achievements: {
-            made_in_europe: "Shipped Across Europe",
-            certified: "100% Authentic & Certified",
-            tailored: "Orders Tailored to You",
+            made_in_europe: "Quick delivery",
+            certified: "Authenticity you can taste",
+            tailored: "Fair pricing, no markups",
         },
     },
 
     quality: {
         cards: {
             quality: {
-                "badge": "Unbeatable quality/price",
+                "badge": "Unbeatable quality / price",
                 "title": "QUALITY PRODUCTS",
-                "body": "100% natural without terpenes"
+                "body": "100% natural"
             },
-            certified: {
-                "badge": "Laboratory analysis",
-                "title": "CERTIFIED < 0.3% THC",
-                "body": "French independent laboratory"
+            effect: {
+                "badge": "Energy Effect",
+                "title": "Always meets expectations",
+                "body": "Focusing on tea energy effect"
             },
             delivery: {
                 badge: "Express Delivery",
-                title: "FREE FROM 99€",
-                body: "Shipping within 24 hours in France"
+                title: "FREE FROM 50€",
+                body: "Dispatching within 24 hours"
             },
-            customs: {
-                badge: "French Society",
-                title: "ALREADY CLEARED<br/>CUSTOMS",
-                body: "Products stored in France"
+            authentic: {
+                badge: "Authentic",
+                title: "TRACEABLE ORIGIN",
+                body: "From traditional tea regions in Yunnan"
             }
         },
-        paragraph: "By choosing The CBD Wholesaler, you benefit from... <b>CBD wholesale orders</b> are carefully prepared and <b>shipped within 24 hours</b>, with <b>fast, free delivery for orders over €99</b>."
+        paragraph: "By choosing <b>Pu’er Expert</b>, you benefit from <b>premium quality at fair prices</b>. Orders are carefully prepared and <b>shipped within 24 hours</b>, with <b>fast, free delivery for orders over €50</b>."
     },
 
     adva: {
@@ -519,34 +598,71 @@ export const en = {
         bullet5: "<b>Legal compliance</b> with THC levels below 0.3%."
     },
 
-    expertise: {
-        paragraph1: "We put our <b>expertise as a CBD wholesaler</b> at the service of professionals and distributors wishing to <b>buy CBD in bulk legally in France and Europe</b>. Our products, from <b>organically grown hemp</b>, are carefully selected to guarantee <b>premium quality</b>.",
-        paragraph2: "Thanks to our <b>comprehensive CBD catalog</b>, you benefit from <b>CBD resins, hemp flowers and CBD oils</b> that comply with <b>current legislation</b>, with <b>fast, secure delivery</b> tailored to your <b>B2B needs</b>."
+
+    our_products: {
+        title: "Our Products",
+        paragraph1: "We put our <b>expertise in Pu’er tea</b> at the service of tea enthusiasts, retailers, and distributors looking to <b>source authentic Pu’er tea in Europe</b>. Our teas, sourced directly from <b>trusted producers in Yunnan</b>, are carefully selected to ensure <b>exceptional quality</b>.",
+        paragraph2: "Thanks to our <b>curated Pu’er selection</b>, you benefit from <b>ripe (shu) and raw (sheng) Pu’er teas</b>, as well as <b>aged tea cakes and loose leaf options</b>, all with <b>reliable delivery across the Baltics and Europe</b>."
+    },
+
+    contact_us: {
+        title: 'Still questions left?',
+        body: "Let\'s talk - we\'ll be happy to answer any questions you may have.",
+        button: 'Contact us'
     },
 
     read_more: {
-        title: "<b>Read More</b>",
-    },
-
-    our_products: {
-      title: "Out Products",
+        title: "Read More",
+        items: {
+            what_is_puer: {
+                question: "What exactly is puer tea and how does it differ from regular tea?",
+                answer: "Puer is a fermented tea from Yunnan, China, with a rich, earthy flavour unlike any black or green tea. Each infusion deepens in character and the taste stays consistent across multiple pours — it's truly in a category of its own."
+            },
+            energy_vs_coffee: {
+                question: "Why does puer give a different kind of energy than coffee?",
+                answer: "Puer contains both caffeine and L-Theanine — an amino acid that smooths out the sharp buzz of caffeine. The result is clear, focused, sustained alertness without the jitter or crash you'd get from coffee."
+            },
+            sleep_quality: {
+                question: "Will drinking puer during the day affect my sleep?",
+                answer: "Unlike coffee, puer tends to preserve sleep quality even when consumed throughout the day. We still recommend avoiding tea right before bed, but regular daytime puer drinking doesn't carry the same sleep-disrupting risk as coffee."
+            },
+            fair_pricing: {
+                question: "Are your prices really lower than other sellers?",
+                answer: "Yes — and that's the whole point. Many sellers mark puer up far beyond what's fair. We started this store because we drink puer daily ourselves and were tired of overpriced options. Our goal is to make quality puer genuinely accessible in Estonia."
+            },
+            tea_origin: {
+                question: "Where does your tea come from?",
+                answer: "All our teas are sourced directly from trusted producers in Yunnan — the traditional home of puer. We work with reliable manufacturers to ensure consistent, traceable origin and authentic quality in every product."
+            },
+            delivery_speed: {
+                question: "How fast will my order arrive?",
+                answer: "We dispatch orders within 24 hours. Shipping is free on orders over €50. You'll receive a tracking number by email as soon as your package is on its way."
+            },
+            returns: {
+                question: "Can I return my order if I'm not satisfied?",
+                answer: "Yes. Under EU law you have 14 days from delivery to withdraw. Sealed, unopened products can be returned — opened tea cannot be returned for hygiene reasons. Email us at info@puerexpert.ee with your order number."
+            },
+            health_benefits: {
+                question: "Are there other health benefits worth knowing about?",
+                answer: "Beyond energy and focus, puer is associated with appetite reduction and digestive support — traditionally known for its cleansing qualities for the gut and stomach. A tea with a lot going for it beyond just great taste."
+            },
+        }
     },
 
     why_us: {
-        image_alt: "Premium loose leaf tea",
-        title: "<b>Tearoma</b> — Your N°1 Source for Premium Tea",
+        title: "<b>Pu'er Expert</b> — Your N°1 Source for Pu'er",
         paragraph_1:
-            "Founded with a passion for tea culture, <b>Tearoma</b> is today the reference for <b>premium loose-leaf tea</b> in Estonia and across Europe. We specialise in rare and artisan teas sourced directly from growers.",
+            "Founded with a passion for tea culture, <b>Pu'er Expert</b> is today the reference for <b>premium loose-leaf tea</b> in Estonia and across Baltics. We specialise in qualitative and powerful Pu'er teas sourced directly from manufacturers.",
         paragraph_2:
-            "From the very beginning, our goal has been to offer only top-of-the-range teas that are harvested with transparency, stored with care, and delivered quickly anywhere in Europe — all at honest prices. From the very beginning, our goal has been to offer only top-of-the-range teas that are harvested with transparency, stored with care, and delivered quickly anywhere in Europe — all at honest prices.",
-        tagline: "With Tearoma, quality is never compromised.",
+            "From the very beginning, our goal has been to offer only top-of-the-range and proven teas that has fair prices, stored with care, and delivered quickly. We value both customer experience and satisfication, and selecting only best Pu'er products",
+        tagline: "Modern and trustworthy seller",
     },
 
     categoriesSection: {
         title: "Explore our tea collections",
         items: {
             'shu-puer': "Shu Pu'er",
-            'shen-puer': "Shen Pu'er",
+            'shen-puer': "Shen Pu'er (Coming Soon)",
             green: "Green Tea",
             white: "White Tea",
             ceremony: "Tea Ceremony",
@@ -554,9 +670,9 @@ export const en = {
     },
     header: {
         top: {
-            promo1: "🍵 10% OFF the Website! Use LOVEPUER code",
+            promo1: "🍵 We've just opened! Enjoy the prices",
             promo2: "🚚 Free shipping on orders over €50",
-            promo3: "🌿 New arrivals — Premium Oolong collection"
+            promo3: "🫖 New arrivals — Shu Pu'er in 357g and 50g!"
         },
         nav: {
             about: "About us",
@@ -583,16 +699,18 @@ export const en = {
         passwords_do_not_match: "Passwords do not match.",
         current_password_required: "Current password is required.",
 
-        first_name_required:     'First name is required',
-        last_name_required:      'Last name is required',
-        phone_required:          'Phone number is required',
-        phone_invalid:           'Please enter a valid phone number',
-        country_required:        'Please select a country',
-        shipping_method_required:'Please select a shipping method',
-        city_required:           'Please select a city',
-        pickup_point_required:   'Please select a pickup point',
-        address_required:        'Address is required',
-        postal_code_required:    'Postal code is required',
+        first_name_required: 'First name is required',
+        last_name_required: 'Last name is required',
+        phone_required: 'Phone number is required',
+        phone_invalid: 'Please enter a valid phone number',
+        country_required: 'Please select a country',
+        shipping_method_required: 'Please select a shipping method',
+        city_required: 'Please select a city',
+        pickup_point_required: 'Please select a pickup point',
+        address_required: 'Address is required',
+        postal_code_required: 'Postal code is required',
+
+        payment_required: 'Please select a payment method',
     },
 
     account: {

@@ -10,6 +10,8 @@ import '@/src/utils/i18n';
 
 import {Montserrat} from 'next/font/google';
 import './globals.css';
+import OrderListener from "@/src/modules/checkout/OrderListener";
+import {AppProvider} from "@/src/context/AppContext";
 
 const montserrat = Montserrat({
     subsets: ['latin'],
@@ -30,10 +32,12 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <body>
         <PersistGate persistor={persistor}>
             <Provider store={store}>
-                <ThemeProvider theme={theme}>
-                    {children}
-                </ThemeProvider>
-
+                <AppProvider>
+                    <ThemeProvider theme={theme}>
+                        {children}
+                    </ThemeProvider>
+                    <OrderListener />
+                </AppProvider>
             </Provider>
         </PersistGate>
         </body>

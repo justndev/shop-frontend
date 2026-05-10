@@ -9,11 +9,11 @@ export default function AdminLayout({children}) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
-        <div style={{display: "flex", minHeight: "100vh", background: "#0d1117"}}>
+        <div style={{display: "flex", minHeight: "100vh", }}>
             <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)}/>
             <MediaManager/>
             {/* Main */}
-            <div style={{flex: 1, marginTop: 48, overflowY: "auto", minHeight: "calc(100vh - 48px)"}}>
+            <div style={{flex: 1,}}>
                 {children}
             </div>
         </div>

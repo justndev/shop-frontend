@@ -3,6 +3,8 @@ import orderApi from '@/src/modules/profile/orderApi';
 import {Order} from "@/src/utils/types";
 import {Axios, AxiosError} from "axios";
 import {MOCKED_ORDERS} from "@/src/utils/mocks";
+import productApi from "@/src/lib/productApi";
+import paymentApi from "@/src/modules/checkout/paymentApi";
 
 export function useOrdersHook() {
     const [orders, setOrders] = useState<Order[]>([]);
@@ -15,9 +17,9 @@ export function useOrdersHook() {
             setLoading(true);
 
             try {
-                const responseData = await orderApi.getMyOrders();
+                const orders = await paymentApi.getOrders();
                 // setOrders(responseData.data)
-                setOrders(MOCKED_ORDERS)
+                setOrders(orders)
             } catch (err: AxiosError) {
                 console.error(err);
                 // TODO: Handle backend errors

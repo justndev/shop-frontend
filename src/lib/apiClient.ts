@@ -16,11 +16,6 @@ apiClient.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-  // Cookies.set('name', 'value', { expires: 7 });
-  console.log(`Test: ${Cookies.get('name')}`)
-  console.log(`accessToken: ${Cookies.get('accessToken')}`)
-  console.log(`refreshToken: ${Cookies.get('refreshToken')}`)
-
 
   return config;
 });
@@ -60,7 +55,6 @@ apiClient.interceptors.response.use(
       const refreshToken = Cookies.get('refreshToken');
 
       if (!refreshToken) {
-        console.log('Removing access token')
         Cookies.remove('accessToken');
         // if (typeof window !== 'undefined') window.location.href = '/login';
         return Promise.reject(error);
@@ -68,9 +62,7 @@ apiClient.interceptors.response.use(
 
       try {
         const { data } = await axios.post(`${BACKEND_API_URL}/auth/refresh`, { refreshToken });
-        console.log('Setting access token')
         Cookies.set('accessToken', data.data.accessToken, { expires: 1 / 24 });
-        console.log('Setting refresh token')
         Cookies.set('refreshToken', data.data.refreshToken, { expires: 7 });
         apiClient.defaults.headers.common.Authorization = `Bearer ${data.data.accessToken}`;
         processQueue(null, data.data.accessToken);
@@ -78,9 +70,7 @@ apiClient.interceptors.response.use(
         return apiClient(originalRequest);
       } catch (err) {
         processQueue(err, null);
-        console.log('Removing access token')
         Cookies.remove('accessToken');
-        console.log('Removing refresh token')
         Cookies.remove('refreshToken');
         // if (typeof window !== 'undefined') window.location.href = '/login';
         return Promise.reject(err);

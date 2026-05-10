@@ -11,6 +11,7 @@ import './product-embla.css'
 import {MOCKED_PRODUCTS} from "@/src/utils/mocks";
 import ComplexProductCard from "@/src/modules/product/ComplexProductCard";
 import {Typography} from "@mui/material";
+import LandingProductCard from "@/src/modules/product/LandingProductCard";
 
 
 const OPTIONS: EmblaOptionsType = { align: 'start' }
@@ -36,7 +37,7 @@ const EmblaCarousel = ({products = MOCKED_PRODUCTS, options = OPTIONS}) => {
                         <div className="products_embla__slide" key={index}>
                             <div key={index} style={{paddingLeft: 8, paddingRight: 8}}
                             >
-                                <ComplexProductCard product={product} />
+                                <LandingProductCard product={product} />
 
                             </div>
                         </div>

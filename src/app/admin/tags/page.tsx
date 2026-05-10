@@ -3,8 +3,9 @@
 
 import Link from "next/link";
 import TagHeader from "@/src/modules/tag/TagHeader";
-import {C} from "@/src/utils/customColors";
-import TagRow from "@/src/modules/tag/TagRow";
+
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+const C = ADMIN_PANEL_COLORS;import TagRow from "@/src/modules/tag/TagRow";
 import {useState} from "react";
 import {Alert} from "@mui/material";
 import {useTagList} from "@/src/modules/tag/useTagList";

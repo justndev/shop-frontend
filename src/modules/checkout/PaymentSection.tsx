@@ -1,14 +1,55 @@
 'use client';
 
-import { MUI_INPUT_SX } from "@/src/app/(main)/checkout/page";
-import { TextField, Checkbox, FormControlLabel } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Banklink, Card } from "@/src/modules/checkout/paymentApi";
+import {PaymentSectionErrors} from "@/src/utils/validations";
 
-export default function PaymentSection() {
+type Props = {
+    paymentCards: Card[];
+    paymentBanks: Banklink[];
+    selected: string | null;
+    onSelect: (method: string) => void;
+    paymentErrors: PaymentSectionErrors;
+};
+
+export default function PaymentSection({
+                                           paymentCards,
+                                           paymentBanks,
+                                           selected,
+                                           onSelect,
+                                           paymentErrors
+                                       }: Props) {
     const { t } = useTranslation();
+
+    const renderOption = (
+        name: string,
+        label: string,
+        logo: string
+    ) => {
+        const isSelected = selected === name;
+
+        return (
+            <button
+                key={name}
+                type="button"
+                onClick={() => onSelect(name)}
+                className={`flex items-center gap-3 w-full border rounded-lg px-3 py-2 transition
+                    ${isSelected
+                    ? 'border-[#1a3c2e] bg-[#f3f6f4]'
+                    : 'border-[#d8d4cc] bg-white hover:border-[#bdb8ae]'
+                }`}
+            >
+                <img src={logo} alt={label} className="h-5 object-contain" />
+                <span className="text-sm text-[#1a1a14] font-medium">
+                    {label}
+                </span>
+            </button>
+        );
+    };
 
     return (
         <section className="flex flex-col gap-3.5">
+            {/* Title */}
             <div>
                 <h2 className="font-semibold text-base text-[#1a1a14] m-0 font-['DM_Sans',sans-serif]">
                     {t('checkout.payment.title')}
@@ -17,41 +58,52 @@ export default function PaymentSection() {
                     {t('checkout.payment.subtitle')}
                 </p>
             </div>
+            {paymentErrors.general && (
+                <p className="text-[0.78rem] text-[#d32f2f] font-['DM_Sans',sans-serif] m-0 mb-2">
+                    {paymentErrors.general}
+                </p>
+            )}
+            {/* Cards */}
+            {paymentCards.length > 0 && (
+                <div className="border border-[#d8d4cc] border-[0.5px] rounded-lg overflow-hidden bg-white">
+                    <div className="px-4 py-3 bg-[#f5f2ec] border-b border-[#e0ddd6]">
+                        <span className="text-[0.9rem] font-medium text-[#1a1a14]">
+                            {t('checkout.payment.card')}
+                        </span>
+                    </div>
 
-            <div className="border border-[#d8d4cc] border-[0.5px] rounded-lg overflow-hidden bg-white">
-                {/* Header */}
-                <div className="flex items-center justify-between px-4 py-3.5 bg-[#f5f2ec] border-b border-b-[#e0ddd6] border-b-[0.5px]">
-          <span className="text-[0.9rem] font-medium text-[#1a1a14] font-['DM_Sans',sans-serif]">
-            {t('checkout.payment.credit_card')}
-          </span>
-                    <div className="flex gap-1.5 items-center">
-                        <span className="text-[0.65rem] font-bold px-1.5 py-0.5 rounded bg-[#1a1f71] text-white tracking-[0.04em]">VISA</span>
-                        <span className="text-[0.65rem] font-bold px-1.5 py-0.5 rounded bg-[#eb001b] text-white tracking-[0.04em]">MC</span>
-                        <span className="text-[0.65rem] font-bold px-1.5 py-0.5 rounded bg-[#2e77bc] text-white tracking-[0.04em]">AMEX</span>
+                    <div className="flex flex-col gap-2 p-4 bg-[#fafaf8]">
+                        {paymentCards.map(card =>
+                            renderOption(
+                                card.name,
+                                card.display_name,
+                                card.logo_url
+                            )
+                        )}
                     </div>
                 </div>
+            )}
 
-                {/* Fields — no logic yet */}
-                <div className="flex flex-col gap-3 p-4 bg-[#fafaf8]">
-                    <TextField fullWidth label={t('checkout.payment.card_number')} inputProps={{ maxLength: 19 }} sx={MUI_INPUT_SX} />
-                    <div className="grid grid-cols-2 gap-3">
-                        <TextField fullWidth label={t('checkout.payment.expiry')} placeholder="MM / YY" sx={MUI_INPUT_SX} />
-                        <TextField fullWidth label={t('checkout.payment.cvv')} sx={MUI_INPUT_SX} />
+            {/* Banklinks */}
+            {paymentBanks.length > 0 && (
+                <div className="border border-[#d8d4cc] border-[0.5px] rounded-lg overflow-hidden bg-white">
+                    <div className="px-4 py-3 bg-[#f5f2ec] border-b border-[#e0ddd6]">
+                        <span className="text-[0.9rem] font-medium text-[#1a1a14]">
+                            {t('checkout.payment.bank')}
+                        </span>
                     </div>
-                    <TextField fullWidth label={t('checkout.payment.name_on_card')} sx={MUI_INPUT_SX} />
-                    <FormControlLabel
-                        control={
-                            <Checkbox defaultChecked size="small"
-                                      sx={{ color: '#c8c4bc', '&.Mui-checked': { color: '#1a3c2e' } }} />
-                        }
-                        label={
-                            <span className="text-[0.85rem] text-[#4a4a42] font-['DM_Sans',sans-serif]">
-                {t('checkout.payment.billing_same')}
-              </span>
-                        }
-                    />
+
+                    <div className="grid grid-cols-2 gap-2 p-4 bg-[#fafaf8]">
+                        {paymentBanks.map(bank =>
+                            renderOption(
+                                bank.name,
+                                bank.display_name,
+                                bank.logo_url
+                            )
+                        )}
+                    </div>
                 </div>
-            </div>
+            )}
         </section>
     );
 }

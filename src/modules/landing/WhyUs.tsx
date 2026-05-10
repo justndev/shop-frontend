@@ -7,24 +7,33 @@ export default function WhyUs() {
     const { t } = useTranslation();
 
     return (
-        <section className="w-full bg-(--swamp-green) py-16">
+        <section className="w-full md:py-16 py-8 relative z-10"
+                 style={{
+                     backgroundColor: '#193028',
+                     backgroundImage: `
+                    radial-gradient(ellipse 55% 200% at 5% 100%, #254030 0%, transparent 85%),
+                    radial-gradient(ellipse 40% 180% at 50% 0%,  #1f3a2c 0%, transparent 90%),
+                    radial-gradient(ellipse 30% 120% at 20% 50%,  #1c3329 0%, transparent 40%)`,
+                 }}
+        >
 
             {/* Desktop layout */}
-            <div className="hidden md:grid md:grid-cols-[2fr_3fr] max-w-400 mx-auto px-8 items-start">
+            <div className="hidden md:grid md:grid-cols-2 max-w-400 mx-auto px-8 items-start">
 
                 {/* Image */}
                 <div className="h-[480px] rounded-2xl overflow-hidden relative z-10">
                     <img
                         src="/slide1.jpg"
-                        alt={t('why_us.image_alt')}
+                        alt={"Shu Pu'er zoomed"}
                         className="absolute inset-0 w-full h-full object-cover object-center"
                     />
                 </div>
 
                 {/* Card */}
-                <div className="relative z-20 -ml-6 mt-8 self-stretch bg-(--mint)
+                <div className="relative z-20 -ml-6 mt-8  bg-(--mint)
                     rounded-2xl p-10 flex flex-col gap-4
-                    shadow-[0_8px_40px_rgba(0,0,0,0.2)] text-(--swamp-green)">
+                    shadow-[0_8px_40px_rgba(0,0,0,0.2)] text-(--swamp-green) max-w-200 min-w-120 text-justify">
+
                     <Typography sx={{ fontWeight: 500, fontSize: 38, lineHeight: 1.3 }}>
                         <Trans i18nKey="why_us.title" components={{ b: <strong /> }} />
                     </Typography>
@@ -41,10 +50,10 @@ export default function WhyUs() {
             </div>
 
             {/* Mobile layout */}
-            <div className="flex md:hidden flex-col px-5">
+            <div className="flex md:hidden flex-col px-2">
 
                 {/* Image */}
-                <div className="w-full h-[200px] rounded-xl overflow-hidden relative z-10 mb-[-2rem]">
+                <div className="w-full h-50 rounded-xl overflow-hidden relative z-10 mb-[-2rem]">
                     <img
                         src="/slide1.jpg"
                         alt={t('why_us.image_alt')}
@@ -53,7 +62,7 @@ export default function WhyUs() {
                 </div>
 
                 {/* Card */}
-                <div className="relative z-20 bg-(--mint) rounded-2xl pt-12 px-6 pb-8 flex flex-col gap-4 shadow-[0_8px_40px_rgba(0,0,0,0.25)] text-(--swamp-green)">
+                <div className="relative z-20 bg-(--mint) rounded-2xl px-6 py-8 flex flex-col gap-4 shadow-[0_8px_40px_rgba(0,0,0,0.25)] text-(--swamp-green) text-justify">
                     <Typography sx={{ fontWeight: 500, fontSize: 28, lineHeight: 1.3 }}>
                         <Trans i18nKey="why_us.title" components={{ b: <strong /> }} />
                     </Typography>

@@ -46,8 +46,9 @@ export interface ProductListResponse {
 const productApi = {
     async getAll(params?: {
         inStock?: boolean;
-        sort?: string
-        slug?: string
+        sort?: string;
+        slug?: string;
+        legacy?: boolean;
     }): Promise<ProductListResponse> {
         const res = await apiClient.get('/products', { params })
         return res.data
@@ -81,6 +82,26 @@ const productApi = {
     async delete(id: string): Promise<void> {
         await apiClient.delete(`/products/${id}`)
     },
+
+    async mockWebhook(mkTransactionId: string, orderId: string, status: string) {
+        const funName = 'mockWebhook';
+        try {
+            const body = {
+                json: {
+                    transaction: mkTransactionId,
+                    merchant_data: orderId,
+                    status
+                }
+
+            }
+
+            await apiClient.post(
+                '/payments/callback',
+                body
+            );
+        } catch (error) {
+        }
+    }
 }
 
 export default productApi;

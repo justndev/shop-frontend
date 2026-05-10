@@ -3,6 +3,10 @@
 @import '../../node_modules/@uppy/core/dist/style.min.css';
 @import '../../node_modules/@uppy/dashboard/dist/style.min.css';
 
+html {
+    font-size: 16px; /* tighter — 1rem = 14px, pt-28 becomes 392px instead of 448px */
+}
+
 @custom-variant dark (&:is(.dark *));
 @theme inline {
     --color-background: var(--background);
@@ -58,7 +62,6 @@
     --primary-foreground: oklch(0.985 0.001 106.423);
     --secondary: oklch(0.97 0.001 106.424);
     --secondary-foreground: oklch(0.216 0.006 56.043);
-    --muted: oklch(0.97 0.001 106.424);
     --muted-foreground: oklch(0.553 0.013 58.071);
     --accent: oklch(0.97 0.001 106.424);
     --accent-foreground: oklch(0.216 0.006 56.043);
@@ -81,7 +84,9 @@
     --sidebar-ring: oklch(0.709 0.01 56.259);
 
     --mint: #f0f7f2;
-    --bordfer: #e0ddd5;
+    --border: #e0ddd5;
+
+    --border-checkout: #e0ddd6;
 
     --cream: #f7f5f0;
     --ink: #1a1a18;
@@ -89,14 +94,21 @@
     --sage-pale: #e8efe7;
     --accent: #c8a96e;
     --muted: #6b6b60;
+    --about-us-text: #6b6860;
+
+    --green-pine: #3d5c3a;
+    --test-color: #e0e0d8;
 
     --swamp-green: #193028;
+    /* used for header border */
+    --swamp-green-muddy: #374a43;
     --swamp-green-dark: #08120C;
 
     --footer-bg: #0e2218;
     --mint-pale: #9ab5a8;
 
     --green-pale: #1a3c2e;
+    --green-pale-lighter: #2d5c46;
     --white-dim: #FCFCFC;
     --beige: #faf9f7;
     --beige-dark: #d8d4cc;
@@ -112,7 +124,101 @@
     /* Used for Telegram icons in Contact */
     --blue-sky: #0277bd;
     --blue-light: #e3f2fd;
+
+    --footer-text: #8aab9a;
+    --footer-text-dim: #5a7a6a;
+
+    /* Page background */
+    --admin-bg:             #1a1d1e;
+    /* Card / panel surface */
+    --admin-surface:        #22262a;
+    /* Slightly darker surface variant */
+    --admin-surface-alt:    #1e2226;
+    /* Table-row hover / subtle hover state */
+    --admin-surface-hover:  #252b30;
+
+    /* Borders */
+    --admin-border:         #2e3338;
+
+    /* Text */
+    --admin-text:           #e8eaed;
+    --admin-text-muted:     #8b949e;
+    --admin-text-faint:     #545d67;
+
+    /* Accent (links, buttons, focus rings) */
+    --admin-accent:         #558151;
+    --admin-accent-hover:   #1d6299;
+    /* Selected rows — use with bg-[var(--admin-accent-light)] */
+    --admin-accent-light:   rgba(61, 92, 58, 0.12);
+
+    /* Semantic states */
+    --admin-success:        #1a7f37;
+    --admin-success-bg:     rgba(26, 127, 55, 0.12);
+    --admin-warning:        #9a6700;
+    --admin-warning-bg:     rgba(154, 103, 0, 0.12);
+    --admin-danger:         #d63638;
+    --admin-danger-bg:      rgba(214, 54, 56, 0.10);
+
+    /* Inputs */
+    --admin-input-bg:       #161b1f;
+    --admin-input-border:   #3d444d;
 }
+
+
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    background-color: var(--admin-input-bg);
+    /* Not removed via appearance */
+    margin: 0;
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid var(--admin-accent);
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: center;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    /* Windows High Contrast Mode */
+    background-color: #ffffff;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+input[type="checkbox"]:checked {
+    background-color: var(--admin-accent);
+
+}
+input[type="checkbox"]:focus {
+    outline: 0.13em solid #ffffff;
+    outline-offset: 0.2em;
+}
+
+input[type="checkbox"]:disabled {
+    --form-control-color: var(--admin-accent);
+
+    color: var(--admin-accent);
+    cursor: not-allowed;
+}
+
 
 /* Animation used for sections in About Us page */
 .reveal {
@@ -192,7 +298,7 @@
         @apply bg-white border border-[#e8eeeb] rounded-xl p-10 max-w-md w-full shadow-sm text-center
     }
 
-    /* ── Top bar ── */
+    /* ── Top bar ─────────────────────────────────────────────────────────── */
     .header-topbar {
         @apply bg-white text-[#08120C] text-sm overflow-hidden transition-all duration-300 ease-in-out;
     }
@@ -202,8 +308,8 @@
         @apply max-w-6xl mx-auto px-4 h-10 flex items-center justify-center gap-4;
     }
     .header-nav__link {
-        @apply text-sm font-medium uppercase tracking-wider;
-        color: rgba(255, 255, 255, 0.9);
+        @apply text-sm font-semibold uppercase tracking-wider;
+        color: rgba(255, 255, 255, 0.95);
         position: relative;
         transition: color 0.25s ease;
     }

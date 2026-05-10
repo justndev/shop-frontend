@@ -2,7 +2,7 @@
 
 export type Locale = "en" | "ru" | "et";
 export type StockStatus = 'IN_STOCK' | 'OUT_OF_STOCK' | 'ON_BACKORDER';
-export type OrderStatus = 'PENDING' | 'PAID' | 'FAILED' | 'CANCELLED';
+export type OrderStatus = 'PENDING' | 'PAID' | 'FAILED' | 'CANCELLED' | 'ABORTED' | 'EXPIRED';
 export interface TranslatedStrings { en: string; ru?: string; et?: string; }
 export interface AuthTokens {
   accessToken: string
@@ -81,9 +81,15 @@ export interface OrderItem {
   orderId: string;
 
   productId: string;
-  product?: Product;
+  product: Product;
 
   quantity: number;
+}
+
+export interface ShippingMethod {
+  id:          string;
+  price:       number;
+  displayName: string;
 }
 
 export interface OrderContactInfo {

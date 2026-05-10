@@ -19,7 +19,7 @@ export default function CartSidebar() {
     handleRemoveItem,
     handleUpdateQuantity,
     handleClearCart,
-    isOpen,
+    showCart,
   } = useCartHook();
 
   const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
@@ -32,7 +32,7 @@ export default function CartSidebar() {
   return (
       <Drawer
           anchor="right"
-          open={isOpen}
+          open={showCart}
           onClose={handleCloseCart}
           PaperProps={{
             sx: {

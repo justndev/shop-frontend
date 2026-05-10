@@ -9,20 +9,8 @@ import ProductCategoriesPanel from "@/src/modules/product/ProductSidePanel";
 import ProductTagsPanel from "@/src/modules/product/ProductTags";
 import ProductSlugField from "@/src/modules/product/ProductSlugField";
 import { use } from "react";
-
-const C = {
-    bg: "#1a1d1e",
-    surface: "#22262a",
-    surfaceAlt: "#1e2226",
-    border: "#2e3338",
-    text: "#e8eaed",
-    textMuted: "#8b949e",
-    textFaint: "#545d67",
-    accent: "#2271b1",
-    inputBg: "#161b1f",
-    inputBorder: "#3d444d",
-    danger: "#d63638",
-};
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+const C = ADMIN_PANEL_COLORS;
 
 // ── Shared locale tab bar ─────────────────────────────────────────────────────
 

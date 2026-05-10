@@ -7,12 +7,11 @@ import Categories from "@/src/modules/landing/Categories";
 import QualityCards from "@/src/modules/landing/Qualities";
 import FAQ from "@/src/modules/landing/FAQ";
 import ExpertiseParagraph from "@/src/modules/landing/ExpertiseParagraph";
-import HowToBuy from "@/src/modules/landing/HowToBuy";
 import ReadMore from "@/src/modules/landing/ReadMore";
-import AdvantagesText from "@/src/modules/landing/AdvantagesText";
 import OurProducts from "@/src/modules/landing/OurProducts";
 import QualityParagraph from "@/src/modules/landing/QualityParagraph";
 import Achievements from "@/src/modules/landing/Achievements";
+import ContactUs from "@/src/modules/landing/ContactUs";
 
 
 export default function HomePage() {
@@ -31,19 +30,23 @@ export default function HomePage() {
             <WhyUs/>
 
             <Categories/>
+
             <OurProducts/>
-            <QualityCards/>
             <QualityParagraph/>
 
             <FAQ/>
-
             <ExpertiseParagraph/>
 
-            <HowToBuy/>
-            <AdvantagesText/>
-            <FAQ/>
+
+            <QualityCards/>
+
+
+            {/*<HowToBuy/>*/}
+            {/*<AdvantagesText/>*/}
 
             <ReadMore/>
+
+            <ContactUs/>
         </>
     )
 }

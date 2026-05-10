@@ -2,6 +2,7 @@ import {PasswordErrors, PasswordFields, ProfileInfo, ProfileInfoErrors} from "@/
 import {RegisterErrors, RegisterFields} from "@/src/modules/auth/useRegisterHook"
 import {LoginErrors, LoginFields} from "@/src/modules/auth/useLoginHook";
 import {ContactMessageData} from "@/src/modules/contact/contactApi";
+import {t} from "i18next";
 
 type T = (key: string) => string;
 
@@ -33,17 +34,21 @@ export interface ContactSectionErrors {
 
 export interface DeliverySectionErrors {
     firstName: string | null;
-    lastName:  string | null;
-    phone:     string | null;
-    country:   string | null;
+    lastName: string | null;
+    phone: string | null;
+    country: string | null;
 }
 
 export interface ShippingSectionErrors {
-    method:     string | null;
-    city:       string | null;
-    pickupPoint:string | null;
-    address:    string | null;
+    method: string | null;
+    city: string | null;
+    pickupPoint: string | null;
+    address: string | null;
     postalCode: string | null;
+}
+
+export interface PaymentSectionErrors {
+    general: string | null;
 }
 
 export function hasErrors(e: Record<string, string | null>): boolean {
@@ -112,8 +117,8 @@ export function validateDelivery(
 ): DeliverySectionErrors {
     return {
         firstName: !fields.firstName.trim() ? t('validation.first_name_required') : null,
-        lastName:  !fields.lastName.trim()  ? t('validation.last_name_required')  : null,
-        phone:     !fields.phone.trim()
+        lastName: !fields.lastName.trim() ? t('validation.last_name_required') : null,
+        phone: !fields.phone.trim()
             ? t('validation.phone_required')
             : !/^\+?[\d\s\-()]{7,}$/.test(fields.phone)
                 ? t('validation.phone_invalid')
@@ -130,29 +135,35 @@ export function validateShipping(
         address?: string;
         postalCode?: string;
     },
-    methodType: 'parcel' | 'courier' | 'pickup' | null,
     t: (k: string) => string
 ): ShippingSectionErrors {
     const errors: ShippingSectionErrors = {
-        method:      !fields.method ? t('validation.shipping_method_required') : null,
-        city:        null,
+        method: !fields.method ? t('validation.shipping_method_required') : null,
+        city: null,
         pickupPoint: null,
-        address:     null,
-        postalCode:  null,
+        address: null,
+        postalCode: null,
     };
 
-    if (methodType === 'parcel') {
-        if (!fields.city)        errors.city        = t('validation.city_required');
-        if (!fields.pickupPoint) errors.pickupPoint = t('validation.pickup_point_required');
-    }
-
-    if (methodType === 'courier') {
-        if (!fields.address)    errors.address    = t('validation.address_required');
-        if (!fields.postalCode) errors.postalCode = t('validation.postal_code_required');
-        if (!fields.city)       errors.city       = t('validation.city_required');
-    }
+    // if (methodType === 'parcel') {
+    //     if (!fields.city) errors.city = t('validation.city_required');
+    //     if (!fields.pickupPoint) errors.pickupPoint = t('validation.pickup_point_required');
+    // }
+    //
+    // if (methodType === 'courier') {
+    //     if (!fields.address) errors.address = t('validation.address_required');
+    //     if (!fields.postalCode) errors.postalCode = t('validation.postal_code_required');
+    //     if (!fields.city) errors.city = t('validation.city_required');
+    // }
 
     return errors;
+}
+
+export function validatePayment(selectedPayment: string, t: (k: string) => string): PaymentSectionErrors {
+    if (!selectedPayment) return {
+        general: t("validation.payment_required")
+    };
+    return {general: null}
 }
 
 // ─── Form-level validators ───────────────────────────────────────────────────
@@ -192,8 +203,8 @@ export function validateLogin(fields: LoginFields, t: T): LoginErrors {
 
 export function validateContactMessage(fields: ContactMessageData, t: T): ContactErrors {
     return {
-        name:    validateName(fields.name, t),
-        email:   validateEmail(fields.email, t),
+        name: validateName(fields.name, t),
+        email: validateEmail(fields.email, t),
         subject: validateSubject(fields.subject, t),
         message: validateMessage(fields.message, t),
     };

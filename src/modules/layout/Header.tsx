@@ -2,7 +2,7 @@
 
 import {useState, useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
-import Link from 'next/link';
+import useCartHook from "@/src/modules/cart/useCartHook";
 
 import {
     IconButton,
@@ -10,14 +10,13 @@ import {
     ClickAwayListener,
 } from '@mui/material';
 import {Collapse, Paper, List, ListItemButton, ListItemText} from '@mui/material';
-
 import SmallHeader from "@/src/modules/landing/SmallHeader";
 import Logo from "@/src/modules/landing/Logo";
 import {Menu, ShoppingCart, User, X} from "lucide-react";
-import {useDispatch} from "react-redux";
-import {toggleCart} from "@/src/store/slices/cartSlice";
 import LanguageDropdown from "@/src/shared/ui/LanguageDropdown";
-import useCartHook from "@/src/modules/cart/useCartHook";
+import Link from 'next/link';
+import {CartItem} from "@/src/store/slices/cartSlice";
+
 
 const NAV_LINKS = [
     {label: 'header.nav.shop', href: '/catalog/shu-puer'},
@@ -25,9 +24,17 @@ const NAV_LINKS = [
     {label: 'header.nav.contact', href: '/contact'},
 ];
 
+function calcTotal(cartItems: CartItem[]): number {
+    let total = 0;
+    cartItems.forEach((item: CartItem) => {
+        total += item.quantity;
+    })
+    return total;
+}
+
 export default function Header() {
     const {t} = useTranslation();
-    const { handleToggleShowCart } = useCartHook();
+    const {handleToggleShowCart, totalQuantity} = useCartHook();
     const [scrollbarWidth, setScrollbarWidth] = useState(0);
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<HTMLButtonElement>(null);
@@ -35,14 +42,6 @@ export default function Header() {
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
-
-    useEffect(() => {
-        const onResize = () => {
-            if (window.innerWidth >= 900) setOpen(false);
-        };
-        window.addEventListener('resize', onResize);
-        return () => window.removeEventListener('resize', onResize);
-    }, []);
 
     useEffect(() => {
         const onResize = () => {
@@ -69,7 +68,13 @@ export default function Header() {
             >
                 <SmallHeader/>
 
-                <div className="bg-[#193028] border-b-1 border-[#374a43] shadow-sm">
+                <div className="border-b border-(--swamp-green-muddy) shadow-xl" style={{
+                    backgroundColor: '#193028',
+                    backgroundImage: `
+    radial-gradient(ellipse 40% 160% at 5% 50%, #254030 0%, transparent 70%),
+    radial-gradient(ellipse 40% 160% at 95% 50%, #1f3a2c 0%, transparent 70%)
+  `
+                }}>
                     <div className="max-w-375 mx-auto px-4 h-16 grid md:grid-cols-3 grid-cols-2 items-center gap-6">
                         <Logo/>
 
@@ -85,18 +90,28 @@ export default function Header() {
                             <LanguageDropdown/>
                             <Link href={'/account'}>
                                 <IconButton size="small" sx={{color: '#ffffff'}}>
-                                    <User size={20} strokeWidth={1.5}/>
+                                    <User size={20} strokeWidth={2}/>
                                 </IconButton>
                             </Link>
 
                             <IconButton size="small" sx={{color: '#ffffff'}} onClick={handleToggleShowCart}>
-                                <Badge badgeContent={0}>
-                                    <ShoppingCart size={20} strokeWidth={1.5}/>
+                                <Badge badgeContent={totalQuantity} sx={{
+                                    '& .MuiBadge-badge': {
+                                        backgroundColor: '#ffffff',
+                                        color: '#000000',
+                                        fontSize: '12px',
+                                        fontWeight: 'bold',
+                                        minWidth: '16px',
+                                        height: '16px',
+                                        padding: '0 4px',
+                                    },
+                                }}>
+                                    <ShoppingCart size={20} strokeWidth={2}/>
                                 </Badge>
                             </IconButton>
                             <div className='flex md:hidden'>
                                 <IconButton size="small" sx={{color: '#ffffff'}} ref={anchorRef} onClick={handleToggle}>
-                                    {open ? <X size={20} strokeWidth={1.5}/> : <Menu size={20} strokeWidth={1.5}/>}
+                                    {open ? <X size={22} strokeWidth={2}/> : <Menu size={22} strokeWidth={2.2}/>}
                                 </IconButton>
                             </div>
                         </div>

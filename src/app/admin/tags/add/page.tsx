@@ -2,21 +2,10 @@
 "use client";
 
 import useAddEditTagForm from "@/src/modules/tag/useAddEditTagForm";
-import { LOCALES } from '@/src/utils/types'
-const C = {
-    bg: "#1a1d1e",
-    surface: "#22262a",
-    surfaceAlt: "#1e2226",
-    border: "#2e3338",
-    text: "#e8eaed",
-    textMuted: "#8b949e",
-    textFaint: "#545d67",
-    accent: "#2271b1",
-    accentHover: "#1d6299",
-    inputBg: "#161b1f",
-    inputBorder: "#3d444d",
-    danger: "#d63638",
-};
+
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+import {LOCALES} from "@/src/modules/product/useAddProduct";
+const C = ADMIN_PANEL_COLORS;
 
 const inp: React.CSSProperties = {
     width: "100%",

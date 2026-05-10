@@ -5,19 +5,9 @@ import { ProductFormState } from "@/src/modules/product/useAddProduct";
 import tagApi from "@/src/modules/tag/tagApi";
 import { Tag } from "@/src/utils/types";
 
-const C = {
-    surface: "#22262a",
-    surfaceAlt: "#1e2226",
-    border: "#2e3338",
-    text: "#e8eaed",
-    textMuted: "#8b949e",
-    textFaint: "#545d67",
-    accent: "#2271b1",
-    accentLight: "rgba(34,113,177,0.15)",
-    inputBg: "#161b1f",
-    inputBorder: "#3d444d",
-    danger: "#d63638",
-};
+
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+const C = ADMIN_PANEL_COLORS;
 
 const SectionHeader = ({ title }: { title: string }) => (
     <div style={{

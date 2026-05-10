@@ -3,19 +3,19 @@ import {Trans} from "react-i18next";
 
 export default function ExpertiseParagraph() {
     return (
-        <div className="relative w-full bg-white py-8">
+        <div className="relative w-full bg-white py-8 z-10">
             {/* Centred paragraph with bold highlights */}
             <div className="max-w-2xl mx-auto px-6 text-center">
                 <Typography variant="body1" sx={{ color: '#444', lineHeight: 1.8 }}>
                     <Trans
-                        i18nKey="expertise.paragraph1"
+                        i18nKey="our_products.paragraph1"
                         components={{ b: <strong style={{ color: '#08120C' }} /> }}
                     />
                 </Typography>
                 <br/>
                 <Typography variant="body1" sx={{ color: '#444', lineHeight: 1.8 }}>
                     <Trans
-                        i18nKey="expertise.paragraph2"
+                        i18nKey="our_products.paragraph2"
                         components={{ b: <strong style={{ color: '#08120C' }} /> }}
                     />
                 </Typography>

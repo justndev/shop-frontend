@@ -6,6 +6,8 @@ import {Divider} from "@mui/material";
 import PuerCloud from "@/src/modules/docs/PuerCloud";
 
 import {Geist_Mono} from 'next/font/google'
+import {useParams, usePathname, useSearchParams} from "next/navigation";
+import {useEffect, useRef} from "react";
 
 const geistMono = Geist_Mono({
     subsets: ['latin'],
@@ -21,6 +23,16 @@ const MISSION_PILLARS = [{label: 'about.fair_price', icon: '/icons/euro.svg'}, {
 }, {label: 'about.honest_taste', icon: '/icons/tongue.svg'}, {label: 'about.real_effect', icon: '/icons/effect.svg'}]
 
 export default function AboutUsPage() {
+    const searchParams = useSearchParams();
+    const section = searchParams.get("section");
+    const scrollRef = useRef(null);
+
+    useEffect(() => {
+        if (section && scrollRef.current) {
+            scrollRef.current.scrollIntoView()
+        }
+    }, [])
+
     const {t} = useTranslation();
     useScrollReveal();
     const tx = (key: string) => `about.${key}`;
@@ -39,7 +51,7 @@ export default function AboutUsPage() {
                 </span>
 
                 <h1
-                    className="text-6xl font-bold leading-[1.1] tracking-tight text-[#1a1a18] max-w-[680px]"
+                    className="text-6xl font-bold leading-[1.1] tracking-tight text-(--ink) max-w-[680px]"
                     style={{fontFamily: "'DM Serif Display', serif", letterSpacing: '-0.02em'}}
                 >
                     {t('about.heading')}
@@ -47,7 +59,7 @@ export default function AboutUsPage() {
 
                 {/* col on mobile, row on desktop */}
                 <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-16 mt-4">
-                    <p className="text-base text-[#6b6860] leading-relaxed max-w-[480px] shrink-0">
+                    <p className="text-base text-(--about-us-text) leading-relaxed max-w-[480px] shrink-0">
                         <T i18nKey="about.intro"/>
                     </p>
 
@@ -61,20 +73,19 @@ export default function AboutUsPage() {
 
             {/* ── CONTENT ── */}
             <div className="px-8">
-                <Divider sx={{bgcolor: 'var(--mint)'}}/>
+                <Divider sx={{bgcolor: 'var(--mint)'}} ref={scrollRef}/>
 
                 {/* ── Section 1: What is Puer — full width with big image ── */}
-                <section id="puer" className="reveal py-20 mx-auto max-w-300">
+                <section id="puer" className="reveal py-20 mx-auto max-w-300" >
                     <div className="flex flex-col gap-10">
 
                         <div className="flex items-end justify-between gap-8">
                             <div className="flex flex-col gap-4 max-w-[560px]">
-                                <SectionNumber n="01"/>
-                                <h2 className="text-4xl font-bold text-[#1a1a18] tracking-tight"
+                                <h2 className="text-4xl font-bold text-(--ink) tracking-tight"
                                     style={{fontFamily: "'DM Serif Display', serif"}}>
                                     <T i18nKey={tx('puer_heading')}/>
                                 </h2>
-                                <p className="text-[#6b6860] leading-relaxed text-base">
+                                <p className="text-(--about-us-text) leading-relaxed text-base">
                                     <T i18nKey={tx('puer_p1')}/>
                                 </p>
                             </div>
@@ -86,7 +97,7 @@ export default function AboutUsPage() {
                                             className="w-1.5 h-1.5 rounded-full shrink-0"
                                             style={{background: 'var(--green-pale)'}}
                                         />
-                                        <span className="text-sm text-[#6b6860]">
+                                        <span className="text-sm text-(--about-us-text)">
                                             <T i18nKey={tx(key)}/>
                                         </span>
                                     </div>
@@ -106,7 +117,7 @@ export default function AboutUsPage() {
                             />
                         </div>
 
-                        <p className="text-[#6b6860] leading-relaxed text-base max-w-[640px]">
+                        <p className="text-(--about-us-text) leading-relaxed text-base max-w-[640px]">
                             <T i18nKey={tx('puer_p2')}/>
                         </p>
                     </div>
@@ -118,30 +129,13 @@ export default function AboutUsPage() {
                 {/* ── Section 2: Effects — text left, image right ── */}
                 <section id="effects" className="reveal py-20 mx-auto max-w-300">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-
-                        <div className="flex flex-col gap-6">
-                            <SectionNumber n="02"/>
-                            <h2 className="text-4xl font-bold text-[#1a1a18] tracking-tight"
-                                style={{fontFamily: "'DM Serif Display', serif"}}>
-                                <T i18nKey={tx('puer_effects_heading')}/>
-                            </h2>
-
-                            <div className="flex flex-col gap-4 text-[#6b6860] leading-relaxed text-base">
-                                {['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7'].map(p => (
-                                    <p key={p}>
-                                        <T i18nKey={tx(`puer_effects_${p}`)}/>
-                                    </p>
-                                ))}
-                            </div>
-                        </div>
-
                         <div>
                             <div
                                 className="w-full overflow-hidden rounded-2xl"
                                 style={{aspectRatio: '4/5', boxShadow: '0 24px 64px rgba(0,0,0,0.1)'}}
                             >
                                 <img
-                                    src="/slide2.webp"
+                                    src="/slide3.webp"
                                     alt="Puer tea effects"
                                     className="w-full h-full object-cover"
                                 />
@@ -198,16 +192,29 @@ export default function AboutUsPage() {
                                 </div>
                             </div>
                         </div>
+                        <div className="flex flex-col gap-6">
+                            <h2 className="text-4xl font-bold text-(--ink) tracking-tight"
+                                style={{fontFamily: "'DM Serif Display', serif"}}>
+                                <T i18nKey={tx('puer_effects_heading')}/>
+                            </h2>
+
+                            <div className="flex flex-col gap-4 text-(--about-us-text) leading-relaxed text-base">
+                                {['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7'].map(p => (
+                                    <p key={p}>
+                                        <T i18nKey={tx(`puer_effects_${p}`)}/>
+                                    </p>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </section>
 
-                <Divider sx={{bgcolor: 'var(--mint)'}}/>
+                {/*<Divider sx={{bgcolor: 'var(--mint)'}}/>*/}
 
 
                 {/* ── Section 3: Who we are — image left, text right ── */}
-                <section id="who" className="reveal py-20 mx-auto max-w-300">
+                <section id="who" className="reveal py-20 mx-auto max-w-300 hidden">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-
                         <div
                             className="overflow-hidden rounded-2xl order-2 lg:order-1"
                             style={{aspectRatio: '4/3', boxShadow: '0 24px 64px rgba(0,0,0,0.1)'}}
@@ -220,14 +227,13 @@ export default function AboutUsPage() {
                         </div>
 
                         <div className="flex flex-col gap-6 order-1 lg:order-2">
-                            <SectionNumber n="03"/>
-                            <h2 className="text-4xl font-bold text-[#1a1a18] tracking-tight"
+                            <h2 className="text-4xl font-bold text-(--ink) tracking-tight"
                                 style={{fontFamily: "'DM Serif Display', serif"}}>
                                 <T i18nKey={tx('who_heading')}/>
                             </h2>
-                            <div className="flex flex-col gap-4 text-[#6b6860] leading-relaxed text-base">
+                            <div className="flex flex-col gap-4 text-(--about-us-text) leading-relaxed text-base">
                                 <p><T i18nKey={tx('who_p1')}/></p>
-                                <p><T i18nKey={tx('who_p1')}/></p>
+                                {/*<p><T i18nKey={tx('who_p2')}/></p>*/}
                             </div>
 
                             {/* Team tag */}
@@ -238,7 +244,7 @@ export default function AboutUsPage() {
                                 >
                                     EE
                                 </div>
-                                <span className="text-sm text-[#6b6860]">{t('about.based_in_estonia')}</span>
+                                <span className="text-sm text-(--about-us-text)">{t('about.based_in_estonia')}</span>
                             </div>
                         </div>
                     </div>
@@ -252,13 +258,30 @@ export default function AboutUsPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
                         <div className="flex flex-col gap-6">
-                            <SectionNumber n="04"/>
-                            <h2 className="text-4xl font-bold text-[#1a1a18] tracking-tight"
+                            <h2 className="text-4xl font-bold text-(--ink) tracking-tight"
+                                style={{fontFamily: "'DM Serif Display', serif"}}>
+                                <T i18nKey={tx('who_heading')}/>
+                            </h2>
+                            <div className="flex flex-col gap-4 text-(--about-us-text) leading-relaxed text-base">
+                                <p><T i18nKey={tx('who_p1')}/></p>
+                                {/*<p><T i18nKey={tx('who_p2')}/></p>*/}
+                            </div>
+
+                            {/* Team tag */}
+                            <div className="flex items-center gap-3 mt-2">
+                                <div
+                                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
+                                    style={{background: 'var(--green-pale)'}}
+                                >
+                                    EE
+                                </div>
+                                <span className="text-sm text-(--about-us-text)">{t('about.based_in_estonia')}</span>
+                            </div>
+                            <h2 className="text-4xl font-bold text-(--ink) tracking-tight"
                                 style={{fontFamily: "'DM Serif Display', serif"}}>
                                 <T i18nKey={tx('mission_heading')}/>
                             </h2>
-                            <div className="flex flex-col gap-4 text-[#6b6860] leading-relaxed text-base">
-                                <p><T i18nKey={tx('who_p1')}/></p>
+                            <div className="flex flex-col gap-4 text-(--about-us-text) leading-relaxed text-base">
                                 {['p1', 'p2', 'p3', 'p4'].map(p => (
                                     <p key={p}><T i18nKey={tx(`mission_${p}`)}/></p>
                                 ))}
@@ -346,12 +369,11 @@ export default function AboutUsPage() {
                     <div className="flex flex-col gap-10">
 
                         <div className="flex flex-col gap-6 ">
-                            <SectionNumber n="05"/>
-                            <h2 className="text-4xl font-bold text-[#1a1a18] tracking-tight"
+                            <h2 className="text-4xl font-bold text-(--ink) tracking-tight"
                                 style={{fontFamily: "'DM Serif Display', serif"}}>
                                 <T i18nKey={tx('site_heading')}/>
                             </h2>
-                            <div className="flex flex-col gap-4 text-[#6b6860] leading-relaxed text-base">
+                            <div className="flex flex-col gap-4 text-(--about-us-text) leading-relaxed">
                                 {['p1', 'p2', 'p3'].map(p => (
                                     <p key={p}><T i18nKey={tx(`site_${p}`)}/></p>
                                 ))}
@@ -386,15 +408,4 @@ export default function AboutUsPage() {
         </div>
     )
         ;
-}
-
-function SectionNumber({n}: { n: string }) {
-    return (
-        <span
-            className="text-xs font-bold tracking-[0.2em] uppercase hidden"
-            style={{color: 'var(--green-pale)', opacity: 0.7}}
-        >
-            {n}
-        </span>
-    );
 }

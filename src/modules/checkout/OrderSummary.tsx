@@ -80,7 +80,7 @@ export default function OrderSummary(props: Props) {
     }
 
     return (
-        <aside className="w-full max-w-125 h-full lg:px-10  lg:py-16 flex flex-col gap-4 -mt-4 lg:mt-0">
+        <aside className="w-full max-w-125 flex flex-col gap-4 md:px-8  md:py-8">
 
 
         {/* Items */}

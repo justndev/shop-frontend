@@ -4,22 +4,14 @@
 import Link from "next/link";
 import {useCategoryList} from "@/src/modules/category/hooks/useCategoryList";
 import CategoryHeader from "@/src/modules/category/CategoryHeader";
-import {C} from "@/src/utils/customColors";
-import {CategoryCard} from "@/src/modules/landing/Categories";
+
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+const C = ADMIN_PANEL_COLORS;
 import CategoryRow from "@/src/modules/category/CategoryRow";
 import {useState} from "react";
 import {Alert} from "@mui/material";
 
-const inp: React.CSSProperties = {
-    background: C.inputBg,
-    border: `1px solid ${C.inputBorder}`,
-    borderRadius: 4,
-    color: C.text,
-    fontSize: 13,
-    padding: "7px 11px",
-    fontFamily: "inherit",
-    outline: "none",
-};
+
 
 const TABS = ["Image", "Name", "Slug", "Created", ""];
 

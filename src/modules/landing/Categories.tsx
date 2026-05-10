@@ -2,72 +2,39 @@
 
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import CategoriesCarousel from "@/src/modules/landing/categoriesCarousel/CategoriesCarousel";
-import {useEffect, useState} from "react";
-import categoryApi from "@/src/modules/category/categoryApi";
+import {CategoryCard} from "@/src/modules/landing/categoriesCarousel/CategoryCard";
 
 export const CATEGORIES = [
     { slug: 'shu-puer',     image: '/categories/categories-puerh.jpg'},
-    { slug: 'shen-puer',   image: '/categories/categories-oolong.webp'},
-    { slug: 'green',    image: '/categories/categories-green.jpg'},
-    { slug: 'white',    image: '/categories/categories-white.webp'},
-    { slug: 'ceremony', image: '/categories/categories-stuff.jpg'},
+    { slug: 'shen-puer',   image: '/categories/shen-puer.jpeg', comingSoon: true },
+
 ];
 
-export function CategoryCard ({ image, href, text }: { image: string; href: string; text: string }) {
-    return (
-        <Link href={href} className="group flex flex-col gap-6 max-h-[300px]">
-            <div className="overflow-hidden rounded-lg aspect-[4/3] bg-[#08120C]">
-                <img
-                    src={image}
-                    alt={text}
-                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                />
-            </div>
-            <div className="flex items-center w-full justify-center gap-1">
-                <Typography variant={'body2'} style={{fontWeight: 500}}>
-                    {text}
-                </Typography>
-                <ArrowRight size={18} strokeWidth={1.5} className="transition-transform group-hover:translate-x-1"/>
-            </div>
-        </Link>
-    );
-}
 
 export default function Categories() {
     const { t } = useTranslation();
-    const [categories, setCategories] = useState([]);
-
-    useEffect(() => {
-        console.log('Categories Page rendered')
-
-        async function fetchCategories() {
-            const responseData = await categoryApi.getAll();
-            setCategories(responseData.data)
-        }
-
-        fetchCategories();
-    }, [])
 
     return (
-        <section className="w-full bg-[#f0f7f2] py-8 z-10">
+        <section className="w-full bg-(--mint) py-8 relative z-10">
             <div className="max-w-375 mx-auto">
-                <Typography variant="h2" sx={{ fontWeight: 500, marginBottom: 4 }} className="px-8 lg:font-3xl md:text-2xl lg:px-8">
-                    {t('categoriesSection.title')}
-                </Typography>
+                <div className='w-full flex md:justify-center justify-start px-4 md:mb-6 mb-4'>
+                    <Typography variant="h2" sx={{ fontWeight: 500}}>
+                        {t('categoriesSection.title')}
+                    </Typography>
+                </div>
+
 
                 {/* Desktop: grid */}
-                <div className="hidden lg:grid grid-cols-5 gap-4 mx-8">
+                <div className="hidden lg:grid grid-cols-2 gap-4 mx-auto max-w-170">
                     {CATEGORIES.map((category, index) => (
-                        <CategoryCard key={index} text={t(`categoriesSection.items.${category.slug}`)} image={category.image} href={`catalog/${category.slug}`} />
+                        <CategoryCard key={index} comingSoon={category.comingSoon} text={t(`categoriesSection.items.${category.slug}`)} image={category.image} href={`catalog/${category.slug}`} />
                     ))}
                 </div>
 
                 {/* Mobile: carousel — 2 cards visible at once */}
                 <div className="lg:hidden">
-                   <CategoriesCarousel/>
+                   <CategoriesCarousel slides={CATEGORIES}/>
                 </div>
             </div>
         </section>

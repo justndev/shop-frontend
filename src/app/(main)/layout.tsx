@@ -1,20 +1,20 @@
-'use client'
+'use client';
 
 import CartSidebar from '@/src/modules/cart/CartSidebar'
 import Header from "@/src/modules/layout/Header";
-import useCartHook from "@/src/modules/cart/useCartHook";
 import Footer from "@/src/modules/layout/Footer";
+import CancelOrderDialog from "@/src/modules/layout/CancelOrderDialog";
 
 
 export default function MainLayout({children}: { children: React.ReactNode }) {
-    const { showCart, toggleShowCart } = useCartHook();
 
     return (
         <>
-            <Header toggleCart={toggleShowCart}/>
-            <main className="min-h-screen pt-15 w-full h-full">{children}</main>
-            <CartSidebar open={showCart} onClose={toggleShowCart} />
+            <Header />
+            <main className="min-h-screen w-full h-full">{children}</main>
+            <CartSidebar />
             <Footer/>
+            <CancelOrderDialog/>
         </>
     )
 }

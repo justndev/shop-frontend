@@ -1,6 +1,7 @@
 import Link from "next/link";
-import {C} from "@/src/utils/customColors";
 
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+const C = ADMIN_PANEL_COLORS;
 interface TagHeaderProps {
     totalCount: number;
 }

@@ -1,7 +1,8 @@
 
 import Link from "next/link";
-import {C} from "@/src/utils/customColors";
-import {Category} from "@/src/types";
+
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+const C = ADMIN_PANEL_COLORS;import {Category} from "@/src/types";
 
 export default function CategoryRow({category, isLast, handleDelete}: {category: Category, isLast: boolean, handleDelete: () => void })
 

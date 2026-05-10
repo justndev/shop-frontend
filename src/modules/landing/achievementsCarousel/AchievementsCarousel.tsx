@@ -1,38 +1,33 @@
-import React, {useEffect} from 'react'
-import {EmblaOptionsType} from 'embla-carousel'
+import React from 'react'
+import {useTranslation} from "react-i18next";
 import useEmblaCarousel from 'embla-carousel-react'
+import {useDotButton} from './AchievementsEmblaCarouselDotButton'
+
 import {
     NextButton,
     PrevButton,
     usePrevNextButtons
 } from './AchievementsEmblaCarouselArrowButtons'
-import {useDotButton} from './AchievementsEmblaCarouselDotButton'
+
 import './achievements-embla.css'
+
 import {Typography} from "@mui/material";
-import {Award, Briefcase, Globe} from "lucide-react";
-import {useTranslation} from "react-i18next";
+import {EmblaOptionsType} from 'embla-carousel'
 
 const OPTIONS: EmblaOptionsType = {align: 'start', loop: false}
 
-const ACHIEVEMENTS = [
-    { icon: <Globe size={48} strokeWidth={1} />, key: 'made_in_europe' },
-    { icon: <Award size={48} strokeWidth={1} />, key: 'certified' },
-    { icon: <Briefcase size={48} strokeWidth={1} />, key: 'tailored' },
-];
-const SLIDES = ACHIEVEMENTS;
-
-function AchievementCard({icon, text}) {
+function AchievementCard({Icon, text}) {
     return (
-        <div className="flex-[0_0_100%] min-w-0 flex flex-col items-center gap-4 px-4">
-            <div className="text-[#193028]">{icon}</div>
-            <Typography variant="body1" className="font-semibold text-[#08120C]">
+        <div className="flex flex-col items-center gap-4">
+            <Icon size={58} strokeWidth={1} className="text-[#193028]"/>
+            <Typography variant="body1" sx={{fontWeight: 600, color: '#08120C'}}>
                 {text}
             </Typography>
         </div>
     )
 }
 
-const AchievementsEmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
+const AchievementsEmblaCarousel = ({slides, options = OPTIONS}) => {
     const {t} = useTranslation();
 
     const [emblaRef, emblaApi] = useEmblaCarousel(options)
@@ -54,7 +49,7 @@ const AchievementsEmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
                     {slides.map((achievement, index) => (
                         <div className="achievements_embla__slide" key={index}>
                             <div key={index}>
-                                <AchievementCard icon={achievement.icon} text={t(`promo.achievements.${achievement.key}`)}/>
+                                <AchievementCard Icon={achievement.Icon} text={t(`promo.achievements.${achievement.key}`)}/>
 
                             </div>
                         </div>
@@ -66,7 +61,7 @@ const AchievementsEmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
                 <div className="achievements_embla__buttons">
                     <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled}/>
                     <div className="w-full flex justify-center">
-                        <Typography variant="body2" sx={{ color: '#666', alignSelf: 'center', alignItems: 'center' }}>
+                        <Typography variant="body1" sx={{ color: '#666', alignSelf: 'center', alignItems: 'center' }}>
                             {selectedIndex + 1} / {scrollSnaps.length}
                         </Typography>
                     </div>
@@ -77,4 +72,5 @@ const AchievementsEmblaCarousel = ({slides = SLIDES, options = OPTIONS}) => {
     )
 }
 
-export default AchievementsEmblaCarousel
+export default AchievementsEmblaCarousel;
+

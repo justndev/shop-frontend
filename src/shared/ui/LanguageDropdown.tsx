@@ -26,7 +26,7 @@ export default function LanguageDropdown() {
             renderValue={(value) => {
                 const lang = LANGUAGES.find(l => l.code === value)!;
                 return (
-                    <span className="flex items-center gap-1.5 text-[rgba(255,255,255,0.9)] text-sm font-medium uppercase tracking-wider">
+                    <span className="flex items-center gap-1.5 text-[rgba(255,255,255,0.95)] text-sm font-semibold uppercase tracking-wider">
 <span className='text-xl'>{lang.flag}</span>  {/* was font-xl → text-xl */}
                         {/* Label hidden on mobile, visible md+ */}
                         <span className="hidden md:inline text-sm">{lang.label}</span>
@@ -69,7 +69,7 @@ export default function LanguageDropdown() {
             {LANGUAGES.map(({ code, flag, label }) => (
                 <MenuItem key={code} value={code}>
                     <span className='text-xl'>{flag}</span>  {/* was font-xl → text-xl */}
-                    <span>{label}</span>
+                    <span className='uppercase font-semibold '>{label}</span>
                 </MenuItem>
             ))}
         </Select>

@@ -3,14 +3,14 @@
 import { Radio, RadioGroup, Select, MenuItem, FormControl, InputLabel, TextField, FormHelperText } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import useCheckoutHook, {
-    SHIPPING_METHODS, MOCK_CITIES, MOCK_PICKUP_POINTS,
+     MOCK_CITIES, MOCK_PICKUP_POINTS,
 } from './useCheckout';
 import {MUI_INPUT_SX, MUI_SELECT_SX } from "@/src/app/(main)/checkout/page";
 
 type Props = Pick<
 ReturnType<typeof useCheckoutHook>,
 | 'country'
-| 'shippingMethodId' | 'handleSetShippingMethod' | 'selectedMethod'
+| 'shippingMethods' | 'handleSetShippingMethod' | 'selectedShippingMethod'
 | 'shippingCity'     | 'handleSetShippingCity'
 | 'pickupPoint'      | 'setPickupPoint'
 | 'address'          | 'setAddress'
@@ -35,7 +35,8 @@ export default function ShippingMethodSection(props: Props) {
     const { t } = useTranslation();
     const {
         country,
-        shippingMethodId, handleSetShippingMethod, selectedMethod,
+        shippingMethods,
+        handleSetShippingMethod, selectedShippingMethod,
         shippingCity, handleSetShippingCity,
         pickupPoint, setPickupPoint,
         address, setAddress,
@@ -60,10 +61,10 @@ export default function ShippingMethodSection(props: Props) {
 
             {/* Method list — each method is its own block with inline reveal */}
             <div className="flex flex-col">
-                {SHIPPING_METHODS.map((method, index) => {
+                {shippingMethods.map((method, index) => {
                     const isFirst    = index === 0;
-                    const isLast     = index === SHIPPING_METHODS.length - 1;
-                    const isSelected = shippingMethodId === method.id;
+                    const isLast     = index === shippingMethods.length - 1;
+                    const isSelected = selectedShippingMethod?.id === method.id;
                     const isParcel   = method.type === 'parcel';
                     const isCourier  = method.type === 'courier';
 

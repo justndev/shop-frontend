@@ -7,7 +7,7 @@ export default function WhyUs() {
     const { t } = useTranslation();
 
     return (
-        <section className="relative w-full bg-[#ffffff] py-8">
+        <section className="relative w-full bg-[#ffffff] py-8 z-10 relative">
 
             {/* Desktop layout */}
             <div className="hidden md:grid md:grid-cols-[3fr_2fr] max-w-400 mx-auto px-8 items-start">

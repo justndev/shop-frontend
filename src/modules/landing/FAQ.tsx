@@ -9,10 +9,10 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const FAQ_KEYS = [
-    'organic_farming',
-    'certified_quality',
-    'expertise_catalog',
-    'packaging_delivery',
+    'fast_delivery',
+    'fair_prices',
+    'high_quality',
+    'puer_effect',
 ];
 
 export default function FAQ() {
@@ -25,32 +25,25 @@ export default function FAQ() {
 
     return (
         <section
-            className="relative w-full "
+            className="relative w-full overflow-hidden"
             style={{ background: '#08120C' }}
         >
-            {/* Sticky zero-height anchor — video stays pinned while section is in view.
-                pointerEvents: none is CRITICAL — without it the sticky div intercepts
-                all clicks and the accordions become unclickable. */}
+            {/* Fixed video — clipped to section bounds by overflow:hidden on parent */}
             <div
                 aria-hidden="true"
                 style={{
-                    position: 'sticky',
-                    top: 0,
-                    height: 0,
-                    overflow: 'visible',
+                    position: 'absolute',
+                    inset: 0,
                     pointerEvents: 'none',
                 }}
             >
                 <div
                     style={{
-                        position: 'absolute',
+                        position: 'fixed',
                         top: 0,
                         left: 0,
                         width: '100%',
                         height: '100vh',
-                        marginLeft: 'calc(-50vw + 50%)',
-                        transform: 'translateZ(0)',
-                        willChange: 'transform',
                     }}
                 >
                     <video
@@ -62,7 +55,6 @@ export default function FAQ() {
                             width: '100%',
                             height: '100%',
                             objectFit: 'cover',
-                            opacity: 0.35,
                             display: 'block',
                         }}
                     >
@@ -73,8 +65,7 @@ export default function FAQ() {
                         style={{
                             position: 'absolute',
                             inset: 0,
-                            background:
-                                'linear-gradient(to bottom, rgba(8,18,12,0.55) 0%, rgba(8,18,12,0.3) 50%, rgba(8,18,12,0.7) 100%)',
+                            background: 'rgba(8,12,12,0.82)',  // tweak this value to taste
                         }}
                     />
                 </div>
@@ -83,20 +74,22 @@ export default function FAQ() {
             {/* Content — zIndex: 1 ensures it sits above the sticky video (zIndex: 0).
                 position: relative is required for zIndex to take effect. */}
             <div
-                className="relative max-w-3xl mx-auto py-20 px-4"
+                className="relative max-w-3xl mx-auto md:py-20 py-8 px-2"
                 style={{ zIndex: 1 }}
             >
-                <Typography
-                    variant="h2"
-                    sx={{
-                        fontWeight: 400,
-                        color: '#fff',
-                        textAlign: 'center',
-                        marginBottom: 6,
-                    }}
-                >
-                    {t('faq.title')}
-                </Typography>
+                <div className='md:mb-6 mb-3'>
+                    <Typography
+                        variant="h2"
+                        sx={{
+                            fontWeight: 400,
+                            color: '#fff',
+                            textAlign: 'center',
+                        }}
+                    >
+                        {t('faq.title')}
+                    </Typography>
+                </div>
+
 
                 <div className="flex flex-col gap-3">
                     {FAQ_KEYS.map((key) => (
@@ -132,8 +125,8 @@ export default function FAQ() {
                                     '& .MuiAccordionSummary-content': { my: 1.5 },
                                 }}
                             >
-                                <Typography variant="body1" sx={{ color: '#fff', fontWeight: 400 }}>
-                                    {t(`faq.items.${key}.question`)}
+                                <Typography variant="body1" sx={{ color: '#fff', fontWeight: 500 }}>
+                                    {t(`faq.items.${key}.title`)}
                                 </Typography>
                             </AccordionSummary>
 
@@ -142,7 +135,7 @@ export default function FAQ() {
                                     variant="body2"
                                     sx={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.8 }}
                                 >
-                                    {t(`faq.items.${key}.answer`)}
+                                    {t(`faq.items.${key}.body`)}
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>

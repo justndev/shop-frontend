@@ -5,17 +5,9 @@ import { Dialog } from "@mui/material";
 import type { MediaItem } from "@/src/modules/media/mediaApi";
 import AddMediaContent from "@/src/modules/media/contents/AddMediaContent";
 
-const C = {
-    surface: "#22262a",
-    surfaceAlt: "#1e2226",
-    border: "#2e3338",
-    text: "#e8eaed",
-    textMuted: "#8b949e",
-    textFaint: "#545d67",
-    accent: "#2271b1",
-    inputBorder: "#3d444d",
-    danger: "#d63638",
-};
+
+import ADMIN_PANEL_COLORS from '@/src/modules/admin/colors';
+const C = ADMIN_PANEL_COLORS;
 
 interface Props {
     images: string[];          // images[0] = featured

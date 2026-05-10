@@ -1,12 +1,13 @@
-import {Typography} from "@mui/material";
-import {Award, Briefcase, ChevronLeft, ChevronRight, Globe, LucideIcon} from "lucide-react";
+'use client';
+
 import {useTranslation} from "react-i18next";
-import useEmblaCarousel from "embla-carousel-react";
-import {usePrevNextButtons} from "@/src/modules/landing/achievementsCarousel/AchievementsEmblaCarouselArrowButtons";
-import {useEffect, useState} from "react";
+
+import {Typography} from "@mui/material";
+import {Award, Briefcase, Globe, LucideIcon} from "lucide-react";
 import AchievementsCarousel from "@/src/modules/landing/achievementsCarousel/AchievementsCarousel";
 
-const ACHIEVEMENTS: { Icon: LucideIcon; key: string }[] = [
+
+export const ACHIEVEMENTS: { Icon: LucideIcon; key: string }[] = [
     {Icon: Globe, key: 'made_in_europe'},
     {Icon: Award, key: 'certified'},
     {Icon: Briefcase, key: 'tailored'},
@@ -14,17 +15,9 @@ const ACHIEVEMENTS: { Icon: LucideIcon; key: string }[] = [
 
 export default function Achievements() {
     const {t} = useTranslation();
-    const [emblaRef, emblaApi] = useEmblaCarousel({loop: false});
-    const {onPrevButtonClick, onNextButtonClick, prevBtnDisabled, nextBtnDisabled} = usePrevNextButtons(emblaApi);
-    const [current, setCurrent] = useState(0);
-
-    useEffect(() => {
-        if (!emblaApi) return;
-        emblaApi.on('select', () => setCurrent(emblaApi.selectedScrollSnap()));
-    }, [emblaApi]);
 
     return (
-        <div className="w-full bg-(--mint) text-center">
+        <div className="w-full bg-(--mint) text-center  relative z-10">
             {/* DESKTOP */}
             <div className="hidden md:flex py-8 px-6 grid-cols-3 gap-10 justify-center">
                 <div className='grid grid-cols-3 max-w-375 w-full'>
@@ -40,8 +33,8 @@ export default function Achievements() {
             </div>
 
             {/* MOBILE */}
-            <div className="md:hidden py-10">
-               <AchievementsCarousel/>
+            <div className="md:hidden md:py-8 py-4">
+               <AchievementsCarousel slides={ACHIEVEMENTS}/>
             </div>
         </div>
     )

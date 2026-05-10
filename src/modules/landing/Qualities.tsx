@@ -1,12 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useTranslation, Trans } from 'react-i18next';
+import {Trans, useTranslation} from 'react-i18next';
 import { Typography } from '@mui/material';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import useEmblaCarousel from 'embla-carousel-react';
-import { usePrevNextButtons } from '@/src/modules/landing/achievementsCarouselOld/AchievementsCarouselArrows';
 import QualitiesEmblaCarousel from "@/src/modules/landing/qualitiesCarousel/QualitiesCarousel";
+import React from "react";
 
 function LeafPattern({ color }: { color: string }) {
     return (
@@ -49,9 +46,9 @@ interface CardConfig {
 
 export const QUALITIES: CardConfig[] = [
     { key: 'quality',   badgeBg: '#7dc242', badgeColor: '#fff',    cardBg: '#193028' },
-    { key: 'certified', badgeBg: '#b0c4c8', badgeColor: '#193028', cardBg: '#193028' },
+    { key: 'effect', badgeBg: '#b0c4c8', badgeColor: '#193028', cardBg: '#193028' },
     { key: 'delivery',  badgeBg: '#f5a623', badgeColor: '#fff',    cardBg: '#193028' },
-    { key: 'customs',   badgeBg: '#e05c4b', badgeColor: '#fff',    cardBg: '#193028' },
+    { key: 'authentic',   badgeBg: '#e05c4b', badgeColor: '#fff',    cardBg: '#193028' },
 ];
 
 export function QualityCard({title, bodyText, badgeText, badgeBg, badgeColor, cardBg }: {
@@ -66,12 +63,12 @@ export function QualityCard({title, bodyText, badgeText, badgeBg, badgeColor, ca
 
     return (
         <div
-            className="relative rounded-xl overflow-hidden flex flex-col gap-3 p-5 min-h-[160px] h-full"
+            className="relative rounded-xl overflow-hidden flex flex-col gap-3 p-5 min-h-[130px] h-full"
             style={{ backgroundColor: cardBg }}
         >
             <LeafPattern color={badgeBg} />
 
-            <div className="relative z-10 self-start">
+            <div className=" self-start">
                 <span
                     className="inline-block text-xs font-semibold px-3 py-1 rounded-full"
                     style={{ backgroundColor: badgeBg, color: badgeColor }}
@@ -82,7 +79,6 @@ export function QualityCard({title, bodyText, badgeText, badgeBg, badgeColor, ca
 
             <Typography
                 variant="body1"
-                className="relative z-10"
                 sx={{ fontWeight: 700, color: badgeBg, lineHeight: 1.3, textTransform: 'uppercase' }}
             >
                 {title}
@@ -90,8 +86,7 @@ export function QualityCard({title, bodyText, badgeText, badgeBg, badgeColor, ca
 
             <Typography
                 variant="body2"
-                className="relative z-10"
-                sx={{ color: '#fff', opacity: 0.9 }}
+                sx={{ color: '#fff', opacity: 0.9, fontWeight: 500 }}
             >
                 {bodyText}
             </Typography>
@@ -103,10 +98,10 @@ export default function Promotion() {
     const { t } = useTranslation();
 
     return (
-        <div className="relative w-full bg-white2">
+        <div className="relative w-full bg-white relative z-10">
 
             {/* Desktop: 4-column grid */}
-            <div className="hidden md:block max-w-375 mx-auto px-4 py-8">
+            <div className="hidden md:block max-w-375 mx-auto px-8 ">
                 <div className="grid grid-cols-4 gap-5">
                     {QUALITIES.map(({ key, badgeBg, badgeColor, cardBg }) => (
                         <QualityCard

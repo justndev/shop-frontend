@@ -1,7 +1,7 @@
 'use client'
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {Product} from "@/src/utils/types";
+import {Order, Product} from "@/src/utils/types";
 
 export interface CartItem {
   product: Product;
@@ -9,11 +9,12 @@ export interface CartItem {
 }
 
 interface CartState {
-  items: CartItem[]
-  isOpen: boolean
+  items: CartItem[];
+  isOpen: boolean;
+  currentOrder: Order | null;
 }
 
-const initialState: CartState = { items: [], isOpen: false }
+const initialState: CartState = { items: [], isOpen: false, currentOrder: null };
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -44,8 +45,16 @@ const cartSlice = createSlice({
     openCart(state)  { state.isOpen = true },
     closeCart(state) { state.isOpen = false },
     toggleCart(state) { state.isOpen = !state.isOpen },
+
+    /* Order Reducers */
+    setOrder(state, action: PayloadAction<Order>) {
+      state.currentOrder = action.payload
+    },
+    clearOrder(state) {
+      state.currentOrder = null
+    }
   },
 })
 
-export const { addItem, removeItem, updateQuantity, clearCart, openCart, closeCart, toggleCart } = cartSlice.actions
+export const { addItem, removeItem, updateQuantity, clearCart, openCart, closeCart, toggleCart, setOrder, clearOrder } = cartSlice.actions
 export default cartSlice.reducer
